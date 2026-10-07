@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Pengajuan ID Card Karyawan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<style>
+  :root{
+    /* palet: #F06E88 #97D9A9 #FDC689 #FFD1C9 #E2F4E1 #F7CCB0 */
+    --pink:#F06E88; --green:#97D9A9; --orange:#FDC689;
+    --pink-lt:#FFD1C9; --green-lt:#E2F4E1; --peach:#F7CCB0;
+    --bg:#FBF3EC; --card:#fff; --ink:#3D2530; --muted:#7A5F66; --line:#F2DCCF;
+    --accent:#C7405E; --ok:#2E6B45; --bad:#A3263F; --badbg:#FFE4DF; --warn:#7A4A00; --warnbg:#FFF1DC;
+  }
+  :root{color-scheme:light dark; --on-pink:#3D2530}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+  header{background-color:var(--pink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='240' viewBox='0 0 320 240'%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round' opacity='.7'%3E%3Cpath d='M30 230 C 90 190 120 150 160 110 S 230 50 270 30'/%3E%3Cpath d='M160 110 C 170 140 200 160 240 168'/%3E%3Cg transform='translate(70 200) rotate(40) scale(1)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(105 170) rotate(-50) scale(0.9)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(130 140) rotate(35) scale(0.8)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(205 72) rotate(-55) scale(0.8)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(185 140) rotate(70) scale(0.8)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(222 158) rotate(-20) scale(0.7)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(270 30) scale(0.95)'%3E%3Cpath transform='rotate(10.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(10.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(82.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(82.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(154.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(154.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(226.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(226.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(298.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(298.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Ccircle r='4.5'/%3E%3Ccircle transform='rotate(0)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(45)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(90)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(135)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(180)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(225)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(270)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(315)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3C/g%3E%3Cg transform='translate(240 168) scale(0.6)'%3E%3Cpath transform='rotate(30.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(30.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(102.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(102.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(174.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(174.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(246.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(246.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(318.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(318.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Ccircle r='4.5'/%3E%3Ccircle transform='rotate(0)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(45)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(90)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(135)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(180)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(225)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(270)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(315)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3C/g%3E%3Cg transform='translate(160 110) rotate(-20) scale(0.9)'%3E%3Cpath d='M0 0 C -6 -6 -6 -16 0 -22 C 6 -16 6 -6 0 0 Z'/%3E%3Cpath d='M-5 -4 Q 0 -10 5 -4' /%3E%3C/g%3E%3Cg transform='translate(48 218) rotate(-60) scale(0.8)'%3E%3Cpath d='M0 0 C -6 -6 -6 -16 0 -22 C 6 -16 6 -6 0 0 Z'/%3E%3Cpath d='M-5 -4 Q 0 -10 5 -4' /%3E%3C/g%3E%3Ccircle cx='300' cy='90' r='1.4' fill='%23fff' stroke='none'/%3E%3Ccircle cx='120' cy='60' r='1.2' fill='%23fff' stroke='none'/%3E%3Ccircle cx='212' cy='20' r='1' fill='%23fff' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='170' viewBox='0 0 120 170'%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round' opacity='.35'%3E%3Cg transform='translate(40 120) rotate(-20) scale(0.9)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(60 95) rotate(30) scale(0.8)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cpath d='M30 160 C 40 130 55 100 70 70'/%3E%3Cg transform='translate(70 70) rotate(15) scale(0.9)'%3E%3Cpath d='M0 0 C -6 -6 -6 -16 0 -22 C 6 -16 6 -6 0 0 Z'/%3E%3Cpath d='M-5 -4 Q 0 -10 5 -4' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");background-repeat:no-repeat,no-repeat;background-position:right -10px bottom -18px,left -14px bottom -40px;background-size:320px 240px,120px 170px;color:var(--on-pink);padding:22px 16px 30px;position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
+    background:linear-gradient(90deg,#97D9A9 0 20%,#FDC689 0 40%,#FFD1C9 0 60%,#E2F4E1 0 80%,#F7CCB0 0)}
+  header .in{max-width:560px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid rgba(61,37,48,.18)}
+  .logo{height:56px;width:auto;flex:none;border-radius:8px;display:block;box-shadow:0 0 0 3px rgba(255,255,255,.85)}
+  .co{font-weight:800;font-size:14px;letter-spacing:.04em;line-height:1.25}
+  .pill{display:inline-block;margin-top:5px;background:rgba(255,255,255,.55);border-radius:999px;padding:2px 10px;font-size:11.5px;font-weight:600}
+  header h1{margin:0;font-size:24px;line-height:1.25}
+  .sub{margin:6px 0 0;font-size:13.5px;font-weight:500;opacity:.85}
+  main{max-width:560px;margin:18px auto 40px;padding:0 16px}
+  .card{background:var(--card);border-radius:14px;padding:18px;margin-bottom:14px;border:1px solid var(--line);box-shadow:0 2px 6px rgba(240,110,136,.08)}
+  .step{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  label{display:block;font-weight:600;margin:12px 0 6px}
+  label:first-of-type{margin-top:0}
+  input[type=text],input[type=tel],input[type=date],textarea,select{
+    width:100%;padding:11px 12px;border:1px solid var(--peach);border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+  textarea{min-height:84px;resize:vertical}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--pink);outline-offset:-1px;border-color:transparent}
+  .row{display:flex;gap:8px}
+  .row input{flex:1}
+  button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;cursor:pointer}
+  .btn{background:var(--pink);color:var(--on-pink)}
+  .btn:hover{filter:brightness(.96)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.full{width:100%;padding:14px;font-size:16px}
+  .ghost{background:var(--pink-lt);color:#9E2F48}
+  .who{margin-top:12px;border:1px solid var(--green);background:var(--green-lt);border-radius:12px;padding:12px 14px;display:none}
+  .who b{display:block;font-size:17px}
+  .who span{color:var(--ok)}
+  .chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;margin-top:12px}
+  .chk input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+  .jenis{display:grid;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0;font-weight:500;cursor:pointer;background:#fff}
+  .opt input{margin-top:4px;flex:none;accent-color:var(--accent)}
+  .opt small{display:block;color:var(--muted);font-weight:400}
+  .opt:has(input:checked){border-color:var(--pink);background:var(--pink-lt)}
+  .note{border-radius:10px;padding:10px 12px;font-size:14px;margin-top:10px}
+  .note.warn{background:var(--warnbg);color:var(--warn);border-left:4px solid var(--orange)}
+  .note.bad{background:var(--badbg);color:var(--bad);border-left:4px solid var(--pink)}
+  .note.ok{background:var(--green-lt);color:var(--ok);border-left:4px solid var(--green)}
+  .hide{display:none!important}
+  .preview{margin-top:10px;max-width:100%;max-height:220px;border-radius:10px;display:block;border:3px solid var(--peach)}
+  .done{text-align:center;padding:30px 18px}
+  .done .ic{width:56px;height:56px;border-radius:50%;background:var(--green);color:var(--on-pink);font-size:30px;line-height:56px;margin:0 auto 12px}
+  .muted{color:var(--muted);font-size:13px;margin-top:4px}
+  .caps{text-transform:uppercase}
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#4E3140; --card:#5B3A4A; --ink:#FFF1F3; --muted:#E9C9D2; --line:#7A5263;
+      --accent:#FFB0C2; --ok:#C6F0D3; --bad:#FFD1C9; --badbg:#7A4258; --warn:#FFE0B0; --warnbg:#5E4630;
+      --pink-lt:#7A4258; --green-lt:#3F5A4E; --peach:#8A6070;
+    }
+    .card{box-shadow:0 2px 10px rgba(30,10,20,.25)}
+    input[type=text],input[type=tel],input[type=date],textarea,select{background:#6A4456;color:var(--ink)}
+    input::placeholder,textarea::placeholder{color:#D9B3BF}
+    .opt{background:#6A4456;border-color:#7A5263}
+    .ghost{color:#FFD1C9}
+    .who{border-color:#6FAF8A}
+    .preview{border-color:#8A6070}
+  }
+</style>
+</head>
+<body>
+<header><div class="in">
+  <div class="brand">
+    <img class="logo" alt="Logo CAPGLOBAL" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFsAAACQCAAAAABCckgyAAAC/UlEQVR42u1bu47TQBQ9Z66zD7FLgWipkZAooKHhS/YD+ImtFgm0X8DXgESNhECiQbQrCiooVpH2MfdSOMkm69fY8U1iyYkUO+PM8cm5j7kej/n2YgIigATJADL/RhIMYL47b5t9u9tZ3c5+g/wTT+H2yo5kT8sOGAjACMAAcNYIWjq2xqhOvIOfJCP2iL117Kx4NvphXzvyfv0o0gWbZh+e+/G+Ug1O2JTQl/PchzEGP//2xIYnbzr69wI7Wu9+svgn0jdvm2ti+HyRrQVtJf6dH1B598lJbwJHsh971pvzU8QY4xg73vkEBN1ifqB5sMdctVk/ceTdY6EV/MqquvxdY2Urv/pqxK6kcVN6QiMIGkt6ZqmaUJ8cR5iamZqZ6fK+5S2N2BWs5eb85FbU1FShqma6/NbInyeamL9L9aTUm271wjZrFZdW3aBh2lTHQuqwWdMQmkOlP/du49+rOrADdnPMLwoYa+jRzpYAcD2dBAlC3p2EqbzrsW+zj28eWBZERLJsku3Hl2dmTOTdJMn096oX/zlL5t2oiYSD2zsWcnWcbktpwjbV5diuqb3WHy/NcWxog926zK40/0Y1cR3n22JrJfV186C51ifJehOhLfU2toSnf9sOxY7tiCaOcdlWb9iO8B5tuVn/tlETvxq5LH8PMnY887cv713CHmjsAKPem8O20b93N5/IQONyqJpwGP6dpWuiMRIRsTt2tSaHIoDgYTLx5Hk246+vf6+ml9dfqF15V2FHOT2dddG+eQOT/LZSYS66D2xLnK7vM+Y9/Vv9Yh4DjXlHvWlu81UAtKrPRjWRDrY0N97YhiY1+SSIpLhJMLS8J2CGyzhNof0vth3TSLy6OWxeD8F4eJB+n2Sxfb+u4DXjZery08qZ5zpbbv9aakewXe8xmnVaV1XSLbvvTnucdCIpKPTji2/L66ipzx53W/Zo4fJ7A2/+6E/fgt57nY1ZKCay4gjl54MYsUfsEXvb2JkTruXYlidAlD2HUmhJeVRl/pjNf75jGBHAGlFPAAAAAElFTkSuQmCC">
+    <div>
+      <div class="co" id="coName">PT CAPGLOBAL INDUSTRY INTERNATIONAL</div>
+      <span class="pill">Human Resources Department</span>
+    </div>
+  </div>
+  <h1>Pengajuan ID Card Karyawan</h1>
+  <p class="sub">ID card hilang · Ganti tidak layak pakai · Susulan</p>
+</div></header>
+
+<main>
+<div id="formWrap">
+  <!-- 0. PERUSAHAAN -->
+  <div class="card" id="cardPT">
+    <div class="step">Pilih perusahaan</div>
+    <div class="jenis">
+      <label class="opt"><input type="radio" name="pt" value="CAPGLOBAL"><div>PT CAPGLOBAL INDUSTRY INTERNATIONAL<small>Pabrik CII 1 · CII 2 · CII 3</small></div></label>
+      <label class="opt"><input type="radio" name="pt" value="CAPWORLD"><div>PT CAP WORLD MANUFACTURING INDONESIA<small>Pabrik CWMI 1 · CWMI 2 · CWMI 3</small></div></label>
+    </div>
+  </div>
+
+  <!-- 1A. CAPGLOBAL: cek NIK -->
+  <div class="card hide" id="cardCG">
+    <div class="step">1 · Data karyawan</div>
+    <label for="nik">NIK Karyawan</label>
+    <div class="row">
+      <input id="nik" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Contoh: ACC0006" style="text-transform:uppercase">
+      <button class="ghost" id="btnCek" type="button">Cek</button>
+    </div>
+    <div id="nikMsg" class="note bad hide"></div>
+
+    <div class="who" id="who">
+      <b id="wNama"></b>
+      <span id="wBagian"></span><span id="wJab"></span>
+    </div>
+
+    <div id="bagianBox" class="hide">
+      <label class="chk"><input type="checkbox" id="bagianSalah"> Bagian / posisi / lokasi pabrik saya di atas tidak sesuai</label>
+      <div id="bagianBenarBox" class="hide">
+        <label for="bagianBenar">Bagian yang benar</label>
+        <select id="bagianBenar"><option value="">— pilih bagian —</option></select>
+        <label for="posisiBenar">Posisi yang benar</label>
+        <input id="posisiBenar" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="CONTOH: OPERATOR SEWING">
+        <div class="muted">Ditulis dengan HURUF BESAR (otomatis).</div>
+        <label for="pabrikBenar">Lokasi pabrik yang benar</label>
+        <select id="pabrikBenar"><option value="">— pilih pabrik —</option></select>
+        <div class="note warn">Laporan ini akan dicek HRD dan dicatat sebagai <b>data tidak sesuai</b>.</div>
+      </div>
+      <label for="hp">No. HP / WhatsApp</label>
+      <input id="hp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx">
+    </div>
+  </div>
+
+  <!-- 1B. CAP WORLD: identitas manual -->
+  <div class="card hide" id="cardCW">
+    <div class="step">1 · Data karyawan PT CAP WORLD MANUFACTURING INDONESIA</div>
+    <label for="mNik">NIK Karyawan</label>
+    <input id="mNik" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="NIK SESUAI KARTU / SLIP GAJI">
+    <label for="mNama">Nama lengkap</label>
+    <input id="mNama" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="NAMA SESUAI KTP">
+    <label for="mBagian">Bagian</label>
+    <select id="mBagian"><option value="">— pilih bagian —</option></select>
+    <input id="mBagianLain" class="caps hide" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="TULIS NAMA BAGIAN" style="margin-top:8px">
+    <label for="mPosisi">Posisi</label>
+    <input id="mPosisi" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="CONTOH: OPERATOR SEWING">
+    <label for="mPabrik">Lokasi pabrik</label>
+    <select id="mPabrik"><option value="">— pilih pabrik —</option><option>CWMI 1</option><option>CWMI 2</option><option>CWMI 3</option></select>
+    <label for="mHp">No. HP / WhatsApp</label>
+    <input id="mHp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx">
+    <div class="muted">NIK, nama, dan posisi otomatis HURUF BESAR.</div>
+    <div class="note ok">Pastikan data yang diisi sudah benar sebelum dikirim.</div>
+  </div>
+
+  <!-- 2. JENIS -->
+  <div class="card hide" id="cardJenis">
+    <div class="step">2 · Jenis pengajuan</div>
+    <div class="jenis">
+      <label class="opt"><input type="radio" name="jenis" value="HILANG"><div>ID Card Hilang<small>ID card hilang dan perlu dibuat ulang.</small></div></label>
+      <label class="opt"><input type="radio" name="jenis" value="GANTI"><div>Ganti ID Card Tidak Layak Pakai<small>Wajib upload foto ID card lama.</small></div></label>
+      <label class="opt"><input type="radio" name="jenis" value="SUSULAN"><div>ID Card Susulan<small>Belum dapat ID card karena terlewat.</small></div></label>
+    </div>
+  </div>
+
+  <!-- 3. DETAIL -->
+  <div class="card hide" id="cardDetail">
+    <div class="step">3 · Detail pengajuan</div>
+
+    <div id="pasFotoBox" class="hide" style="padding-bottom:16px;margin-bottom:4px;border-bottom:1px dashed var(--line)">
+      <label for="pasFoto">Pas foto <span style="color:var(--accent)">(wajib untuk SECURITY &amp; OFFICE)</span></label>
+      <div class="note warn" style="margin-top:0;margin-bottom:8px">Pas foto <b>formal</b>, wajah terlihat jelas menghadap depan. Warna background bebas.</div>
+      <input id="pasFoto" type="file" accept="image/*">
+      <img id="prevPas" class="preview hide" alt="Pratinjau pas foto">
+    </div>
+
+    <div id="fHILANG" class="sec hide">
+      <label for="tglHilang">Tanggal ID card hilang</label>
+      <input id="tglHilang" type="date">
+      <label for="kronologi">Kronologi kehilangan</label>
+      <textarea id="kronologi" placeholder="Ceritakan singkat kapan & di mana hilang"></textarea>
+    </div>
+
+    <div id="fGANTI" class="sec hide">
+      <label for="alasanGanti">Alasan penggantian</label>
+      <select id="alasanGanti">
+        <option value="">— pilih —</option>
+        <option>Patah / Retak</option>
+        <option>Foto / Tulisan Pudar</option>
+        <option>Kartu Rusak / Tertekuk</option>
+        <option>Barcode / Chip Tidak Terbaca</option>
+        <option>Lainnya</option>
+      </select>
+      <input id="alasanLain" type="text" class="hide" placeholder="Tulis alasan lainnya" style="margin-top:8px">
+      <label for="foto">Foto ID card lama <span style="color:var(--accent)">(wajib)</span></label>
+      <input id="foto" type="file" accept="image/*">
+      <img id="prev" class="preview hide" alt="Pratinjau foto">
+      <div class="muted">Foto hanya dipakai untuk pengecekan HRD dan dihapus otomatis setelah pengajuan selesai.</div>
+    </div>
+
+    <div id="fSUSULAN" class="sec hide">
+      <label for="tglSus">Tanggal masuk kerja</label>
+      <input id="tglSus" type="date">
+      <label for="alasanSus">Alasan ID card terlewat</label>
+      <textarea id="alasanSus"></textarea>
+    </div>
+  </div>
+
+  <div id="sendMsg" class="note bad hide"></div>
+  <button class="btn full hide" id="btnKirim" type="button">Kirim Pengajuan</button>
+</div>
+
+<div id="doneWrap" class="card done hide">
+  <div class="ic">✓</div>
+  <h2 style="margin:0 0 6px">Pengajuan terkirim</h2>
+  <p id="doneMsg" class="muted" style="font-size:15px"></p>
+  <button class="ghost" type="button" id="btnLagi">Ajukan lagi</button>
+</div>
+</main>
+
+<script>
+/* ===== Penghubung ke Google Apps Script (untuk versi GitHub Pages) =====
+   Ganti API_URL kalau link Web App (/exec) berubah. */
+const API_URL = 'https://script.google.com/macros/s/AKfycbxnqUzWjhlshth-a4qybz9yX3OvNYT1t2hl5rNbDVEfTf8vETngJG41pKKnr1JXA7Dk/exec';
+(function () {
+  function makeRun() {
+    let ok = function () {}, fail = function (e) { console.error(e); };
+    const c = {
+      withSuccessHandler: function (f) { ok = f; return c; },
+      withFailureHandler: function (f) { fail = f; return c; }
+    };
+    ['lookupNik', 'getBagianList', 'getPabrikList', 'submitWeb'].forEach(function (fn) {
+      c[fn] = function () {
+        const args = Array.prototype.slice.call(arguments);
+        fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: fn, args: args })
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (res) { if (res && res.error) fail(new Error(res.error)); else ok(res.result); })
+          .catch(function () { fail(new Error('Koneksi gagal. Periksa internet lalu coba lagi.')); });
+      };
+    });
+    return c;
+  }
+  window.google = { script: {} };
+  Object.defineProperty(window.google.script, 'run', { get: makeRun });
+})();
+</script>
+<script>
+const $ = id => document.getElementById(id);
+let current = null, fotoB64 = '', pasB64 = '', pt = '';
+const WAJIB_PAS = ['SECURITY', 'OFFICE'];
+
+function resetForm(){
+  current = null; fotoB64 = ''; pasB64 = '';
+  $('pasFoto').value = ''; show($('prevPas'), false); $('prevPas').removeAttribute('src'); show($('pasFotoBox'), false);
+  document.querySelectorAll('#formWrap input[type=text], #formWrap input[type=tel], #formWrap input[type=date], #formWrap textarea')
+    .forEach(el => el.value = '');
+  document.querySelectorAll('#formWrap input[type=checkbox], #formWrap input[type=radio]').forEach(el => el.checked = false);
+  $('alasanGanti').value = ''; $('bagianBenar').value = ''; $('pabrikBenar').value = ''; $('foto').value = '';
+  show($('prev'), false); $('prev').removeAttribute('src');
+  $('mBagian').value = ''; $('mPabrik').value = ''; show($('mBagianLain'), false);
+  pt = ''; show($('cardCG'), false); show($('cardCW'), false); show($('cardPT'), true);
+  $('coName').textContent = 'PT CAPGLOBAL INDUSTRY INTERNATIONAL';
+  show($('alasanLain'), false); 
+  show($('bagianBenarBox'), false);
+  document.querySelectorAll('.sec').forEach(s => show(s, false));
+  $('who').style.display = 'none';
+  err($('nikMsg'), ''); err($('sendMsg'), '');
+  reveal(false);
+  show($('doneWrap'), false); show($('formWrap'), true);
+  window.scrollTo(0, 0);
+}
+
+function show(el, on){ el.classList.toggle('hide', !on); }
+function bagianSekarang(){
+  if (pt === 'CAPWORLD') return ($('mBagian').value === '__LAIN__' ? $('mBagianLain').value : $('mBagian').value).trim().toUpperCase();
+  if (pt === 'CAPGLOBAL' && current) return ($('bagianSalah').checked && $('bagianBenar').value ? $('bagianBenar').value : current.bagian).trim().toUpperCase();
+  return '';
+}
+function cekPasFoto(){ show($('pasFotoBox'), WAJIB_PAS.indexOf(bagianSekarang()) > -1); }
+function err(el, t){ el.textContent = t || ''; show(el, !!t); }
+
+function cekNik(){
+  const nik = $('nik').value.trim().toUpperCase();
+  err($('nikMsg'), '');
+  if(!nik){ err($('nikMsg'), 'Isi NIK dulu.'); return; }
+  $('btnCek').disabled = true; $('btnCek').textContent = '...';
+  google.script.run
+    .withSuccessHandler(r => {
+      $('btnCek').disabled = false; $('btnCek').textContent = 'Cek';
+      if(!r.ok){ current = null; $('who').style.display = 'none'; reveal(false); err($('nikMsg'), r.msg); return; }
+      current = { nik, bagian: r.bagian || '', posisi: r.jabatan || '', pabrik: r.pabrik || '' };
+      $('wNama').textContent = r.nama;
+      $('wBagian').textContent = 'Bagian: ' + (r.bagian || '-');
+      $('wJab').textContent = (r.jabatan ? ' · Posisi: ' + r.jabatan : '') + (r.pabrik ? ' · ' + r.pabrik : '');
+      $('who').style.display = 'block';
+      reveal(true); cekPasFoto();
+    })
+    .withFailureHandler(e => {
+      $('btnCek').disabled = false; $('btnCek').textContent = 'Cek';
+      err($('nikMsg'), 'Gagal cek NIK: ' + e.message);
+    })
+    .lookupNik(nik);
+}
+function reveal(on){
+  if (pt === 'CAPWORLD') on = true;
+  if (!pt) on = false;
+  show($('bagianBox'), on && pt === 'CAPGLOBAL'); show($('cardJenis'), on);
+  const j = document.querySelector('input[name=jenis]:checked');
+  show($('cardDetail'), on && !!j); show($('btnKirim'), on && !!j);
+}
+
+$('btnCek').onclick = cekNik;
+document.querySelectorAll('input[name=pt]').forEach(r => r.onchange = () => {
+  pt = r.value;
+  show($('cardCG'), pt === 'CAPGLOBAL'); show($('cardCW'), pt === 'CAPWORLD');
+  $('coName').textContent = pt === 'CAPWORLD' ? 'PT CAP WORLD MANUFACTURING INDONESIA' : 'PT CAPGLOBAL INDUSTRY INTERNATIONAL';
+  err($('sendMsg'), '');
+  reveal(pt === 'CAPWORLD' || !!current);
+  cekPasFoto();
+});
+$('btnLagi').onclick = resetForm;
+$('nik').addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); cekNik(); } });
+$('nik').addEventListener('input', () => { if(current){ current = null; $('who').style.display='none'; reveal(false); } });
+
+$('bagianSalah').onchange = e => {
+  show($('bagianBenarBox'), e.target.checked);
+  setTimeout(cekPasFoto, 0);
+  if (e.target.checked && current) {               // isi awal dengan data sekarang, tinggal diubah
+    if (!$('bagianBenar').value) $('bagianBenar').value = current.bagian.trim().toUpperCase();
+    if (!$('posisiBenar').value) $('posisiBenar').value = current.posisi.toUpperCase();
+    if (!$('pabrikBenar').value) $('pabrikBenar').value = current.pabrik.trim().toUpperCase();
+  }
+};
+document.querySelectorAll('input.caps').forEach(el => el.addEventListener('input', () => {
+  const s = el.selectionStart, e = el.selectionEnd, up = el.value.toUpperCase();
+  if (el.value !== up) { el.value = up; try { el.setSelectionRange(s, e); } catch (x) {} }
+}));
+
+document.querySelectorAll('input[name=jenis]').forEach(r => r.onchange = () => {
+  document.querySelectorAll('.sec').forEach(s => show(s, false));
+  show($('f' + r.value), true);
+  show($('cardDetail'), true); show($('btnKirim'), true);
+  err($('sendMsg'), '');
+});
+
+$('alasanGanti').onchange = e => show($('alasanLain'), e.target.value === 'Lainnya');
+$('mBagian').onchange = e => { show($('mBagianLain'), e.target.value === '__LAIN__'); if (e.target.value === '__LAIN__') $('mBagianLain').focus(); cekPasFoto(); };
+$('mBagianLain').addEventListener('input', cekPasFoto);
+$('bagianBenar').addEventListener('change', cekPasFoto);
+
+function compress(file){
+  return new Promise((res, rej) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const max = 1280, s = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', 0.75));
+    };
+    img.onerror = () => rej(new Error('File bukan foto atau tidak bisa dibaca.'));
+    img.src = url;
+  });
+}
+$('foto').onchange = async e => {
+  fotoB64 = ''; show($('prev'), false);
+  const f = e.target.files[0]; if(!f) return;
+  try{
+    const dataUrl = await compress(f);
+    fotoB64 = dataUrl.split(',')[1];
+    $('prev').src = dataUrl; show($('prev'), true);
+  }catch(x){ err($('sendMsg'), x.message); }
+};
+$('pasFoto').onchange = async e => {
+  pasB64 = ''; show($('prevPas'), false);
+  const f = e.target.files[0]; if(!f) return;
+  try{
+    const dataUrl = await compress(f);
+    pasB64 = dataUrl.split(',')[1];
+    $('prevPas').src = dataUrl; show($('prevPas'), true);
+  }catch(x){ err($('sendMsg'), x.message); }
+};
+
+google.script.run.withSuccessHandler(list => {
+  ['bagianBenar', 'mBagian'].forEach(id => {
+    const sel = $(id);
+    list.forEach(b => { const o = document.createElement('option'); o.value = b; o.textContent = b; sel.appendChild(o); });
+  });
+  const o = document.createElement('option'); o.value = '__LAIN__'; o.textContent = 'LAINNYA (tulis sendiri)'; $('mBagian').appendChild(o);
+}).getBagianList();
+google.script.run.withSuccessHandler(list => {
+  const sel = $('pabrikBenar');
+  list.filter(b => b.indexOf('CII') === 0)
+    .forEach(b => { const o = document.createElement('option'); o.value = b; o.textContent = b; sel.appendChild(o); });
+}).getPabrikList();
+
+$('btnKirim').onclick = () => {
+  err($('sendMsg'), '');
+  if(!pt){ err($('sendMsg'), 'Pilih perusahaan dulu.'); return; }
+  if(pt === 'CAPGLOBAL' && !current){ err($('sendMsg'), 'Cek NIK dulu.'); return; }
+  const j = document.querySelector('input[name=jenis]:checked');
+  if(j && j.value === 'GANTI' && !fotoB64){ err($('sendMsg'), 'Foto ID card lama wajib diupload.'); return; }
+  if(WAJIB_PAS.indexOf(bagianSekarang()) > -1 && !pasB64){ err($('sendMsg'), 'Bagian SECURITY dan OFFICE wajib upload pas foto formal.'); return; }
+  const cw = pt === 'CAPWORLD';
+  const p = {
+    pt: pt,
+    nik: cw ? '' : current.nik, hp: (cw ? $('mHp') : $('hp')).value.trim(), jenis: j ? j.value : '',
+    mNik: $('mNik').value.trim().toUpperCase(), mNama: $('mNama').value.trim().toUpperCase(),
+    mBagian: $('mBagian').value === '__LAIN__' ? $('mBagianLain').value.trim().toUpperCase() : $('mBagian').value,
+    mBagianLain: $('mBagian').value === '__LAIN__', mPosisi: $('mPosisi').value.trim().toUpperCase(), mPabrik: $('mPabrik').value,
+    bagianSalah: $('bagianSalah').checked, bagianBenar: $('bagianBenar').value.trim().toUpperCase(),
+    posisiBenar: $('posisiBenar').value.trim().toUpperCase(),
+    pabrikBenar: $('pabrikBenar').value,
+    tglMasuk: $('tglSus').value,
+    tglHilang: $('tglHilang').value, kronologi: $('kronologi').value.trim(),
+    alasanGanti: $('alasanGanti').value, alasanLain: $('alasanLain').value.trim(),
+    alasanSusulan: $('alasanSus').value.trim(),
+    foto: fotoB64 ? { b64: fotoB64 } : null,
+    pasFoto: pasB64 ? { b64: pasB64 } : null
+  };
+  const b = $('btnKirim'); b.disabled = true; b.textContent = 'Mengirim...';
+  google.script.run
+    .withSuccessHandler(r => {
+      b.disabled = false; b.textContent = 'Kirim Pengajuan';
+      if(!r.ok){ err($('sendMsg'), r.msg); return; }
+      $('doneMsg').textContent = r.msg;
+      show($('formWrap'), false); show($('doneWrap'), true); window.scrollTo(0,0);
+    })
+    .withFailureHandler(e => {
+      b.disabled = false; b.textContent = 'Kirim Pengajuan';
+      err($('sendMsg'), 'Gagal mengirim: ' + e.message);
+    })
+    .submitWeb(p);
+};
+</script>
+</body>
+</html>
