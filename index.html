@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="id" translate="no" class="notranslate">
 <head>
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="id">
 <meta charset="utf-8">
 <title>Pengajuan ID Card Karyawan</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -103,6 +105,19 @@
   .b-aju{background:#F06E88;color:#fff}
   .b-cek{background:#E2F4E1;color:#1d4d2c}
   .tab.home{flex:0 0 auto;padding:10px 12px}
+  .filebtn{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0;font-weight:400;cursor:pointer}
+  .filebtn input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+  .fb-btn{background:var(--pink-lt);color:#9E2F48;font-weight:700;border-radius:10px;padding:9px 14px;font-size:14px}
+  .fb-nama{font-size:13px;color:var(--muted);word-break:break-all}
+  .lang{position:relative;display:flex;justify-content:flex-end;margin:-10px 0 10px;z-index:5}
+  .lang-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.45);color:inherit;border:0;border-radius:999px;padding:4px 10px 4px 6px;font-size:12.5px;font-weight:800;cursor:pointer;font-family:inherit}
+  .lang .flag{width:22px;height:15px;border-radius:3px;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+  .lang .car{font-size:10px;opacity:.8}
+  .lang-menu{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border-radius:14px;padding:6px;min-width:190px;box-shadow:0 10px 28px rgba(60,20,35,.22)}
+  .lang-menu button{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:0;border-radius:10px;padding:9px 10px;font-size:14px;color:#3a2a30;cursor:pointer;font-family:inherit;text-align:left}
+  .lang-menu button:hover,.lang-menu button.on{background:#FFE4EA}
+  .lang-menu button.on{font-weight:800}
+  .lang-menu .flag{width:28px;height:19px}
   .penting{background:linear-gradient(135deg,#FFD1C9,#F7CCB0);color:#5a2333;border-radius:14px;padding:12px 14px;margin:0 0 14px;font-size:13.5px;line-height:1.55}
   .penting .pj{font-weight:800;font-size:14.5px;margin-bottom:6px}
   .penting a{color:#9E2F48;font-weight:800}
@@ -160,6 +175,7 @@
 </head>
 <body>
 <header><div class="in">
+  <div class="lang"><button type="button" class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false"><span id="langFlag"><svg viewBox="0 0 30 20" class="flag"><rect width="30" height="10" fill="#E70011"/><rect y="10" width="30" height="10" fill="#fff"/></svg></span><span id="langNow">ID</span><span class="car">▾</span></button><div class="lang-menu hide" id="langMenu" role="menu"><button type="button" data-l="id" role="menuitem"><span class="fl"><svg viewBox="0 0 30 20" class="flag"><rect width="30" height="10" fill="#E70011"/><rect y="10" width="30" height="10" fill="#fff"/></svg></span>Bahasa Indonesia</button><button type="button" data-l="en" role="menuitem"><span class="fl"><svg viewBox="0 0 60 30" class="flag"><clipPath id="gbc"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#gbc)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg></span>English</button><button type="button" data-l="zh" role="menuitem"><span class="fl"><svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#EE1C25"/><g fill="#FFFF00"><polygon points="5,2 5.9,4.8 8.8,4.8 6.5,6.5 7.4,9.3 5,7.6 2.6,9.3 3.5,6.5 1.2,4.8 4.1,4.8"/><circle cx="10" cy="2" r=".9"/><circle cx="12" cy="4" r=".9"/><circle cx="12" cy="7" r=".9"/><circle cx="10" cy="9" r=".9"/></g></svg></span>中文</button></div></div>
   <div class="brand">
     <img class="logo" alt="Logo CAPGLOBAL" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFsAAACQCAAAAABCckgyAAAC/UlEQVR42u1bu47TQBQ9Z66zD7FLgWipkZAooKHhS/YD+ImtFgm0X8DXgESNhECiQbQrCiooVpH2MfdSOMkm69fY8U1iyYkUO+PM8cm5j7kej/n2YgIigATJADL/RhIMYL47b5t9u9tZ3c5+g/wTT+H2yo5kT8sOGAjACMAAcNYIWjq2xqhOvIOfJCP2iL117Kx4NvphXzvyfv0o0gWbZh+e+/G+Ug1O2JTQl/PchzEGP//2xIYnbzr69wI7Wu9+svgn0jdvm2ti+HyRrQVtJf6dH1B598lJbwJHsh971pvzU8QY4xg73vkEBN1ifqB5sMdctVk/ceTdY6EV/MqquvxdY2Urv/pqxK6kcVN6QiMIGkt6ZqmaUJ8cR5iamZqZ6fK+5S2N2BWs5eb85FbU1FShqma6/NbInyeamL9L9aTUm271wjZrFZdW3aBh2lTHQuqwWdMQmkOlP/du49+rOrADdnPMLwoYa+jRzpYAcD2dBAlC3p2EqbzrsW+zj28eWBZERLJsku3Hl2dmTOTdJMn096oX/zlL5t2oiYSD2zsWcnWcbktpwjbV5diuqb3WHy/NcWxog926zK40/0Y1cR3n22JrJfV186C51ifJehOhLfU2toSnf9sOxY7tiCaOcdlWb9iO8B5tuVn/tlETvxq5LH8PMnY887cv713CHmjsAKPem8O20b93N5/IQONyqJpwGP6dpWuiMRIRsTt2tSaHIoDgYTLx5Hk246+vf6+ml9dfqF15V2FHOT2dddG+eQOT/LZSYS66D2xLnK7vM+Y9/Vv9Yh4DjXlHvWlu81UAtKrPRjWRDrY0N97YhiY1+SSIpLhJMLS8J2CGyzhNof0vth3TSLy6OWxeD8F4eJB+n2Sxfb+u4DXjZery08qZ5zpbbv9aakewXe8xmnVaV1XSLbvvTnucdCIpKPTji2/L66ipzx53W/Zo4fJ7A2/+6E/fgt57nY1ZKCay4gjl54MYsUfsEXvb2JkTruXYlidAlD2HUmhJeVRl/pjNf75jGBHAGlFPAAAAAElFTkSuQmCC">
     <div class="tx">
@@ -277,7 +293,7 @@
     <div id="pasFotoBox" class="hide" style="padding-bottom:16px;margin-bottom:4px;border-bottom:1px dashed var(--line)">
       <label for="pasFoto">Pas foto <span style="color:var(--accent)">(wajib untuk SECURITY &amp; OFFICE)</span></label>
       <div class="note warn" style="margin-top:0;margin-bottom:8px">Pas foto <b>formal</b>, wajah terlihat jelas menghadap depan. Warna background bebas.</div>
-      <input id="pasFoto" type="file" accept="image/*">
+      <label class="filebtn"><input id="pasFoto" type="file" accept="image/*"><span class="fb-btn">📷 Pilih / ambil foto</span><span class="fb-nama" data-for="pasFoto">Belum ada foto dipilih</span></label>
       <img id="prevPas" class="preview hide" alt="Pratinjau pas foto">
     </div>
 
@@ -300,7 +316,7 @@
       </select>
       <input id="alasanLain" type="text" class="hide" placeholder="Tulis alasan lainnya" style="margin-top:8px">
       <label for="foto">Foto ID card lama <span style="color:var(--accent)">(wajib)</span></label>
-      <input id="foto" type="file" accept="image/*">
+      <label class="filebtn"><input id="foto" type="file" accept="image/*"><span class="fb-btn">📷 Pilih / ambil foto</span><span class="fb-nama" data-for="foto">Belum ada foto dipilih</span></label>
       <img id="prev" class="preview hide" alt="Pratinjau foto">
       <div class="muted">Foto hanya dipakai untuk pengecekan HRD dan dihapus otomatis setelah pengajuan selesai.</div>
     </div>
@@ -359,6 +375,7 @@
 </main>
 
 <script>
+window.T = window.T || (x => x);
 /* ===== Penghubung ke Google Apps Script (untuk versi GitHub Pages) =====
    Ganti API_URL kalau link Web App (/exec) berubah. */
 const API_URL = 'https://script.google.com/macros/s/AKfycbxnqUzWjhlshth-a4qybz9yX3OvNYT1t2hl5rNbDVEfTf8vETngJG41pKKnr1JXA7Dk/exec';
@@ -395,6 +412,7 @@ const WAJIB_PAS = ['SECURITY', 'OFFICE'];
 
 function resetForm(){
   current = null; fotoB64 = ''; pasB64 = '';
+  document.querySelectorAll('.fb-nama').forEach(n => n.textContent = 'Belum ada foto dipilih');
   $('pasFoto').value = ''; show($('prevPas'), false); $('prevPas').removeAttribute('src'); show($('pasFotoBox'), false);
   document.querySelectorAll('#formWrap input[type=text], #formWrap input[type=tel], #formWrap input[type=date], #formWrap textarea')
     .forEach(el => el.value = '');
@@ -656,7 +674,7 @@ function gambarBukti(d){
   const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
   const rows = buktiBaris(d);
   ctx.font = '700 34px ' + S;
-  const rowsW = rows.map(x => bungkus(ctx, x[1], W - P * 2 - 380));
+  const rowsW = rows.map(x => bungkus(ctx, T(x[1]), W - P * 2 - 380));
   const tinggi = 330 + rowsW.reduce((a, l) => a + Math.max(1, l.length) * 46 + 34, 0) + 175;
   cv.width = W; cv.height = tinggi;
   ctx.fillStyle = '#FFF8F3'; ctx.fillRect(0, 0, W, tinggi);
@@ -665,20 +683,20 @@ function gambarBukti(d){
   strip.forEach((c, i) => { ctx.fillStyle = c; ctx.fillRect(i * W / 5, 210, W / 5 + 1, 12); });
   const logo = document.querySelector('img.logo');
   try { if (logo && logo.complete) { ctx.fillStyle = '#fff'; ctx.fillRect(P - 6, 44, 104, 132); ctx.drawImage(logo, P, 50, 92, 120); } } catch (e) {}
-  ctx.fillStyle = '#fff'; ctx.font = '800 40px ' + S; ctx.fillText('BUKTI PENGAJUAN ID CARD', P + 130, 100);
+  ctx.fillStyle = '#fff'; ctx.font = '800 40px ' + S; ctx.fillText(T('BUKTI PENGAJUAN ID CARD'), P + 130, 100);
   ctx.font = '600 28px ' + S; ctx.fillText(d.perusahaan || '', P + 130, 145);
-  ctx.font = '500 24px ' + S; ctx.fillText('Human Resources Department', P + 130, 182);
+  ctx.font = '500 24px ' + S; ctx.fillText(T('Human Resources Department'), P + 130, 182);
   let y = 300;
   ctx.setLineDash([10, 8]); ctx.strokeStyle = '#F7CCB0'; ctx.lineWidth = 3;
   ctx.strokeRect(P - 20, y - 50, W - (P - 20) * 2, tinggi - y - 160 + 20); ctx.setLineDash([]);
   rows.forEach((x, i) => {
-    ctx.fillStyle = '#8a6a72'; ctx.font = '500 30px ' + S; ctx.fillText(x[0], P + 10, y + 10);
+    ctx.fillStyle = '#8a6a72'; ctx.font = '500 30px ' + S; ctx.fillText(T(x[0]), P + 10, y + 10);
     ctx.font = '700 34px ' + S; ctx.textAlign = 'right';
     const lines = rowsW[i];
     if (x[0] === 'Status') {
-      const tw = ctx.measureText(x[1]).width + 40; ctx.fillStyle = '#cfe2f3';
+      const tw = ctx.measureText(T(x[1])).width + 40; ctx.fillStyle = '#cfe2f3';
       ctx.beginPath(); ctx.roundRect ? ctx.roundRect(W - P - 10 - tw, y - 28, tw, 50, 25) : ctx.rect(W - P - 10 - tw, y - 28, tw, 50); ctx.fill();
-      ctx.fillStyle = '#073763'; ctx.fillText(x[1], W - P - 30, y + 10);
+      ctx.fillStyle = '#073763'; ctx.fillText(T(x[1]), W - P - 30, y + 10);
     } else {
       ctx.fillStyle = x[0] === 'No. Pengajuan' ? '#C7405E' : '#3a2a30';
       lines.forEach((l, j) => ctx.fillText(l, W - P - 10, y + 10 + j * 46));
@@ -688,11 +706,11 @@ function gambarBukti(d){
     if (i < rows.length - 1) { ctx.strokeStyle = '#F7CCB0'; ctx.lineWidth = 2; ctx.setLineDash([3, 7]); ctx.beginPath(); ctx.moveTo(P + 10, y - 40); ctx.lineTo(W - P - 10, y - 40); ctx.stroke(); ctx.setLineDash([]); }
   });
   ctx.fillStyle = '#3a2a30'; ctx.font = '600 28px ' + S; ctx.textAlign = 'center';
-  ctx.fillText('Silakan cek status pengajuan secara berkala', W / 2, tinggi - 120);
+  ctx.fillText(T('Silakan cek status pengajuan secara berkala'), W / 2, tinggi - 120);
   ctx.fillStyle = '#C7405E'; ctx.font = '700 28px ' + S;
-  ctx.fillText('capglobal-hr.github.io/idcard  →  menu Cek Status', W / 2, tinggi - 78);
+  ctx.fillText(T('capglobal-hr.github.io/idcard  →  menu Cek Status'), W / 2, tinggi - 78);
   ctx.fillStyle = '#8a6a72'; ctx.font = '500 22px ' + S;
-  ctx.fillText('Dibuat otomatis oleh sistem pengajuan ID card · simpan bukti ini', W / 2, tinggi - 38);
+  ctx.fillText(T('Dibuat otomatis oleh sistem pengajuan ID card · simpan bukti ini'), W / 2, tinggi - 38);
   return cv;
 }
 function unduhBukti(){
@@ -766,6 +784,10 @@ function compress(file){
     img.src = url;
   });
 }
+document.querySelectorAll('.filebtn input').forEach(inp => inp.addEventListener('change', () => {
+  const n = document.querySelector('.fb-nama[data-for="' + inp.id + '"]');
+  if (n) n.textContent = inp.files && inp.files[0] ? inp.files[0].name : 'Belum ada foto dipilih';
+}));
 $('foto').onchange = async e => {
   fotoB64 = ''; show($('prev'), false);
   const f = e.target.files[0]; if(!f) return;
@@ -846,6 +868,351 @@ $('btnKirim').onclick = () => {
     })
     .submitWeb(p);
 };
+</script>
+<script>
+/* ===================== PILIHAN BAHASA (ID / EN / 中文) ===================== */
+(function(){
+const D = {
+  en: {
+    'Human Resources Department':'Human Resources Department',
+    'Layanan ID Card Karyawan':'Employee ID Card Service',
+    'Pengajuan, cek status & laporan ID card':'Requests, status check & ID card reports',
+    'Halo, ada yang bisa HR bantu?':'Hello, how can HR help you?',
+    'Pilih salah satu menu di bawah ini.':'Choose one of the menus below.',
+    'Ajukan ID Card':'Request ID Card',
+    'ID card hilang, rusak, atau belum dapat':'ID card lost, damaged, or not received yet',
+    'Cek Status Pengajuan':'Check Request Status',
+    'Lihat proses ID card Anda':'See the progress of your ID card',
+    '⚠️ Penting sebelum mengajukan':'⚠️ Important before submitting',
+    '1. Sudah pernah mengajukan?':'1. Already submitted a request?',
+    'Cek status':'Check the status','dulu.':'first.',
+    '2. Jangan mengajukan dua kali untuk keperluan yang sama.':'2. Do not submit twice for the same purpose.',
+    '3. Pastikan NIK & data sudah benar.':'3. Make sure your employee ID (NIK) & data are correct.',
+    '‹ Menu':'‹ Menu','📝 Ajukan':'📝 Request','🔍 Cek Status':'🔍 Check Status',
+    'Pilih perusahaan':'Choose company',
+    'Pabrik CII 1 · CII 2 · CII 3':'Factory CII 1 · CII 2 · CII 3',
+    'Pabrik CWMI 1 · CWMI 2 · CWMI 3':'Factory CWMI 1 · CWMI 2 · CWMI 3',
+    '1 · Data karyawan':'1 · Employee data',
+    'Cari pakai NIK':'Search by NIK','Cari pakai Nama':'Search by name',
+    'NIK Karyawan':'Employee ID (NIK)','Nama Karyawan':'Employee name',
+    'Cek':'Check','Cari':'Search',
+    'Pilih nama Anda:':'Select your name:',
+    'Bagian / posisi / lokasi pabrik saya di atas tidak sesuai':'My department / position / factory above is incorrect',
+    'Bagian yang benar':'Correct department','— pilih bagian —':'— choose department —',
+    'Posisi yang benar':'Correct position','Ditulis dengan HURUF BESAR (otomatis).':'Written in CAPITAL LETTERS (automatic).',
+    'Lokasi pabrik yang benar':'Correct factory location','— pilih pabrik —':'— choose factory —',
+    'Laporan ini akan dicek HRD dan dicatat sebagai':'This report will be checked by HRD and recorded as',
+    'data tidak sesuai':'incorrect data',
+    'No. HP / WhatsApp':'Phone / WhatsApp number',
+    'Nama lengkap':'Full name','Bagian':'Department','LAINNYA (tulis sendiri)':'OTHER (write it yourself)',
+    'Posisi':'Position','Lokasi pabrik':'Factory location',
+    'NIK, nama, dan posisi otomatis HURUF BESAR.':'NIK, name and position are automatically in CAPITAL LETTERS.',
+    'Pastikan data yang diisi sudah benar sebelum dikirim.':'Make sure the data is correct before submitting.',
+    '2 · Jenis pengajuan':'2 · Request type',
+    'ID Card Hilang':'Lost ID Card','ID card hilang dan perlu dibuat ulang.':'ID card is lost and needs to be reissued.',
+    'Ganti ID Card Tidak Layak Pakai':'Replace Damaged ID Card','Wajib upload foto ID card lama.':'Photo of the old ID card is required.',
+    'ID Card Susulan':'Missed ID Card','Belum dapat ID card karena terlewat.':'Have not received an ID card because it was missed.',
+    '3 · Detail pengajuan':'3 · Request details',
+    'Pas foto':'Passport photo','(wajib untuk SECURITY & OFFICE)':'(required for SECURITY & OFFICE)',
+    'formal':'formal',', wajah terlihat jelas menghadap depan. Warna background bebas.':', face clearly visible facing forward. Any background color.',
+    '📷 Pilih / ambil foto':'📷 Choose / take photo','Belum ada foto dipilih':'No photo selected',
+    'Tanggal ID card hilang':'Date the ID card was lost','Kronologi kehilangan':'How it was lost',
+    'Alasan penggantian':'Reason for replacement','— pilih —':'— choose —',
+    'Patah / Retak':'Broken / Cracked','Foto / Tulisan Pudar':'Faded photo / text','Kartu Rusak / Tertekuk':'Damaged / Bent card',
+    'Barcode / Chip Tidak Terbaca':'Barcode / Chip unreadable','Lainnya':'Other',
+    'Foto ID card lama':'Photo of old ID card','(wajib)':'(required)',
+    'Foto hanya dipakai untuk pengecekan HRD dan dihapus otomatis setelah pengajuan selesai.':'The photo is only used for HRD checking and is deleted automatically after the request is completed.',
+    'Tanggal masuk kerja':'Start date of work','Alasan ID card terlewat':'Reason the ID card was missed',
+    'Kirim Pengajuan':'Submit Request','Mengirim...':'Sending...',
+    'Pengajuan terkirim':'Request submitted',
+    '⬇️ Unduh Bukti Pengajuan':'⬇️ Download Request Receipt',
+    'Jika file tidak otomatis terunduh, tekan lama gambar di bawah lalu pilih':'If the file does not download automatically, press and hold the image below, then choose',
+    'Simpan gambar':'Save image',
+    'Silakan cek status pengajuan secara berkala di menu':'Please check your request status regularly in the menu',
+    'Ajukan lagi':'Submit another',
+    'BUKTI PENGAJUAN ID CARD':'ID CARD REQUEST RECEIPT',
+    'No. Pengajuan':'Request No.','Nama':'Name','Jenis':'Type','Perusahaan':'Company','Tanggal':'Date','Status':'Status',
+    'HR penanggung jawab':'HR in charge',
+    'Cek status pengajuan':'Check request status',
+    'ℹ️ Arti setiap status':'ℹ️ What each status means',
+    'Menunggu':'Waiting','Diproses':'In process','Selesai cetak':'Printed','Sudah diambil':'Collected','Ditolak':'Rejected','Diambil':'Collected',
+    'Data pengajuan sudah diterima HR.':'Your request has been received by HR.',
+    'ID card sedang dalam proses pencetakan oleh tim IT.':'The ID card is being printed by the IT team.',
+    'ID card sudah selesai dicetak dan siap diambil di HRD.':'The ID card has been printed and is ready to be collected at HRD.',
+    'ID card sudah diterima karyawan.':'The ID card has been received by the employee.',
+    'ID card sudah diterima karyawan. Jika belum menerima, tekan':'The ID card has been received by the employee. If you have not received it, press',
+    'Laporkan':'Report','pada pengajuan tersebut.':'on that request.',
+    'Pengajuan tidak dapat diproses. Hubungi HRD.':'The request cannot be processed. Please contact HRD.',
+    'Pengajuan tidak dapat diproses.':'The request cannot be processed.',
+    'ID card sudah jadi. Silakan ambil di HRD.':'Your ID card is ready. Please collect it at HRD.',
+    'Belum menerima ID card? Laporkan':'Have not received your ID card? Report it',
+    'No. HP / WhatsApp yang bisa dihubungi':'Phone / WhatsApp number we can contact',
+    'Keterangan (opsional)':'Notes (optional)','Kirim Laporan':'Send Report',
+    'Laporan "ID card belum diterima" sudah dikirim. Status laporan:':'Your "ID card not received" report has been sent. Report status:',
+    'Sedang dicek HR':'Being checked by HR','Diterima HR':'Received by HR','. HR akan menghubungi Anda.':'. HR will contact you.',
+    'Untuk melihat alasan jika pengajuan ditolak, cek pakai NIK.':'To see the reason if a request was rejected, check using your NIK.',
+    'Belum ada pengajuan ID card untuk NIK ini.':'There is no ID card request for this NIK yet.',
+    'ID Card Karyawan Baru':'New Employee ID Card','Ganti (Tidak Layak Pakai)':'Replacement (Damaged)','Susulan (Terlewat)':'Missed (Late issue)',
+    'Isi NIK dulu.':'Please enter your NIK first.','Ketik minimal 3 huruf nama.':'Type at least 3 letters of the name.',
+    'Isi No. HP / WhatsApp yang benar.':'Enter a valid phone / WhatsApp number.',
+    'Cek NIK dulu.':'Please check your NIK first.','Pilih perusahaan dulu.':'Please choose a company first.',
+    'Foto ID card lama wajib diupload.':'A photo of the old ID card is required.',
+    'Bagian SECURITY dan OFFICE wajib upload pas foto formal.':'SECURITY and OFFICE departments must upload a formal passport photo.',
+    'File bukan foto atau tidak bisa dibaca.':'The file is not a photo or cannot be read.',
+    'NIK tidak terdaftar. Hubungi HRD.':'NIK is not registered. Please contact HRD.',
+    'NIK ini tercatat ganda di data HRD. Hubungi HRD untuk diperbaiki.':'This NIK is recorded twice in HRD data. Please contact HRD to fix it.',
+    'NIK ini tercatat sudah tidak aktif (resign). Hubungi HRD.':'This NIK is recorded as inactive (resigned). Please contact HRD.',
+    'Bagian harus dipilih dari daftar.':'Department must be chosen from the list.',
+    'Bagian, posisi, dan pabrik yang diisi sama dengan data. Hilangkan centang jika data sudah benar.':'The department, position and factory you entered are the same as the data. Untick the box if the data is correct.',
+    'Data karyawan belum ada. Hubungi HRD.':'Employee data is not available yet. Please contact HRD.',
+    'Data pengajuan tidak ditemukan. Silakan cek status ulang.':'Request data not found. Please check the status again.',
+    'Data sudah berubah. Silakan cek status ulang.':'The data has changed. Please check the status again.',
+    'Data tidak valid. Silakan cek status ulang.':'Invalid data. Please check the status again.',
+    'Isi NIK dengan benar.':'Enter a valid NIK.','Isi No. HP / WhatsApp yang bisa dihubungi.':'Enter a phone / WhatsApp number we can contact.',
+    'Isi alasan ID card terlewat.':'Enter the reason the ID card was missed.','Isi alasan penggantian.':'Enter the reason for replacement.',
+    'Isi kronologi kehilangan.':'Describe how it was lost.','Isi nama lengkap.':'Enter your full name.',
+    'Isi posisi (huruf besar).':'Enter your position (capital letters).','Isi posisi yang benar (huruf besar).':'Enter the correct position (capital letters).',
+    'Isi tanggal ID card hilang.':'Enter the date the ID card was lost.','Isi tanggal masuk kerja.':'Enter your start date of work.',
+    'Laporan hanya bisa dikirim jika status sudah "Sudah diambil".':'A report can only be sent when the status is "Collected".',
+    'Lokasi pabrik harus dipilih dari daftar.':'Factory location must be chosen from the list.',
+    'No. HP tidak valid.':'Invalid phone number.','Pilih bagian yang benar.':'Choose the correct department.',
+    'Pilih jenis pengajuan.':'Choose a request type.','Pilih lokasi pabrik CWMI 1 / CWMI 2 / CWMI 3.':'Choose factory location CWMI 1 / CWMI 2 / CWMI 3.',
+    'Pilih lokasi pabrik yang benar.':'Choose the correct factory location.','Tulis nama bagian.':'Write the department name.',
+    'Ukuran foto terlalu besar.':'The photo is too large.','Ukuran pas foto terlalu besar.':'The passport photo is too large.',
+    'Silakan cek status pengajuan secara berkala':'Please check your request status regularly',
+    'capglobal-hr.github.io/idcard  →  menu Cek Status':'capglobal-hr.github.io/idcard  →  Check Status menu',
+    'Dibuat otomatis oleh sistem pengajuan ID card · simpan bukti ini':'Generated automatically by the ID card request system · keep this receipt',
+    'Contoh: ACC0006':'Example: ACC0006','Contoh: YUNIAR (minimal 3 huruf)':'Example: YUNIAR (at least 3 letters)',
+    'CONTOH: OPERATOR SEWING':'EXAMPLE: OPERATOR SEWING','NIK SESUAI KARTU / SLIP GAJI':'NIK AS ON CARD / PAYSLIP',
+    'NAMA SESUAI KTP':'NAME AS ON ID CARD (KTP)','TULIS NAMA BAGIAN':'WRITE DEPARTMENT NAME',
+    'Ceritakan singkat kapan & di mana hilang':'Briefly describe when & where it was lost','Tulis alasan lainnya':'Write the other reason',
+    'Contoh: belum pernah menerima ID card':'Example: never received the ID card'
+  },
+  zh: {
+    'Human Resources Department':'人力资源部',
+    'Layanan ID Card Karyawan':'员工工牌服务',
+    'Pengajuan, cek status & laporan ID card':'申请、查询状态及工牌问题反馈',
+    'Halo, ada yang bisa HR bantu?':'您好，HR 可以为您做什么？',
+    'Pilih salah satu menu di bawah ini.':'请选择下方的一个菜单。',
+    'Ajukan ID Card':'申请工牌',
+    'ID card hilang, rusak, atau belum dapat':'工牌丢失、损坏或尚未领取',
+    'Cek Status Pengajuan':'查询申请状态',
+    'Lihat proses ID card Anda':'查看您的工牌进度',
+    '⚠️ Penting sebelum mengajukan':'⚠️ 申请前请注意',
+    '1. Sudah pernah mengajukan?':'1. 已经申请过？请先',
+    'Cek status':'查询状态','dulu.':'。',
+    '2. Jangan mengajukan dua kali untuk keperluan yang sama.':'2. 同一事项请勿重复申请。',
+    '3. Pastikan NIK & data sudah benar.':'3. 请确认工号（NIK）和资料正确。',
+    '‹ Menu':'‹ 菜单','📝 Ajukan':'📝 申请','🔍 Cek Status':'🔍 查询状态',
+    'Pilih perusahaan':'选择公司',
+    'Pabrik CII 1 · CII 2 · CII 3':'工厂 CII 1 · CII 2 · CII 3',
+    'Pabrik CWMI 1 · CWMI 2 · CWMI 3':'工厂 CWMI 1 · CWMI 2 · CWMI 3',
+    '1 · Data karyawan':'1 · 员工资料',
+    'Cari pakai NIK':'按工号查询','Cari pakai Nama':'按姓名查询',
+    'NIK Karyawan':'员工工号（NIK）','Nama Karyawan':'员工姓名',
+    'Cek':'查询','Cari':'搜索',
+    'Pilih nama Anda:':'请选择您的姓名：',
+    'Bagian / posisi / lokasi pabrik saya di atas tidak sesuai':'以上我的部门 / 职位 / 工厂信息不正确',
+    'Bagian yang benar':'正确的部门','— pilih bagian —':'— 选择部门 —',
+    'Posisi yang benar':'正确的职位','Ditulis dengan HURUF BESAR (otomatis).':'自动转为大写字母。',
+    'Lokasi pabrik yang benar':'正确的工厂','— pilih pabrik —':'— 选择工厂 —',
+    'Laporan ini akan dicek HRD dan dicatat sebagai':'此反馈将由 HRD 核查，并记录为',
+    'data tidak sesuai':'资料不符',
+    'No. HP / WhatsApp':'手机 / WhatsApp 号码',
+    'Nama lengkap':'全名','Bagian':'部门','LAINNYA (tulis sendiri)':'其他（自行填写）',
+    'Posisi':'职位','Lokasi pabrik':'工厂',
+    'NIK, nama, dan posisi otomatis HURUF BESAR.':'工号、姓名和职位会自动转为大写字母。',
+    'Pastikan data yang diisi sudah benar sebelum dikirim.':'提交前请确认填写的资料正确。',
+    '2 · Jenis pengajuan':'2 · 申请类型',
+    'ID Card Hilang':'工牌丢失','ID card hilang dan perlu dibuat ulang.':'工牌丢失，需要补办。',
+    'Ganti ID Card Tidak Layak Pakai':'更换损坏的工牌','Wajib upload foto ID card lama.':'必须上传旧工牌照片。',
+    'ID Card Susulan':'补发工牌','Belum dapat ID card karena terlewat.':'因遗漏尚未领到工牌。',
+    '3 · Detail pengajuan':'3 · 申请详情',
+    'Pas foto':'证件照','(wajib untuk SECURITY & OFFICE)':'（SECURITY 和 OFFICE 必须上传）',
+    'formal':'正式',', wajah terlihat jelas menghadap depan. Warna background bebas.':'，正面清晰露脸，背景颜色不限。',
+    '📷 Pilih / ambil foto':'📷 选择 / 拍摄照片','Belum ada foto dipilih':'尚未选择照片',
+    'Tanggal ID card hilang':'工牌丢失日期','Kronologi kehilangan':'丢失经过',
+    'Alasan penggantian':'更换原因','— pilih —':'— 请选择 —',
+    'Patah / Retak':'断裂 / 破裂','Foto / Tulisan Pudar':'照片 / 文字褪色','Kartu Rusak / Tertekuk':'卡片损坏 / 弯折',
+    'Barcode / Chip Tidak Terbaca':'条码 / 芯片无法读取','Lainnya':'其他',
+    'Foto ID card lama':'旧工牌照片','(wajib)':'（必填）',
+    'Foto hanya dipakai untuk pengecekan HRD dan dihapus otomatis setelah pengajuan selesai.':'照片仅用于 HRD 核查，申请完成后会自动删除。',
+    'Tanggal masuk kerja':'入职日期','Alasan ID card terlewat':'工牌遗漏原因',
+    'Kirim Pengajuan':'提交申请','Mengirim...':'提交中...',
+    'Pengajuan terkirim':'申请已提交',
+    '⬇️ Unduh Bukti Pengajuan':'⬇️ 下载申请凭证',
+    'Jika file tidak otomatis terunduh, tekan lama gambar di bawah lalu pilih':'如果文件没有自动下载，请长按下方图片并选择',
+    'Simpan gambar':'保存图片',
+    'Silakan cek status pengajuan secara berkala di menu':'请定期在以下菜单查询申请状态：',
+    'Ajukan lagi':'再次申请',
+    'BUKTI PENGAJUAN ID CARD':'工牌申请凭证',
+    'No. Pengajuan':'申请编号','Nama':'姓名','Jenis':'类型','Perusahaan':'公司','Tanggal':'日期','Status':'状态',
+    'HR penanggung jawab':'负责 HR',
+    'Cek status pengajuan':'查询申请状态',
+    'ℹ️ Arti setiap status':'ℹ️ 各状态说明',
+    'Menunggu':'等待中','Diproses':'处理中','Selesai cetak':'已打印','Sudah diambil':'已领取','Ditolak':'已拒绝','Diambil':'已领取',
+    'Data pengajuan sudah diterima HR.':'HR 已收到申请资料。',
+    'ID card sedang dalam proses pencetakan oleh tim IT.':'IT 团队正在打印工牌。',
+    'ID card sudah selesai dicetak dan siap diambil di HRD.':'工牌已打印完成，可到 HRD 领取。',
+    'ID card sudah diterima karyawan.':'员工已领取工牌。',
+    'ID card sudah diterima karyawan. Jika belum menerima, tekan':'员工已领取工牌。如未收到，请在该申请上点击',
+    'Laporkan':'反馈','pada pengajuan tersebut.':'。',
+    'Pengajuan tidak dapat diproses. Hubungi HRD.':'申请无法处理，请联系 HRD。',
+    'Pengajuan tidak dapat diproses.':'申请无法处理。',
+    'ID card sudah jadi. Silakan ambil di HRD.':'工牌已制作完成，请到 HRD 领取。',
+    'Belum menerima ID card? Laporkan':'还没收到工牌？点此反馈',
+    'No. HP / WhatsApp yang bisa dihubungi':'可联系的手机 / WhatsApp 号码',
+    'Keterangan (opsional)':'备注（选填）','Kirim Laporan':'发送反馈',
+    'Laporan "ID card belum diterima" sudah dikirim. Status laporan:':'"未收到工牌"的反馈已发送。反馈状态：',
+    'Sedang dicek HR':'HR 核查中','Diterima HR':'HR 已收到','. HR akan menghubungi Anda.':'。HR 会与您联系。',
+    'Untuk melihat alasan jika pengajuan ditolak, cek pakai NIK.':'如需查看申请被拒原因，请按工号查询。',
+    'Belum ada pengajuan ID card untuk NIK ini.':'此工号尚无工牌申请。',
+    'ID Card Karyawan Baru':'新员工工牌','Ganti (Tidak Layak Pakai)':'更换（损坏）','Susulan (Terlewat)':'补发（遗漏）',
+    'Isi NIK dulu.':'请先输入工号。','Ketik minimal 3 huruf nama.':'请至少输入姓名的 3 个字母。',
+    'Isi No. HP / WhatsApp yang benar.':'请输入正确的手机 / WhatsApp 号码。',
+    'Cek NIK dulu.':'请先查询工号。','Pilih perusahaan dulu.':'请先选择公司。',
+    'Foto ID card lama wajib diupload.':'必须上传旧工牌照片。',
+    'Bagian SECURITY dan OFFICE wajib upload pas foto formal.':'SECURITY 和 OFFICE 部门必须上传正式证件照。',
+    'File bukan foto atau tidak bisa dibaca.':'文件不是照片或无法读取。',
+    'NIK tidak terdaftar. Hubungi HRD.':'工号未登记，请联系 HRD。',
+    'NIK ini tercatat ganda di data HRD. Hubungi HRD untuk diperbaiki.':'此工号在 HRD 资料中重复，请联系 HRD 更正。',
+    'NIK ini tercatat sudah tidak aktif (resign). Hubungi HRD.':'此工号已登记为离职，请联系 HRD。',
+    'Bagian harus dipilih dari daftar.':'部门必须从列表中选择。',
+    'Bagian, posisi, dan pabrik yang diisi sama dengan data. Hilangkan centang jika data sudah benar.':'填写的部门、职位和工厂与资料相同。如资料正确，请取消勾选。',
+    'Data karyawan belum ada. Hubungi HRD.':'暂无员工资料，请联系 HRD。',
+    'Data pengajuan tidak ditemukan. Silakan cek status ulang.':'未找到申请资料，请重新查询状态。',
+    'Data sudah berubah. Silakan cek status ulang.':'资料已变更，请重新查询状态。',
+    'Data tidak valid. Silakan cek status ulang.':'资料无效，请重新查询状态。',
+    'Isi NIK dengan benar.':'请输入正确的工号。','Isi No. HP / WhatsApp yang bisa dihubungi.':'请输入可联系的手机 / WhatsApp 号码。',
+    'Isi alasan ID card terlewat.':'请填写工牌遗漏原因。','Isi alasan penggantian.':'请填写更换原因。',
+    'Isi kronologi kehilangan.':'请填写丢失经过。','Isi nama lengkap.':'请填写全名。',
+    'Isi posisi (huruf besar).':'请填写职位（大写字母）。','Isi posisi yang benar (huruf besar).':'请填写正确的职位（大写字母）。',
+    'Isi tanggal ID card hilang.':'请填写工牌丢失日期。','Isi tanggal masuk kerja.':'请填写入职日期。',
+    'Laporan hanya bisa dikirim jika status sudah "Sudah diambil".':'只有状态为"已领取"时才能发送反馈。',
+    'Lokasi pabrik harus dipilih dari daftar.':'工厂必须从列表中选择。',
+    'No. HP tidak valid.':'手机号码无效。','Pilih bagian yang benar.':'请选择正确的部门。',
+    'Pilih jenis pengajuan.':'请选择申请类型。','Pilih lokasi pabrik CWMI 1 / CWMI 2 / CWMI 3.':'请选择工厂 CWMI 1 / CWMI 2 / CWMI 3。',
+    'Pilih lokasi pabrik yang benar.':'请选择正确的工厂。','Tulis nama bagian.':'请填写部门名称。',
+    'Ukuran foto terlalu besar.':'照片太大。','Ukuran pas foto terlalu besar.':'证件照太大。',
+    'Silakan cek status pengajuan secara berkala':'请定期查询申请状态',
+    'capglobal-hr.github.io/idcard  →  menu Cek Status':'capglobal-hr.github.io/idcard  →  查询状态',
+    'Dibuat otomatis oleh sistem pengajuan ID card · simpan bukti ini':'由工牌申请系统自动生成 · 请保存此凭证',
+    'Contoh: ACC0006':'例如：ACC0006','Contoh: YUNIAR (minimal 3 huruf)':'例如：YUNIAR（至少 3 个字母）',
+    'CONTOH: OPERATOR SEWING':'例如：OPERATOR SEWING','NIK SESUAI KARTU / SLIP GAJI':'与工牌 / 工资单一致的工号',
+    'NAMA SESUAI KTP':'与身份证（KTP）一致的姓名','TULIS NAMA BAGIAN':'填写部门名称',
+    'Ceritakan singkat kapan & di mana hilang':'简要说明何时、何地丢失','Tulis alasan lainnya':'填写其他原因',
+    'Contoh: belum pernah menerima ID card':'例如：从未收到工牌'
+  }
+};
+// kalimat yang berisi data (nama, tanggal, jumlah)
+const R = [
+  [/^1 · Data karyawan (.+)$/, { en: m => '1 · Employee data ' + m[1], zh: m => '1 · 员工资料 ' + m[1] }],
+  [/^Bagian: (.*)$/, { en: m => 'Department: ' + m[1], zh: m => '部门：' + m[1] }],
+  [/^· Posisi: (.*)$/, { en: m => '· Position: ' + m[1], zh: m => '· 职位：' + m[1] }],
+  [/^(.*) · diajukan (.*)$/, { en: m => m[1] + ' · submitted ' + m[2], zh: m => m[1] + ' · 申请日期 ' + m[2] }],
+  [/^(\d+) pengajuan ditemukan$/, { en: m => m[1] + ' request(s) found', zh: m => '找到 ' + m[1] + ' 条申请' }],
+  [/^Belum ada pengajuan ditemukan$/, { en: () => 'No requests found', zh: () => '未找到申请' }],
+  [/^NIK (.*) · (\d+) pengajuan$/, { en: m => 'NIK ' + m[1] + ' · ' + m[2] + ' request(s)', zh: m => '工号 ' + m[1] + ' · ' + m[2] + ' 条申请' }],
+  [/^(.*) · NIK (.*)$/, { en: m => m[1] + ' · NIK ' + m[2], zh: m => m[1] + ' · 工号 ' + m[2] }],
+  [/^Diambil pada (.*)\.$/, { en: m => 'Collected on ' + m[1] + '.', zh: m => '领取日期：' + m[1] + '。' }],
+  [/^Diambil\.$/, { en: () => 'Collected.', zh: () => '已领取。' }],
+  [/^(\d+) orang ditemukan dengan nama "(.*)"\. Pastikan pilih nama & NIK yang benar\.$/, { en: m => m[1] + ' people found named "' + m[2] + '". Make sure you choose the correct name & NIK.', zh: m => '找到 ' + m[1] + ' 位名为"' + m[2] + '"的员工，请确认选择正确的姓名和工号。' }],
+  [/^Pengajuan ditolak: (.*?)\.? Hubungi HRD untuk info lebih lanjut\.$/, { en: m => 'Request rejected: ' + m[1] + '. Contact HRD for more information.', zh: m => '申请被拒：' + m[1] + '。详情请联系 HRD。' }],
+  [/^Pengajuan ditolak\. Hubungi HRD untuk info lebih lanjut\.$/, { en: () => 'Request rejected. Contact HRD for more information.', zh: () => '申请被拒。详情请联系 HRD。' }],
+  [/^Pengajuan (.*) atas nama (.*) sudah diterima HRD\.( Laporan data tidak sesuai sudah dicatat\.)?$/, { en: m => 'Your request "' + tr(m[1]) + '" for ' + m[2] + ' has been received by HRD.' + (m[3] ? ' Your incorrect-data report has been recorded.' : ''), zh: m => m[2] + ' 的"' + tr(m[1]) + '"申请已被 HRD 接收。' + (m[3] ? '资料不符的反馈已记录。' : '') }],
+  [/^Belum ada pengajuan ID card untuk NIK (.*)\.$/, { en: m => 'There is no ID card request for NIK ' + m[1] + ' yet.', zh: m => '工号 ' + m[1] + ' 尚无工牌申请。' }],
+  [/^Tidak ada pengajuan atas nama "(.*)"\. Coba ketik nama lain atau pakai NIK\.$/, { en: m => 'No requests under the name "' + m[1] + '". Try another name or use NIK.', zh: m => '没有姓名为"' + m[1] + '"的申请。请尝试其他姓名或使用工号。' }],
+  [/^Ditemukan (\d+) orang dengan nama "(.*)"\. Ketik nama lebih lengkap atau pakai NIK\.$/, { en: m => m[1] + ' people found named "' + m[2] + '". Type a more complete name or use NIK.', zh: m => '找到 ' + m[1] + ' 位名为"' + m[2] + '"的员工。请输入更完整的姓名或使用工号。' }],
+  [/^Ada (\d+) karyawan dengan nama "(.*)"\. Ketik nama lebih lengkap atau pakai NIK\.$/, { en: m => 'There are ' + m[1] + ' employees named "' + m[2] + '". Type a more complete name or use NIK.', zh: m => '有 ' + m[1] + ' 位员工名为"' + m[2] + '"。请输入更完整的姓名或使用工号。' }],
+  [/^Nama "(.*)" tidak ditemukan di data karyawan\. Coba ketik nama lain atau pakai NIK\.$/, { en: m => 'The name "' + m[1] + '" was not found in employee data. Try another name or use NIK.', zh: m => '员工资料中找不到姓名"' + m[1] + '"。请尝试其他姓名或使用工号。' }],
+  [/^Anda masih punya pengajuan "(.*)" yang belum selesai\. Hubungi HRD\.$/, { en: m => 'You still have an unfinished "' + tr(m[1]) + '" request. Please contact HRD.', zh: m => '您还有未完成的"' + tr(m[1]) + '"申请，请联系 HRD。' }],
+  [/^Laporan terkirim\. HR akan menghubungi Anda di nomor (.*)\.$/, { en: m => 'Report sent. HR will contact you at ' + m[1] + '.', zh: m => '反馈已发送。HR 会通过 ' + m[1] + ' 与您联系。' }],
+  [/^Laporan untuk pengajuan ini sudah dikirim dan sedang ditangani HR \(status: (.*)\)\.$/, { en: m => 'A report for this request has already been sent and is being handled by HR (status: ' + m[1] + ').', zh: m => '此申请的反馈已发送，HR 正在处理（状态：' + m[1] + '）。' }],
+  [/^Gagal (mengirim|cek status|cek data|mencari|menyimpan): (.*)$/, { en: m => ({ 'mengirim':'Failed to send','cek status':'Failed to check status','cek data':'Failed to check data','mencari':'Search failed','menyimpan':'Failed to save' })[m[1]] + ': ' + m[2], zh: m => ({ 'mengirim':'发送失败','cek status':'查询状态失败','cek data':'查询资料失败','mencari':'搜索失败','menyimpan':'保存失败' })[m[1]] + '：' + m[2] }],
+  [/^Koneksi gagal\. Periksa internet lalu coba lagi\.$/, { en: () => 'Connection failed. Check your internet and try again.', zh: () => '连接失败，请检查网络后重试。' }]
+];
+let LANG = 'id';
+try { LANG = localStorage.getItem('idcard_lang') || 'id'; } catch (e) {}
+if (!D[LANG] && LANG !== 'id') LANG = 'id';
+function tr(s){
+  if (LANG === 'id' || s == null) return s;
+  const t = String(s), core = t.trim();
+  if (!core) return t;
+  const pre = t.slice(0, t.indexOf(core)), post = t.slice(t.indexOf(core) + core.length);
+  let out = D[LANG][core];
+  if (out === undefined) {
+    for (const [re, f] of R) { const m = core.match(re); if (m) { out = f[LANG](m); break; } }
+  }
+  return out === undefined ? t : pre + out + post;
+}
+window.T = tr;
+const SRC = new WeakMap(), OUT = new WeakMap();
+let sibuk = false;
+function terjemahNode(n){
+  if (n.nodeType === 3) {
+    if (!n.parentElement || n.parentElement.closest('script,style,.lang')) return;
+    if (OUT.get(n) === n.nodeValue) return;
+    SRC.set(n, n.nodeValue);
+    const o = tr(n.nodeValue);
+    OUT.set(n, o);
+    if (o !== n.nodeValue) n.nodeValue = o;
+  } else if (n.nodeType === 1) {
+    if (n.matches && n.matches('script,style,.lang')) return;
+    ['placeholder', 'aria-label', 'alt'].forEach(a => {
+      if (!n.hasAttribute || !n.hasAttribute(a)) return;
+      const cur = n.getAttribute(a), key = 'data-i18n-' + a;
+      if (n.getAttribute(key + '-out') === cur) return;
+      n.setAttribute(key, cur);
+      const o = tr(cur); n.setAttribute(key + '-out', o);
+      if (o !== cur) n.setAttribute(a, o);
+    });
+    n.childNodes.forEach(terjemahNode);
+  }
+}
+function terapkanUlang(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let n; while ((n = w.nextNode())) {
+    if (!n.parentElement || n.parentElement.closest('script,style,.lang')) continue;
+    if (SRC.has(n) && OUT.get(n) === n.nodeValue) n.nodeValue = SRC.get(n);   // kembalikan ke asli dulu
+    OUT.delete(n);
+  }
+  root.querySelectorAll('[data-i18n-placeholder],[data-i18n-aria-label],[data-i18n-alt]').forEach(el => {
+    ['placeholder', 'aria-label', 'alt'].forEach(a => {
+      const key = 'data-i18n-' + a;
+      if (el.hasAttribute(key) && el.getAttribute(a) === el.getAttribute(key + '-out')) el.setAttribute(a, el.getAttribute(key));
+      el.removeAttribute(key + '-out');
+    });
+  });
+  terjemahNode(root);
+}
+function setBahasa(l){
+  LANG = l;
+  try { localStorage.setItem('idcard_lang', l); } catch (e) {}
+  document.documentElement.lang = l === 'zh' ? 'zh-CN' : l;
+  document.querySelectorAll('.lang-menu button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
+  const pil = document.querySelector('.lang-menu button[data-l="' + l + '"]');
+  if (pil) { document.getElementById('langFlag').innerHTML = pil.querySelector('.fl').innerHTML; document.getElementById('langNow').textContent = l === 'zh' ? '中文' : l.toUpperCase(); }
+  sibuk = true; terapkanUlang(document.body); sibuk = false;
+}
+const mo = new MutationObserver(list => {
+  if (sibuk) return;
+  sibuk = true;
+  list.forEach(m => {
+    if (m.type === 'characterData') terjemahNode(m.target);
+    else if (m.type === 'attributes') terjemahNode(m.target);
+    else m.addedNodes.forEach(terjemahNode);
+  });
+  sibuk = false;
+});
+mo.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['placeholder', 'aria-label', 'alt'] });
+const lb = document.getElementById('langBtn'), lm = document.getElementById('langMenu');
+function tutupMenu(){ lm.classList.add('hide'); lb.setAttribute('aria-expanded', 'false'); }
+lb.onclick = e => { e.stopPropagation(); const buka = lm.classList.contains('hide'); lm.classList.toggle('hide', !buka); lb.setAttribute('aria-expanded', String(buka)); };
+lm.querySelectorAll('button').forEach(b => b.onclick = e => { e.stopPropagation(); setBahasa(b.dataset.l); tutupMenu(); });
+document.addEventListener('click', e => { if (!e.target.closest('.lang')) tutupMenu(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupMenu(); });
+setBahasa(LANG);
+})();
 </script>
 </body>
 </html>
