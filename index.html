@@ -78,6 +78,31 @@
   .tab.on{background:var(--pink);color:var(--on-pink)}
   .seg{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;margin:2px 0 14px}
   .segb{flex:1;background:transparent;color:var(--muted);padding:8px 6px;border-radius:8px;font-size:13.5px;font-weight:700;border:0}
+  header{padding-bottom:70px !important}
+  .brand{border-bottom:0 !important;margin-bottom:0 !important;padding-bottom:0 !important}
+  main{padding-top:0 !important}
+  .brand{gap:14px !important}
+  .brand .logo{height:58px}
+  .brand .tx{border-left:3px solid rgba(255,255,255,.75);padding-left:12px}
+  .brand .co{font-size:14px}
+  .brand .sub2{display:inline-block;margin-top:6px;background:rgba(255,255,255,.55);border-radius:999px;padding:2px 10px;font-size:11.5px;font-weight:600}
+  .float{position:relative;z-index:2;margin:-54px 0 16px;background:var(--card);border-radius:18px;padding:16px;
+    box-shadow:0 8px 24px rgba(240,110,136,.22);display:flex;gap:12px;align-items:center}
+  .float .fic{width:48px;height:48px;border-radius:14px;background:#FFD1C9;display:grid;place-items:center;font-size:24px;flex:none}
+  .float b{display:block;font-size:18px;color:var(--ink)}
+  .float span{font-size:12.5px;color:var(--muted)}
+  .hello{text-align:center;padding:6px 6px 2px}
+  .hello .wave{font-size:34px}
+  .hello h2{margin:4px 0;font-size:21px;color:var(--ink)}
+  .hello p{margin:0 0 14px;color:var(--muted);font-size:14px}
+  .bigb{display:flex;align-items:center;gap:12px;width:100%;border-radius:16px;padding:14px;margin-bottom:10px;border:0;
+    text-align:left;font-size:15px;cursor:pointer;box-shadow:0 4px 14px rgba(240,110,136,.18);font-family:inherit}
+  .bigb .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:rgba(255,255,255,.55);flex:none}
+  .bigb b{display:block;font-size:16px}
+  .bigb span span{font-size:12.5px;opacity:.9}
+  .b-aju{background:#F06E88;color:#fff}
+  .b-cek{background:#E2F4E1;color:#1d4d2c}
+  .tab.home{flex:0 0 auto;padding:10px 12px}
   .penting{background:linear-gradient(135deg,#FFD1C9,#F7CCB0);color:#5a2333;border-radius:14px;padding:12px 14px;margin:0 0 14px;font-size:13.5px;line-height:1.55}
   .penting .pj{font-weight:800;font-size:14.5px;margin-bottom:6px}
   .penting a{color:#9E2F48;font-weight:800}
@@ -100,6 +125,15 @@
   .steps i{flex:1;height:6px;border-radius:6px;background:var(--line)}
   .steps i.on{background:var(--pink)}
   .steps i.lewat{background:var(--green)}
+  .st .arti{font-size:13px;color:var(--ink);margin-top:8px}
+  .komp-btn{margin-top:10px;width:100%}
+  .komp{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+  .komp label{font-size:13px;margin-top:6px}
+  .komp .btn{margin-top:10px}
+  .legend{margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;color:var(--ink)}
+  .legend summary{cursor:pointer;font-weight:700}
+  .legend div{display:flex;gap:8px;align-items:flex-start;margin-top:8px;line-height:1.45}
+  .legend .badge{min-width:104px;text-align:center}
   .stl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
   .st .meta{font-size:13px;color:var(--muted);margin-top:8px}
   @media (prefers-color-scheme: dark){
@@ -116,6 +150,9 @@
     .who{border-color:#6FAF8A}
     .preview{border-color:#8A6070}
     .penting{background:linear-gradient(135deg,#7A4258,#6A4456);color:#FFE4DF}
+    .float{box-shadow:0 8px 24px rgba(20,5,12,.35)}
+    .float .fic{background:#7A4258}
+    .b-cek{background:#3F5A4E;color:#C6F0D3}
     .penting a{color:#FFB0C2}
     .hrpj{background:var(--green-lt);border-color:#6FAF8A;color:var(--ok)}
   }
@@ -125,28 +162,38 @@
 <header><div class="in">
   <div class="brand">
     <img class="logo" alt="Logo CAPGLOBAL" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFsAAACQCAAAAABCckgyAAAC/UlEQVR42u1bu47TQBQ9Z66zD7FLgWipkZAooKHhS/YD+ImtFgm0X8DXgESNhECiQbQrCiooVpH2MfdSOMkm69fY8U1iyYkUO+PM8cm5j7kej/n2YgIigATJADL/RhIMYL47b5t9u9tZ3c5+g/wTT+H2yo5kT8sOGAjACMAAcNYIWjq2xqhOvIOfJCP2iL117Kx4NvphXzvyfv0o0gWbZh+e+/G+Ug1O2JTQl/PchzEGP//2xIYnbzr69wI7Wu9+svgn0jdvm2ti+HyRrQVtJf6dH1B598lJbwJHsh971pvzU8QY4xg73vkEBN1ifqB5sMdctVk/ceTdY6EV/MqquvxdY2Urv/pqxK6kcVN6QiMIGkt6ZqmaUJ8cR5iamZqZ6fK+5S2N2BWs5eb85FbU1FShqma6/NbInyeamL9L9aTUm271wjZrFZdW3aBh2lTHQuqwWdMQmkOlP/du49+rOrADdnPMLwoYa+jRzpYAcD2dBAlC3p2EqbzrsW+zj28eWBZERLJsku3Hl2dmTOTdJMn096oX/zlL5t2oiYSD2zsWcnWcbktpwjbV5diuqb3WHy/NcWxog926zK40/0Y1cR3n22JrJfV186C51ifJehOhLfU2toSnf9sOxY7tiCaOcdlWb9iO8B5tuVn/tlETvxq5LH8PMnY887cv713CHmjsAKPem8O20b93N5/IQONyqJpwGP6dpWuiMRIRsTt2tSaHIoDgYTLx5Hk246+vf6+ml9dfqF15V2FHOT2dddG+eQOT/LZSYS66D2xLnK7vM+Y9/Vv9Yh4DjXlHvWlu81UAtKrPRjWRDrY0N97YhiY1+SSIpLhJMLS8J2CGyzhNof0vth3TSLy6OWxeD8F4eJB+n2Sxfb+u4DXjZery08qZ5zpbbv9aakewXe8xmnVaV1XSLbvvTnucdCIpKPTji2/L66ipzx53W/Zo4fJ7A2/+6E/fgt57nY1ZKCay4gjl54MYsUfsEXvb2JkTruXYlidAlD2HUmhJeVRl/pjNf75jGBHAGlFPAAAAAElFTkSuQmCC">
-    <div>
+    <div class="tx">
       <div class="co" id="coName">PT CAPGLOBAL INDUSTRY INTERNATIONAL</div>
-      <span class="pill">Human Resources Department</span>
+      <div class="sub2">Human Resources Department</div>
     </div>
   </div>
-  <h1>Pengajuan ID Card Karyawan</h1>
-  <p class="sub">ID card hilang · Ganti tidak layak pakai · Susulan</p>
 </div></header>
 
 <main>
-<div class="tabs" role="tablist">
-  <button class="tab on" type="button" id="tabAjukan">📝 Ajukan ID Card</button>
-  <button class="tab" type="button" id="tabStatus">🔍 Cek Status</button>
+<div class="float">
+  <div class="fic">🪪</div>
+  <div><b>Layanan ID Card Karyawan</b><span>Pengajuan, cek status &amp; laporan ID card</span></div>
 </div>
-<div id="viewAjukan">
-<div id="formWrap">
-  <div class="penting" id="infoDobel">
+
+<div id="viewHome">
+  <div class="hello"><div class="wave">👋</div><h2>Halo, ada yang bisa HR bantu?</h2><p>Pilih salah satu menu di bawah ini.</p></div>
+  <button class="bigb b-aju" type="button" id="goAjukan"><span class="ic">📝</span><span><b>Ajukan ID Card</b><span>ID card hilang, rusak, atau belum dapat</span></span></button>
+  <button class="bigb b-cek" type="button" id="goStatus"><span class="ic">🔍</span><span><b>Cek Status Pengajuan</b><span>Lihat proses ID card Anda</span></span></button>
+  <div class="penting" id="infoDobel" style="margin-top:6px">
     <div class="pj">⚠️ Penting sebelum mengajukan</div>
     <div>1. Sudah pernah mengajukan? <a href="#" id="lnkCekAwal">Cek status</a> dulu.</div>
     <div>2. Jangan mengajukan dua kali untuk keperluan yang sama.</div>
     <div>3. Pastikan NIK &amp; data sudah benar.</div>
   </div>
+</div>
+
+<div class="tabs hide" role="tablist" id="tabsBar">
+  <button class="tab home" type="button" id="tabHome" aria-label="Menu utama">‹ Menu</button>
+  <button class="tab on" type="button" id="tabAjukan">📝 Ajukan</button>
+  <button class="tab" type="button" id="tabStatus">🔍 Cek Status</button>
+</div>
+<div id="viewAjukan" class="hide">
+<div id="formWrap">
   <!-- 0. PERUSAHAAN -->
   <div class="card" id="cardPT">
     <div class="step">Pilih perusahaan</div>
@@ -299,6 +346,14 @@
     </div>
     <div id="sMsg" class="note bad hide"></div>
     <div id="sHasil"></div>
+    <details class="legend">
+      <summary>ℹ️ Arti setiap status</summary>
+      <div><span class="badge b-MENUNGGU">Menunggu</span> <span>Data pengajuan sudah diterima HR.</span></div>
+      <div><span class="badge b-DIPROSES">Diproses</span> <span>ID card sedang dalam proses pencetakan oleh tim IT.</span></div>
+      <div><span class="badge b-SELESAI-CETAK">Selesai cetak</span> <span>ID card sudah selesai dicetak dan siap diambil di HRD.</span></div>
+      <div><span class="badge b-SUDAH-DISERAHKAN">Sudah diambil</span> <span>ID card sudah diterima karyawan. Jika belum menerima, tekan <b>Laporkan</b> pada pengajuan tersebut.</span></div>
+      <div><span class="badge b-DITOLAK">Ditolak</span> <span>Pengajuan tidak dapat diproses. Hubungi HRD.</span></div>
+    </details>
   </div>
 </div>
 </main>
@@ -314,7 +369,7 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxnqUzWjhlshth-a4qybz9y
       withSuccessHandler: function (f) { ok = f; return c; },
       withFailureHandler: function (f) { fail = f; return c; }
     };
-    ['lookupNik', 'getBagianList', 'getPabrikList', 'submitWeb', 'cekStatus', 'cekStatusNama', 'cariKaryawanNama'].forEach(function (fn) {
+    ['lookupNik', 'getBagianList', 'getPabrikList', 'submitWeb', 'cekStatus', 'cekStatusNama', 'cariKaryawanNama', 'ajukanKomplain'].forEach(function (fn) {
       c[fn] = function () {
         const args = Array.prototype.slice.call(arguments);
         fetch(API_URL, {
@@ -446,15 +501,26 @@ $('btnCek').onclick = cekNik;
 function pilihMenu(v){
   $('tabAjukan').classList.toggle('on', v === 'ajukan');
   $('tabStatus').classList.toggle('on', v === 'status');
+  show($('viewHome'), v === 'home'); show($('tabsBar'), v !== 'home');
   show($('viewAjukan'), v === 'ajukan'); show($('viewStatus'), v === 'status');
   window.scrollTo(0, 0);
   if (v === 'status') $('sNik').focus();
 }
 $('tabAjukan').onclick = () => pilihMenu('ajukan');
 $('tabStatus').onclick = () => pilihMenu('status');
+$('tabHome').onclick = () => pilihMenu('home');
+$('goAjukan').onclick = () => pilihMenu('ajukan');
+$('goStatus').onclick = () => pilihMenu('status');
 
 const ALUR = ['MENUNGGU', 'DIPROSES', 'SELESAI CETAK', 'SUDAH DISERAHKAN'];
-const LBL = { 'MENUNGGU': 'Menunggu', 'DIPROSES': 'Diproses', 'SELESAI CETAK': 'Siap diambil', 'SUDAH DISERAHKAN': 'Sudah diserahkan', 'DITOLAK': 'Ditolak' };
+const LBL = { 'MENUNGGU': 'Menunggu', 'DIPROSES': 'Diproses', 'SELESAI CETAK': 'Selesai cetak', 'SUDAH DISERAHKAN': 'Sudah diambil', 'DITOLAK': 'Ditolak' };
+const ARTI = {
+  'MENUNGGU': 'Data pengajuan sudah diterima HR.',
+  'DIPROSES': 'ID card sedang dalam proses pencetakan oleh tim IT.',
+  'SELESAI CETAK': 'ID card sudah selesai dicetak dan siap diambil di HRD.',
+  'SUDAH DISERAHKAN': 'ID card sudah diterima karyawan.',
+  'DITOLAK': 'Pengajuan tidak dapat diproses.'
+};
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function kartuStatus(it){
   const idx = ALUR.indexOf(it.status), tolak = it.status === 'DITOLAK';
@@ -462,16 +528,53 @@ function kartuStatus(it){
   let steps = '';
   if (!tolak) {
     steps = '<div class="steps">' + ALUR.map((s, i) => '<i class="' + (i < idx || idx === ALUR.length - 1 ? 'lewat' : i === idx ? 'on' : '') + '"></i>').join('') + '</div>' +
-      '<div class="stl"><span>Menunggu</span><span>Diproses</span><span>Siap</span><span>Diserahkan</span></div>';
+      '<div class="stl"><span>Menunggu</span><span>Diproses</span><span>Selesai cetak</span><span>Diambil</span></div>';
   }
-  let info = '';
-  if (it.status === 'SELESAI CETAK') info = '<div class="note ok">ID card sudah jadi. Silakan ambil di HRD.</div>';
-  if (it.status === 'SUDAH DISERAHKAN') info = '<div class="meta">Diserahkan' + (it.selesai ? ' pada ' + esc(it.selesai) : '') + '.</div>';
+  let info = ARTI[it.status] && !tolak ? '<div class="arti">' + ARTI[it.status] + '</div>' : '';
+  if (it.status === 'SELESAI CETAK') info += '<div class="note ok">ID card sudah jadi. Silakan ambil di HRD.</div>';
+  if (it.status === 'SUDAH DISERAHKAN') {
+    info += '<div class="meta">Diambil' + (it.selesai ? ' pada ' + esc(it.selesai) : '') + '.</div>';
+    if (it.komplain && it.komplain !== 'SELESAI') {
+      info += '<div class="note warn">Laporan "ID card belum diterima" sudah dikirim. Status laporan: <b>' +
+        esc(it.komplain === 'DICEK HR' ? 'Sedang dicek HR' : 'Diterima HR') + '</b>. HR akan menghubungi Anda.</div>';
+    } else if (it.ref) {
+      info += '<button type="button" class="ghost komp-btn" data-ref="' + esc(it.ref) + '">Belum menerima ID card? Laporkan</button>' +
+        '<div class="komp hide" data-form="' + esc(it.ref) + '">' +
+        '<label>No. HP / WhatsApp yang bisa dihubungi</label><input type="tel" class="komp-hp" inputmode="tel" placeholder="08xxxxxxxxxx">' +
+        '<label>Keterangan (opsional)</label><textarea class="komp-ket" rows="2" placeholder="Contoh: belum pernah menerima ID card"></textarea>' +
+        '<div class="note bad hide komp-msg"></div>' +
+        '<button type="button" class="btn full komp-kirim">Kirim Laporan</button></div>';
+    }
+  }
   if (tolak) info = '<div class="note bad">Pengajuan ditolak' + (it.alasan ? ': ' + esc(it.alasan).replace(/\.?$/, '.') : '.') + ' Hubungi HRD untuk info lebih lanjut.</div>';
   return '<div class="st"><div class="top"><div><div class="jn">' + esc(it.jenis) + '</div><div class="pt">' + esc(it.perusahaan) +
     ' · diajukan ' + esc(it.tanggal) + '</div></div><span class="badge ' + cls + '">' + esc(LBL[it.status] || it.status) + '</span></div>' +
     steps + info + '</div>';
 }
+// laporan "belum diterima"
+$('sHasil').addEventListener('click', e => {
+  const tb = e.target.closest('.komp-btn');
+  if (tb) {
+    const fm = tb.nextElementSibling; show(fm, fm.classList.contains('hide'));
+    if (!fm.classList.contains('hide')) fm.querySelector('.komp-hp').focus();
+    return;
+  }
+  const kb = e.target.closest('.komp-kirim');
+  if (!kb) return;
+  const fm = kb.closest('.komp'), msg = fm.querySelector('.komp-msg');
+  const hp = fm.querySelector('.komp-hp').value.trim(), ket = fm.querySelector('.komp-ket').value.trim();
+  err(msg, '');
+  if (!/^[0-9+ -]{8,16}$/.test(hp)) { err(msg, 'Isi No. HP / WhatsApp yang benar.'); return; }
+  kb.disabled = true; kb.textContent = 'Mengirim...';
+  google.script.run
+    .withSuccessHandler(r => {
+      if (!r.ok) { kb.disabled = false; kb.textContent = 'Kirim Laporan'; err(msg, r.msg); return; }
+      const st = fm.closest('.st');
+      fm.previousElementSibling.remove(); fm.outerHTML = '<div class="note ok">' + esc(r.msg) + '</div>';
+    })
+    .withFailureHandler(x => { kb.disabled = false; kb.textContent = 'Kirim Laporan'; err(msg, 'Gagal mengirim: ' + x.message); })
+    .ajukanKomplain({ ref: fm.dataset.form, hp: hp, ket: ket });
+});
 let modeCari = 'nik';
 function pilihCari(m){
   modeCari = m;
