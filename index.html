@@ -76,6 +76,16 @@
   .tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:5px;margin-bottom:14px}
   .tab{flex:1;background:transparent;color:var(--muted);padding:10px 8px;border-radius:10px;font-size:14.5px}
   .tab.on{background:var(--pink);color:var(--on-pink)}
+  .seg{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;margin:2px 0 14px}
+  .segb{flex:1;background:transparent;color:var(--muted);padding:8px 6px;border-radius:8px;font-size:13.5px;font-weight:700;border:0}
+  .penting{background:linear-gradient(135deg,#FFD1C9,#F7CCB0);color:#5a2333;border-radius:14px;padding:12px 14px;margin:0 0 14px;font-size:13.5px;line-height:1.55}
+  .penting .pj{font-weight:800;font-size:14.5px;margin-bottom:6px}
+  .penting a{color:#9E2F48;font-weight:800}
+  .kand{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;color:var(--ink);cursor:pointer}
+  .kand:hover{border-color:var(--pink)}
+  .kand b{display:block;font-size:15px}
+  .kand span{font-size:12.5px;color:var(--muted)}
+  .segb.on{background:var(--card);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
   .st{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px;background:var(--card)}
   .st .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
   .st .jn{font-weight:700}
@@ -105,6 +115,8 @@
     .ghost{color:#FFD1C9}
     .who{border-color:#6FAF8A}
     .preview{border-color:#8A6070}
+    .penting{background:linear-gradient(135deg,#7A4258,#6A4456);color:#FFE4DF}
+    .penting a{color:#FFB0C2}
     .hrpj{background:var(--green-lt);border-color:#6FAF8A;color:var(--ok)}
   }
 </style>
@@ -129,6 +141,12 @@
 </div>
 <div id="viewAjukan">
 <div id="formWrap">
+  <div class="penting" id="infoDobel">
+    <div class="pj">⚠️ Penting sebelum mengajukan</div>
+    <div>1. Sudah pernah mengajukan? <a href="#" id="lnkCekAwal">Cek status</a> dulu.</div>
+    <div>2. Jangan mengajukan dua kali untuk keperluan yang sama.</div>
+    <div>3. Pastikan NIK &amp; data sudah benar.</div>
+  </div>
   <!-- 0. PERUSAHAAN -->
   <div class="card" id="cardPT">
     <div class="step">Pilih perusahaan</div>
@@ -141,12 +159,17 @@
   <!-- 1A. CAPGLOBAL: cek NIK -->
   <div class="card hide" id="cardCG">
     <div class="step">1 · Data karyawan</div>
-    <label for="nik">NIK Karyawan</label>
+    <div class="seg" role="tablist" aria-label="Cari data karyawan">
+      <button type="button" class="segb on" id="segANik">Cari pakai NIK</button>
+      <button type="button" class="segb" id="segANama">Cari pakai Nama</button>
+    </div>
+    <label for="nik" id="aLbl">NIK Karyawan</label>
     <div class="row">
       <input id="nik" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Contoh: ACC0006" style="text-transform:uppercase">
       <button class="ghost" id="btnCek" type="button">Cek</button>
     </div>
     <div id="nikMsg" class="note bad hide"></div>
+    <div id="kandidat" class="hide"></div>
 
     <div class="who" id="who">
       <b id="wNama"></b>
@@ -265,7 +288,11 @@
 <div id="viewStatus" class="hide">
   <div class="card">
     <div class="step">Cek status pengajuan</div>
-    <label for="sNik">NIK Karyawan</label>
+    <div class="seg" role="tablist" aria-label="Cari berdasarkan">
+      <button type="button" class="segb on" id="segNik">Cari pakai NIK</button>
+      <button type="button" class="segb" id="segNama">Cari pakai Nama</button>
+    </div>
+    <label for="sNik" id="sLbl">NIK Karyawan</label>
     <div class="row">
       <input id="sNik" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Contoh: ACC0006">
       <button class="btn" id="btnStatus" type="button">Cek</button>
@@ -287,7 +314,7 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxnqUzWjhlshth-a4qybz9y
       withSuccessHandler: function (f) { ok = f; return c; },
       withFailureHandler: function (f) { fail = f; return c; }
     };
-    ['lookupNik', 'getBagianList', 'getPabrikList', 'submitWeb', 'cekStatus'].forEach(function (fn) {
+    ['lookupNik', 'getBagianList', 'getPabrikList', 'submitWeb', 'cekStatus', 'cekStatusNama', 'cariKaryawanNama'].forEach(function (fn) {
       c[fn] = function () {
         const args = Array.prototype.slice.call(arguments);
         fetch(API_URL, {
@@ -326,6 +353,7 @@ function resetForm(){
   show($('bagianBenarBox'), false);
   document.querySelectorAll('.sec').forEach(s => show(s, false));
   $('who').style.display = 'none';
+  pilihAju('nik');
   err($('nikMsg'), ''); err($('sendMsg'), '');
   reveal(false);
   show($('doneWrap'), false); show($('formWrap'), true);
@@ -341,14 +369,55 @@ function bagianSekarang(){
 function cekPasFoto(){ show($('pasFotoBox'), WAJIB_PAS.indexOf(bagianSekarang()) > -1); }
 function err(el, t){ el.textContent = t || ''; show(el, !!t); }
 
-function cekNik(){
-  const nik = $('nik').value.trim().toUpperCase();
-  err($('nikMsg'), '');
-  if(!nik){ err($('nikMsg'), 'Isi NIK dulu.'); return; }
+let modeAju = 'nik';
+function pilihAju(m){
+  modeAju = m;
+  $('segANik').classList.toggle('on', m === 'nik'); $('segANama').classList.toggle('on', m === 'nama');
+  $('aLbl').textContent = m === 'nik' ? 'NIK Karyawan' : 'Nama Karyawan';
+  $('nik').placeholder = m === 'nik' ? 'Contoh: ACC0006' : 'Contoh: YUNIAR (minimal 3 huruf)';
+  $('btnCek').textContent = m === 'nik' ? 'Cek' : 'Cari';
+  $('nik').value = ''; err($('nikMsg'), ''); $('kandidat').innerHTML = ''; show($('kandidat'), false);
+  current = null; $('who').style.display = 'none'; reveal(false);
+}
+$('segANik').onclick = () => { pilihAju('nik'); $('nik').focus(); };
+$('segANama').onclick = () => { pilihAju('nama'); $('nik').focus(); };
+function cariNamaAju(){
+  const q = $('nik').value.trim().toUpperCase();
+  err($('nikMsg'), ''); $('kandidat').innerHTML = ''; show($('kandidat'), false);
+  if (q.replace(/\s/g, '').length < 3) { err($('nikMsg'), 'Ketik minimal 3 huruf nama.'); return; }
   $('btnCek').disabled = true; $('btnCek').textContent = '...';
   google.script.run
     .withSuccessHandler(r => {
-      $('btnCek').disabled = false; $('btnCek').textContent = 'Cek';
+      $('btnCek').disabled = false; $('btnCek').textContent = 'Cari';
+      if (!r.ok) { err($('nikMsg'), r.msg); return; }
+      $('kandidat').innerHTML = '<div class="meta" style="margin:10px 0 6px">Pilih nama Anda:</div>' +
+        r.list.map((k, i) => '<button type="button" class="kand" data-i="' + i + '"><b>' + esc(k.nama) + '</b><span>' +
+          esc([k.bagian, k.posisi].filter(Boolean).join(' · ')) + (k.pabrik ? ' · ' + esc(k.pabrik) : '') +
+          ' · NIK ' + esc(k.nik) + '</span></button>').join('');
+      show($('kandidat'), true);
+      $('kandidat').querySelectorAll('.kand').forEach(el => el.onclick = () => {
+        const k = r.list[Number(el.dataset.i)];
+        $('kandidat').innerHTML = ''; show($('kandidat'), false);
+        $('nik').value = k.nama;
+        muatKaryawan(k.token);
+      });
+    })
+    .withFailureHandler(e => { $('btnCek').disabled = false; $('btnCek').textContent = 'Cari'; err($('nikMsg'), 'Gagal mencari: ' + e.message); })
+    .cariKaryawanNama(q);
+}
+function cekNik(){
+  if (modeAju === 'nama') { cariNamaAju(); return; }
+  const nik = $('nik').value.trim().toUpperCase();
+  err($('nikMsg'), '');
+  if(!nik){ err($('nikMsg'), 'Isi NIK dulu.'); return; }
+  muatKaryawan(nik);
+}
+function muatKaryawan(nik){
+  const lbl = modeAju === 'nik' ? 'Cek' : 'Cari';
+  $('btnCek').disabled = true; $('btnCek').textContent = '...';
+  google.script.run
+    .withSuccessHandler(r => {
+      $('btnCek').disabled = false; $('btnCek').textContent = lbl;
       if(!r.ok){ current = null; $('who').style.display = 'none'; reveal(false); err($('nikMsg'), r.msg); return; }
       current = { nik, bagian: r.bagian || '', posisi: r.jabatan || '', pabrik: r.pabrik || '' };
       $('wNama').textContent = r.nama;
@@ -358,8 +427,8 @@ function cekNik(){
       reveal(true); cekPasFoto();
     })
     .withFailureHandler(e => {
-      $('btnCek').disabled = false; $('btnCek').textContent = 'Cek';
-      err($('nikMsg'), 'Gagal cek NIK: ' + e.message);
+      $('btnCek').disabled = false; $('btnCek').textContent = lbl;
+      err($('nikMsg'), 'Gagal cek data: ' + e.message);
     })
     .lookupNik(nik);
 }
@@ -403,7 +472,36 @@ function kartuStatus(it){
     ' · diajukan ' + esc(it.tanggal) + '</div></div><span class="badge ' + cls + '">' + esc(LBL[it.status] || it.status) + '</span></div>' +
     steps + info + '</div>';
 }
+let modeCari = 'nik';
+function pilihCari(m){
+  modeCari = m;
+  $('segNik').classList.toggle('on', m === 'nik'); $('segNama').classList.toggle('on', m === 'nama');
+  $('sLbl').textContent = m === 'nik' ? 'NIK Karyawan' : 'Nama Karyawan';
+  $('sNik').placeholder = m === 'nik' ? 'Contoh: ACC0006' : 'Contoh: YUNIAR (minimal 3 huruf)';
+  $('sNik').value = ''; err($('sMsg'), ''); $('sHasil').innerHTML = ''; $('sNik').focus();
+}
+$('segNik').onclick = () => pilihCari('nik');
+$('segNama').onclick = () => pilihCari('nama');
+function cekStatusNama(){
+  const q = $('sNik').value.trim().toUpperCase();
+  err($('sMsg'), ''); $('sHasil').innerHTML = '';
+  if (q.replace(/\s/g, '').length < 3) { err($('sMsg'), 'Ketik minimal 3 huruf nama.'); return; }
+  const b = $('btnStatus'); b.disabled = true; b.textContent = '...';
+  google.script.run
+    .withSuccessHandler(r => {
+      b.disabled = false; b.textContent = 'Cek';
+      if (!r.ok) { err($('sMsg'), r.msg); return; }
+      $('sHasil').innerHTML = (r.orang.length > 1 ? '<div class="meta" style="margin:12px 0 4px">' + r.orang.length +
+          ' orang ditemukan dengan nama "' + esc(r.cari) + '". Pastikan pilih nama & NIK yang benar.</div>' : '') +
+        r.orang.map(o => '<div class="who" style="display:block"><b>' + esc(o.nama) + '</b><span>NIK ' + esc(o.nik) + ' · ' +
+          o.list.length + ' pengajuan</span></div>' + o.list.map(kartuStatus).join('')).join('') +
+        '<div class="meta" style="margin-top:10px">Untuk melihat alasan jika pengajuan ditolak, cek pakai NIK.</div>';
+    })
+    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); })
+    .cekStatusNama(q);
+}
 function cekStatusNik(){
+  if (modeCari === 'nama') { cekStatusNama(); return; }
   const nik = $('sNik').value.trim().toUpperCase();
   err($('sMsg'), ''); $('sHasil').innerHTML = '';
   if (!nik) { err($('sMsg'), 'Isi NIK dulu.'); return; }
@@ -511,7 +609,8 @@ function unduhBukti(){
 $('btnUnduh').onclick = unduhBukti;
 
 let lastNik = '';
-$('lnkCek').onclick = e => { e.preventDefault(); pilihMenu('status'); if (lastNik) { $('sNik').value = lastNik; cekStatusNik(); } };
+$('lnkCekAwal').onclick = e => { e.preventDefault(); pilihMenu('status'); };
+$('lnkCek').onclick = e => { e.preventDefault(); pilihMenu('status'); pilihCari('nik'); if (lastNik) { $('sNik').value = lastNik; cekStatusNik(); } };
 /* HR penanggung jawab per pabrik (CWMI 1 sengaja tidak ada) */
 const HR_PJ = { 'CII 1': 'Destya', 'CII 2': 'Laila', 'CII 3': 'Nabilla', 'CWMI 2': 'Egi', 'CWMI 3': 'Bela' };
 function normPabrik(v){
@@ -626,7 +725,7 @@ $('btnKirim').onclick = () => {
       b.disabled = false; b.textContent = 'Kirim Pengajuan';
       if(!r.ok){ err($('sendMsg'), r.msg); return; }
       $('doneMsg').textContent = r.msg;
-      lastNik = cw ? p.mNik : current.nik;
+      lastNik = (r.bukti && r.bukti.nik) || (cw ? p.mNik : current.nik);
       const pab = normPabrik(cw ? p.mPabrik : (p.bagianSalah && p.pabrikBenar ? p.pabrikBenar : current.pabrik));
       const hr = HR_PJ[pab];
       const bk = r.bukti || {};
