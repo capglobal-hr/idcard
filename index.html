@@ -312,7 +312,7 @@
     <div class="step">3 · Detail pengajuan</div>
 
     <div id="pasFotoBox" class="hide" style="padding-bottom:16px;margin-bottom:4px;border-bottom:1px dashed var(--line)">
-      <label for="pasFoto">Pas foto <span style="color:var(--accent)">(wajib untuk SECURITY &amp; OFFICE)</span></label>
+      <label for="pasFoto">Pas foto <span style="color:var(--accent)">(wajib untuk SECURITY, OFFICE &amp; TRANSLATOR)</span></label>
       <div class="note warn" style="margin-top:0;margin-bottom:8px">Pas foto <b>formal</b>, wajah terlihat jelas menghadap depan. Warna background bebas.</div>
       <label class="filebtn"><input id="pasFoto" type="file" accept="image/*"><span class="fb-btn">📷 Pilih / ambil foto</span><span class="fb-nama" data-for="pasFoto">Belum ada foto dipilih</span></label>
       <img id="prevPas" class="preview hide" alt="Pratinjau pas foto">
@@ -441,7 +441,7 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxnqUzWjhlshth-a4qybz9y
 <script>
 const $ = id => document.getElementById(id);
 let current = null, fotoB64 = '', pasB64 = '', pt = '';
-const WAJIB_PAS = ['SECURITY', 'OFFICE'];
+const WAJIB_PAS = ['SECURITY', 'OFFICE', 'TRANSLATOR'];
 
 function resetForm(){
   current = null; fotoB64 = ''; pasB64 = '';
@@ -863,7 +863,7 @@ $('btnKirim').onclick = () => {
   if(pt === 'CAPGLOBAL' && !current){ err($('sendMsg'), 'Cek NIK dulu.'); return; }
   const j = document.querySelector('input[name=jenis]:checked');
   if(j && j.value === 'GANTI' && !fotoB64){ err($('sendMsg'), 'Foto ID card lama wajib diupload.'); return; }
-  if(WAJIB_PAS.indexOf(bagianSekarang()) > -1 && !pasB64){ err($('sendMsg'), 'Bagian SECURITY dan OFFICE wajib upload pas foto formal.'); return; }
+  if(WAJIB_PAS.indexOf(bagianSekarang()) > -1 && !pasB64){ err($('sendMsg'), 'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.'); return; }
   const cw = pt === 'CAPWORLD';
   const p = {
     pt: pt,
@@ -1087,7 +1087,7 @@ const D = {
     'Ganti ID Card Tidak Layak Pakai':'Replace Damaged ID Card','Wajib upload foto ID card lama.':'Photo of the old ID card is required.',
     'ID Card Susulan':'Missed ID Card','Belum dapat ID card karena terlewat.':'Have not received an ID card because it was missed.',
     '3 · Detail pengajuan':'3 · Request details',
-    'Pas foto':'Passport photo','(wajib untuk SECURITY & OFFICE)':'(required for SECURITY & OFFICE)',
+    'Pas foto':'Passport photo','(wajib untuk SECURITY, OFFICE & TRANSLATOR)':'(required for SECURITY, OFFICE & TRANSLATOR)',
     'formal':'formal',', wajah terlihat jelas menghadap depan. Warna background bebas.':', face clearly visible facing forward. Any background color.',
     '📷 Pilih / ambil foto':'📷 Choose / take photo','Belum ada foto dipilih':'No photo selected',
     'Tanggal ID card hilang':'Date the ID card was lost','Kronologi kehilangan':'How it was lost',
@@ -1131,7 +1131,7 @@ const D = {
     'Isi No. HP / WhatsApp yang benar.':'Enter a valid phone / WhatsApp number.',
     'Cek NIK dulu.':'Please check your NIK first.','Pilih perusahaan dulu.':'Please choose a company first.',
     'Foto ID card lama wajib diupload.':'A photo of the old ID card is required.',
-    'Bagian SECURITY dan OFFICE wajib upload pas foto formal.':'SECURITY and OFFICE departments must upload a formal passport photo.',
+    'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.':'SECURITY, OFFICE and TRANSLATOR departments must upload a formal passport photo.',
     'File bukan foto atau tidak bisa dibaca.':'The file is not a photo or cannot be read.',
     'NIK tidak terdaftar. Hubungi HRD.':'NIK is not registered. Please contact HRD.',
     'NIK ini tercatat ganda di data HRD. Hubungi HRD untuk diperbaiki.':'This NIK is recorded twice in HRD data. Please contact HRD to fix it.',
@@ -1214,7 +1214,7 @@ const D = {
     'Ganti ID Card Tidak Layak Pakai':'更换损坏的工牌','Wajib upload foto ID card lama.':'必须上传旧工牌照片。',
     'ID Card Susulan':'补发工牌','Belum dapat ID card karena terlewat.':'因遗漏尚未领到工牌。',
     '3 · Detail pengajuan':'3 · 申请详情',
-    'Pas foto':'证件照','(wajib untuk SECURITY & OFFICE)':'（SECURITY 和 OFFICE 必须上传）',
+    'Pas foto':'证件照','(wajib untuk SECURITY, OFFICE & TRANSLATOR)':'（SECURITY、OFFICE 和 TRANSLATOR 必须上传）',
     'formal':'正式',', wajah terlihat jelas menghadap depan. Warna background bebas.':'，正面清晰露脸，背景颜色不限。',
     '📷 Pilih / ambil foto':'📷 选择 / 拍摄照片','Belum ada foto dipilih':'尚未选择照片',
     'Tanggal ID card hilang':'工牌丢失日期','Kronologi kehilangan':'丢失经过',
@@ -1258,7 +1258,7 @@ const D = {
     'Isi No. HP / WhatsApp yang benar.':'请输入正确的手机 / WhatsApp 号码。',
     'Cek NIK dulu.':'请先查询工号。','Pilih perusahaan dulu.':'请先选择公司。',
     'Foto ID card lama wajib diupload.':'必须上传旧工牌照片。',
-    'Bagian SECURITY dan OFFICE wajib upload pas foto formal.':'SECURITY 和 OFFICE 部门必须上传正式证件照。',
+    'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.':'SECURITY、OFFICE 和 TRANSLATOR 部门必须上传正式证件照。',
     'File bukan foto atau tidak bisa dibaca.':'文件不是照片或无法读取。',
     'NIK tidak terdaftar. Hubungi HRD.':'工号未登记，请联系 HRD。',
     'NIK ini tercatat ganda di data HRD. Hubungi HRD untuk diperbaiki.':'此工号在 HRD 资料中重复，请联系 HRD 更正。',
