@@ -60,9 +60,38 @@
   .hide{display:none!important}
   .preview{margin-top:10px;max-width:100%;max-height:220px;border-radius:10px;display:block;border:3px solid var(--peach)}
   .done{text-align:center;padding:30px 18px}
+  .cekb{margin:0 auto 12px;max-width:320px;font-size:14px;color:var(--ink)}
+  .cekb a{color:var(--accent);font-weight:700;white-space:nowrap}
+  .bukti{border:2px dashed #F7CCB0;border-radius:14px;padding:14px;text-align:left;margin:12px 0;background:#FFF8F3;color:#3a2a30}
+  .bukti .bk-h{text-align:center;font-size:12px;letter-spacing:.1em;color:#C7405E;font-weight:800;margin-bottom:10px}
+  .bukti .rw{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:6px 0;border-bottom:1px dotted #F7CCB0}
+  .bukti .rw:last-child{border:0}
+  .bukti .rw > span{color:#8a6a72;flex:none}
+  .bukti .rw > b{text-align:right;word-break:break-word}
+  .hrpj{margin:4px auto 16px;max-width:320px;background:#E2F4E1;border:1px solid #97D9A9;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5;color:#1d4d2c}
+  .hrpj .nm{display:inline-block;margin-top:4px;font-size:18px;font-weight:800}
   .done .ic{width:56px;height:56px;border-radius:50%;background:var(--green);color:var(--on-pink);font-size:30px;line-height:56px;margin:0 auto 12px}
   .muted{color:var(--muted);font-size:13px;margin-top:4px}
   .caps{text-transform:uppercase}
+  .tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:5px;margin-bottom:14px}
+  .tab{flex:1;background:transparent;color:var(--muted);padding:10px 8px;border-radius:10px;font-size:14.5px}
+  .tab.on{background:var(--pink);color:var(--on-pink)}
+  .st{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px;background:var(--card)}
+  .st .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .st .jn{font-weight:700}
+  .st .pt{font-size:12.5px;color:var(--muted)}
+  .badge{flex:none;font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .b-MENUNGGU{background:#cfe2f3;color:#073763}
+  .b-DIPROSES{background:#fff2cc;color:#7f6000}
+  .b-SELESAI-CETAK{background:#d9ead3;color:#274e13}
+  .b-SUDAH-DISERAHKAN{background:#97D9A9;color:#1d4d2c}
+  .b-DITOLAK{background:#f4cccc;color:#990000}
+  .steps{display:flex;gap:4px;margin:14px 0 6px}
+  .steps i{flex:1;height:6px;border-radius:6px;background:var(--line)}
+  .steps i.on{background:var(--pink)}
+  .steps i.lewat{background:var(--green)}
+  .stl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+  .st .meta{font-size:13px;color:var(--muted);margin-top:8px}
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#4E3140; --card:#5B3A4A; --ink:#FFF1F3; --muted:#E9C9D2; --line:#7A5263;
@@ -76,6 +105,7 @@
     .ghost{color:#FFD1C9}
     .who{border-color:#6FAF8A}
     .preview{border-color:#8A6070}
+    .hrpj{background:var(--green-lt);border-color:#6FAF8A;color:var(--ok)}
   }
 </style>
 </head>
@@ -93,6 +123,11 @@
 </div></header>
 
 <main>
+<div class="tabs" role="tablist">
+  <button class="tab on" type="button" id="tabAjukan">📝 Ajukan ID Card</button>
+  <button class="tab" type="button" id="tabStatus">🔍 Cek Status</button>
+</div>
+<div id="viewAjukan">
 <div id="formWrap">
   <!-- 0. PERUSAHAAN -->
   <div class="card" id="cardPT">
@@ -216,7 +251,28 @@
   <div class="ic">✓</div>
   <h2 style="margin:0 0 6px">Pengajuan terkirim</h2>
   <p id="doneMsg" class="muted" style="font-size:15px"></p>
+  <div id="bukti" class="bukti"></div>
+  <button class="btn full" id="btnUnduh" type="button">⬇️ Unduh Bukti Pengajuan</button>
+  <div id="buktiImgWrap" class="hide" style="margin-top:12px">
+    <p class="muted" style="font-size:13px;margin:0 0 8px">Jika file tidak otomatis terunduh, tekan lama gambar di bawah lalu pilih <b>Simpan gambar</b>.</p>
+    <img id="buktiImg" alt="Bukti pengajuan" style="width:100%;border-radius:12px;border:1px solid var(--line)">
+  </div>
+  <p class="cekb" style="margin-top:14px">Silakan cek status pengajuan secara berkala di menu <a href="#" id="lnkCek">🔍 Cek Status</a>.</p>
   <button class="ghost" type="button" id="btnLagi">Ajukan lagi</button>
+</div>
+</div>
+
+<div id="viewStatus" class="hide">
+  <div class="card">
+    <div class="step">Cek status pengajuan</div>
+    <label for="sNik">NIK Karyawan</label>
+    <div class="row">
+      <input id="sNik" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Contoh: ACC0006">
+      <button class="btn" id="btnStatus" type="button">Cek</button>
+    </div>
+    <div id="sMsg" class="note bad hide"></div>
+    <div id="sHasil"></div>
+  </div>
 </div>
 </main>
 
@@ -231,7 +287,7 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxnqUzWjhlshth-a4qybz9y
       withSuccessHandler: function (f) { ok = f; return c; },
       withFailureHandler: function (f) { fail = f; return c; }
     };
-    ['lookupNik', 'getBagianList', 'getPabrikList', 'submitWeb'].forEach(function (fn) {
+    ['lookupNik', 'getBagianList', 'getPabrikList', 'submitWeb', 'cekStatus'].forEach(function (fn) {
       c[fn] = function () {
         const args = Array.prototype.slice.call(arguments);
         fetch(API_URL, {
@@ -316,6 +372,56 @@ function reveal(on){
 }
 
 $('btnCek').onclick = cekNik;
+
+/* ---------- menu Ajukan / Cek Status ---------- */
+function pilihMenu(v){
+  $('tabAjukan').classList.toggle('on', v === 'ajukan');
+  $('tabStatus').classList.toggle('on', v === 'status');
+  show($('viewAjukan'), v === 'ajukan'); show($('viewStatus'), v === 'status');
+  window.scrollTo(0, 0);
+  if (v === 'status') $('sNik').focus();
+}
+$('tabAjukan').onclick = () => pilihMenu('ajukan');
+$('tabStatus').onclick = () => pilihMenu('status');
+
+const ALUR = ['MENUNGGU', 'DIPROSES', 'SELESAI CETAK', 'SUDAH DISERAHKAN'];
+const LBL = { 'MENUNGGU': 'Menunggu', 'DIPROSES': 'Diproses', 'SELESAI CETAK': 'Siap diambil', 'SUDAH DISERAHKAN': 'Sudah diserahkan', 'DITOLAK': 'Ditolak' };
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function kartuStatus(it){
+  const idx = ALUR.indexOf(it.status), tolak = it.status === 'DITOLAK';
+  const cls = 'b-' + it.status.replace(/\s+/g, '-');
+  let steps = '';
+  if (!tolak) {
+    steps = '<div class="steps">' + ALUR.map((s, i) => '<i class="' + (i < idx || idx === ALUR.length - 1 ? 'lewat' : i === idx ? 'on' : '') + '"></i>').join('') + '</div>' +
+      '<div class="stl"><span>Menunggu</span><span>Diproses</span><span>Siap</span><span>Diserahkan</span></div>';
+  }
+  let info = '';
+  if (it.status === 'SELESAI CETAK') info = '<div class="note ok">ID card sudah jadi. Silakan ambil di HRD.</div>';
+  if (it.status === 'SUDAH DISERAHKAN') info = '<div class="meta">Diserahkan' + (it.selesai ? ' pada ' + esc(it.selesai) : '') + '.</div>';
+  if (tolak) info = '<div class="note bad">Pengajuan ditolak' + (it.alasan ? ': ' + esc(it.alasan).replace(/\.?$/, '.') : '.') + ' Hubungi HRD untuk info lebih lanjut.</div>';
+  return '<div class="st"><div class="top"><div><div class="jn">' + esc(it.jenis) + '</div><div class="pt">' + esc(it.perusahaan) +
+    ' · diajukan ' + esc(it.tanggal) + '</div></div><span class="badge ' + cls + '">' + esc(LBL[it.status] || it.status) + '</span></div>' +
+    steps + info + '</div>';
+}
+function cekStatusNik(){
+  const nik = $('sNik').value.trim().toUpperCase();
+  err($('sMsg'), ''); $('sHasil').innerHTML = '';
+  if (!nik) { err($('sMsg'), 'Isi NIK dulu.'); return; }
+  const b = $('btnStatus'); b.disabled = true; b.textContent = '...';
+  google.script.run
+    .withSuccessHandler(r => {
+      b.disabled = false; b.textContent = 'Cek';
+      if (!r.ok) { err($('sMsg'), r.msg); return; }
+      $('sHasil').innerHTML = '<div class="who" style="display:block"><b>' + esc(r.nama) + '</b><span>' + (r.list.length || 'Belum ada') +
+        ' pengajuan ditemukan</span></div>' + (r.list.length ? r.list.map(kartuStatus).join('') :
+        '<div class="st"><div class="meta">Belum ada pengajuan ID card untuk NIK ini.</div></div>');
+    })
+    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); })
+    .cekStatus(nik);
+}
+$('btnStatus').onclick = cekStatusNik;
+$('sNik').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); cekStatusNik(); } });
+$('sNik').addEventListener('input', () => { const s = $('sNik').selectionStart; $('sNik').value = $('sNik').value.toUpperCase(); try { $('sNik').setSelectionRange(s, s); } catch (x) {} });
 document.querySelectorAll('input[name=pt]').forEach(r => r.onchange = () => {
   pt = r.value;
   show($('cardCG'), pt === 'CAPGLOBAL'); show($('cardCW'), pt === 'CAPWORLD');
@@ -325,6 +431,95 @@ document.querySelectorAll('input[name=pt]').forEach(r => r.onchange = () => {
   cekPasFoto();
 });
 $('btnLagi').onclick = resetForm;
+/* ===== Bukti pengajuan (tampil + unduh PNG) ===== */
+let buktiData = null;
+function buktiBaris(d){
+  const r = [['No. Pengajuan', d.no], ['Nama', d.nama], ['NIK', d.nik], ['Jenis', d.jenis], ['Perusahaan', d.perusahaan],
+    ['Lokasi pabrik', d.pabrik], ['Tanggal', d.tanggal], ['Status', 'Menunggu']];
+  if (d.hr) r.push(['HR penanggung jawab', d.hr]);
+  return r.filter(x => x[1]);
+}
+function tampilBukti(d){
+  buktiData = d;
+  $('bukti').innerHTML = '<div class="bk-h">BUKTI PENGAJUAN ID CARD</div>' + buktiBaris(d).map(x =>
+    '<div class="rw"><span>' + esc(x[0]) + '</span><b>' + (x[0] === 'Status' ? '<span class="badge b-MENUNGGU">Menunggu</span>' : esc(x[1])) + '</b></div>').join('');
+  show($('buktiImgWrap'), false); $('buktiImg').removeAttribute('src');
+}
+function bungkus(ctx, teks, maxW){
+  const kata = String(teks).split(' '), out = []; let baris = '';
+  kata.forEach(k => { const c = baris ? baris + ' ' + k : k; if (ctx.measureText(c).width > maxW && baris) { out.push(baris); baris = k; } else baris = c; });
+  if (baris) out.push(baris); return out;
+}
+function gambarBukti(d){
+  const W = 1080, P = 70, S = 'Inter, "Segoe UI", Roboto, Arial, sans-serif';
+  const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+  const rows = buktiBaris(d);
+  ctx.font = '700 34px ' + S;
+  const rowsW = rows.map(x => bungkus(ctx, x[1], W - P * 2 - 380));
+  const tinggi = 330 + rowsW.reduce((a, l) => a + Math.max(1, l.length) * 46 + 34, 0) + 175;
+  cv.width = W; cv.height = tinggi;
+  ctx.fillStyle = '#FFF8F3'; ctx.fillRect(0, 0, W, tinggi);
+  ctx.fillStyle = '#F06E88'; ctx.fillRect(0, 0, W, 210);
+  const strip = ['#97D9A9', '#FDC689', '#FFD1C9', '#E2F4E1', '#F7CCB0'];
+  strip.forEach((c, i) => { ctx.fillStyle = c; ctx.fillRect(i * W / 5, 210, W / 5 + 1, 12); });
+  const logo = document.querySelector('img.logo');
+  try { if (logo && logo.complete) { ctx.fillStyle = '#fff'; ctx.fillRect(P - 6, 44, 104, 132); ctx.drawImage(logo, P, 50, 92, 120); } } catch (e) {}
+  ctx.fillStyle = '#fff'; ctx.font = '800 40px ' + S; ctx.fillText('BUKTI PENGAJUAN ID CARD', P + 130, 100);
+  ctx.font = '600 28px ' + S; ctx.fillText(d.perusahaan || '', P + 130, 145);
+  ctx.font = '500 24px ' + S; ctx.fillText('Human Resources Department', P + 130, 182);
+  let y = 300;
+  ctx.setLineDash([10, 8]); ctx.strokeStyle = '#F7CCB0'; ctx.lineWidth = 3;
+  ctx.strokeRect(P - 20, y - 50, W - (P - 20) * 2, tinggi - y - 160 + 20); ctx.setLineDash([]);
+  rows.forEach((x, i) => {
+    ctx.fillStyle = '#8a6a72'; ctx.font = '500 30px ' + S; ctx.fillText(x[0], P + 10, y + 10);
+    ctx.font = '700 34px ' + S; ctx.textAlign = 'right';
+    const lines = rowsW[i];
+    if (x[0] === 'Status') {
+      const tw = ctx.measureText(x[1]).width + 40; ctx.fillStyle = '#cfe2f3';
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(W - P - 10 - tw, y - 28, tw, 50, 25) : ctx.rect(W - P - 10 - tw, y - 28, tw, 50); ctx.fill();
+      ctx.fillStyle = '#073763'; ctx.fillText(x[1], W - P - 30, y + 10);
+    } else {
+      ctx.fillStyle = x[0] === 'No. Pengajuan' ? '#C7405E' : '#3a2a30';
+      lines.forEach((l, j) => ctx.fillText(l, W - P - 10, y + 10 + j * 46));
+    }
+    ctx.textAlign = 'left';
+    y += Math.max(1, lines.length) * 46 + 34;
+    if (i < rows.length - 1) { ctx.strokeStyle = '#F7CCB0'; ctx.lineWidth = 2; ctx.setLineDash([3, 7]); ctx.beginPath(); ctx.moveTo(P + 10, y - 40); ctx.lineTo(W - P - 10, y - 40); ctx.stroke(); ctx.setLineDash([]); }
+  });
+  ctx.fillStyle = '#3a2a30'; ctx.font = '600 28px ' + S; ctx.textAlign = 'center';
+  ctx.fillText('Silakan cek status pengajuan secara berkala', W / 2, tinggi - 120);
+  ctx.fillStyle = '#C7405E'; ctx.font = '700 28px ' + S;
+  ctx.fillText('capglobal-hr.github.io/idcard  →  menu Cek Status', W / 2, tinggi - 78);
+  ctx.fillStyle = '#8a6a72'; ctx.font = '500 22px ' + S;
+  ctx.fillText('Dibuat otomatis oleh sistem pengajuan ID card · simpan bukti ini', W / 2, tinggi - 38);
+  return cv;
+}
+function unduhBukti(){
+  if (!buktiData) return;
+  const cv = gambarBukti(buktiData);
+  const bersih = x => String(x || '').replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, ' ').trim().toUpperCase();
+  const nama = [bersih(buktiData.nama), bersih(buktiData.nik), 'ID CARD ' + bersih(buktiData.kode || buktiData.jenis)].filter(Boolean).join('_') + '.png';
+  const url = cv.toDataURL('image/png');
+  $('buktiImg').src = url; show($('buktiImgWrap'), true);
+  try {
+    cv.toBlob(bl => {
+      const a = document.createElement('a'); a.href = URL.createObjectURL(bl); a.download = nama;
+      document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    }, 'image/png');
+  } catch (e) {}
+}
+$('btnUnduh').onclick = unduhBukti;
+
+let lastNik = '';
+$('lnkCek').onclick = e => { e.preventDefault(); pilihMenu('status'); if (lastNik) { $('sNik').value = lastNik; cekStatusNik(); } };
+/* HR penanggung jawab per pabrik (CWMI 1 sengaja tidak ada) */
+const HR_PJ = { 'CII 1': 'Destya', 'CII 2': 'Laila', 'CII 3': 'Nabilla', 'CWMI 2': 'Egi', 'CWMI 3': 'Bela' };
+function normPabrik(v){
+  const s = String(v || '').toUpperCase().replace(/\s+/g, ' ').trim();
+  let m = s.match(/^(?:PABRIK|CII) ?(\d)$/); if (m) return 'CII ' + m[1];
+  m = s.match(/^CWMI ?(\d)$/); if (m) return 'CWMI ' + m[1];
+  return s;
+}
 $('nik').addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); cekNik(); } });
 $('nik').addEventListener('input', () => { if(current){ current = null; $('who').style.display='none'; reveal(false); } });
 
@@ -431,6 +626,16 @@ $('btnKirim').onclick = () => {
       b.disabled = false; b.textContent = 'Kirim Pengajuan';
       if(!r.ok){ err($('sendMsg'), r.msg); return; }
       $('doneMsg').textContent = r.msg;
+      lastNik = cw ? p.mNik : current.nik;
+      const pab = normPabrik(cw ? p.mPabrik : (p.bagianSalah && p.pabrikBenar ? p.pabrikBenar : current.pabrik));
+      const hr = HR_PJ[pab];
+      const bk = r.bukti || {};
+      tampilBukti({
+        no: bk.no || '', nama: bk.nama || (cw ? p.mNama : $('wNama').textContent), nik: bk.nik || lastNik,
+        jenis: bk.jenis || ({ HILANG: 'ID Card Hilang', GANTI: 'Ganti (Tidak Layak Pakai)', SUSULAN: 'Susulan (Terlewat)' })[j ? j.value : ''] || '', perusahaan: bk.perusahaan || (cw ? 'PT CAP WORLD MANUFACTURING INDONESIA' : 'PT CAPGLOBAL INDUSTRY INTERNATIONAL'),
+        pabrik: pab, tanggal: bk.tanggal || new Date().toLocaleString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        hr: hr ? hr + ' (' + pab + ')' : '', kode: j ? j.value : ''
+      });
       show($('formWrap'), false); show($('doneWrap'), true); window.scrollTo(0,0);
     })
     .withFailureHandler(e => {
