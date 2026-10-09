@@ -106,6 +106,7 @@
   .b-cek{background:#E2F4E1;color:#1d4d2c}
   .b-riw{background:#FDE8D4;color:#6b3a12}
   .riw-bt{display:flex;gap:8px;margin-top:10px}
+  .riw-tot{font-size:12.5px;color:var(--muted);margin-top:6px}
   .riw-bt .ghost{flex:1;font-size:13px;padding:9px 8px}
   .riw-img{width:100%;margin-top:10px;border-radius:10px;border:1px solid var(--line)}
   .tabs .tab{font-size:13.5px;padding:10px 6px}
@@ -372,6 +373,10 @@
   <div class="card">
     <div class="step">Riwayat pengajuan di HP ini</div>
     <div class="meta" style="font-size:13px;color:var(--muted)">Semua pengajuan yang pernah dikirim dari HP ini. Pengajuan dari HP lain bisa dicek di menu Cek Status.</div>
+    <div id="riwCariBox" class="hide" style="margin-top:12px">
+      <input id="riwCari" type="text" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Cari nama, NIK, no. pengajuan, jenis, atau tanggal">
+      <div class="riw-tot" id="riwTot"></div>
+    </div>
     <div id="riwList"></div>
     <a href="#" id="riwHapus" class="n-hapus hide" style="margin-top:12px">Hapus riwayat di HP ini</a>
   </div>
@@ -967,6 +972,7 @@ function simpanRiwayat(d){
 function tampilRiwayat(){
   const l = simpanBaca(RIW_KEY, []), box = $('riwList');
   $('riwHapus').classList.toggle('hide', !l.length);
+  show($('riwCariBox'), l.length > 1); $('riwCari').value = ''; $('riwTot').textContent = '';
   if (!l.length) { box.innerHTML = '<div class="st"><div class="meta">Belum ada pengajuan dari HP ini.</div></div>'; return; }
   box.innerHTML = l.map((d, i) =>
     '<div class="st riw" data-i="' + i + '"><div class="top"><div><div class="jn">' + esc(d.jenis) + '</div>' +
@@ -1009,6 +1015,18 @@ $('riwList').addEventListener('click', e => {
       document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); }, 'image/png'); } catch (x) {}
   }
 });
+$('riwCari').addEventListener('input', () => {
+  const q = $('riwCari').value.trim().toUpperCase();
+  const kartu = [...$('riwList').querySelectorAll('.riw')];
+  let n = 0;
+  kartu.forEach(k => {
+    const d = simpanBaca(RIW_KEY, [])[Number(k.dataset.i)] || {};
+    const teks = [d.nama, d.nik, d.no, d.jenis, d.tanggal, d.pabrik, k.querySelector('.riw-st').textContent].join(' ').toUpperCase();
+    const cocok = !q || teks.indexOf(q) > -1;
+    show(k, cocok); if (cocok) n++;
+  });
+  $('riwTot').textContent = q ? (n ? n + ' dari ' + kartu.length + ' pengajuan' : 'Tidak ada yang cocok.') : '';
+});
 $('riwHapus').onclick = e => { e.preventDefault(); simpanTulis(RIW_KEY, []); tampilRiwayat(); };
 cekNotif();
 
@@ -1023,7 +1041,8 @@ const D = {
     'Riwayat pengajuan di HP ini':'Request history on this phone',
     'Semua pengajuan yang pernah dikirim dari HP ini. Pengajuan dari HP lain bisa dicek di menu Cek Status.':'All requests ever sent from this phone. Requests from other phones can be checked in the Check Status menu.',
     'Belum ada pengajuan dari HP ini.':'No requests from this phone yet.','Hapus riwayat di HP ini':'Clear history on this phone',
-    'Unduh bukti':'Download receipt','Lihat status':'View status',
+    'Unduh bukti':'Download receipt','Lihat status':'View status','Tidak ada yang cocok.':'No matches.',
+    'Cari nama, NIK, no. pengajuan, jenis, atau tanggal':'Search name, NIK, request no., type, or date',
 
     'Pengajuan ditolak':'Request rejected','ID card Anda sudah jadi!':'Your ID card is ready!',
     'Silakan hubungi HRD untuk info lebih lanjut.':'Please contact HRD for more information.',
@@ -1149,7 +1168,8 @@ const D = {
     'Riwayat pengajuan di HP ini':'此手机的申请记录',
     'Semua pengajuan yang pernah dikirim dari HP ini. Pengajuan dari HP lain bisa dicek di menu Cek Status.':'此手机提交过的所有申请。其他手机提交的申请可在"查询状态"菜单查询。',
     'Belum ada pengajuan dari HP ini.':'此手机尚无申请。','Hapus riwayat di HP ini':'清除此手机上的记录',
-    'Unduh bukti':'下载凭证','Lihat status':'查看状态',
+    'Unduh bukti':'下载凭证','Lihat status':'查看状态','Tidak ada yang cocok.':'没有匹配的结果。',
+    'Cari nama, NIK, no. pengajuan, jenis, atau tanggal':'搜索姓名、工号、申请编号、类型或日期',
 
     'Pengajuan ditolak':'申请被拒','ID card Anda sudah jadi!':'您的工牌已制作完成！',
     'Silakan hubungi HRD untuk info lebih lanjut.':'详情请联系 HRD。',
@@ -1276,6 +1296,7 @@ const R = [
   [/^Alasan: (.*)$/, { en: m => 'Reason: ' + m[1], zh: m => '原因：' + m[1] }],
   [/^: (.*)$/, { en: m => ': ' + m[1], zh: m => '：' + m[1] }],
   [/^(.*) · NIK ([^·]*)$/, { en: m => m[1] + ' · NIK ' + m[2], zh: m => m[1] + ' · 工号 ' + m[2] }],
+  [/^(\d+) dari (\d+) pengajuan$/, { en: m => m[1] + ' of ' + m[2] + ' requests', zh: m => m[2] + ' 条申请中的 ' + m[1] + ' 条' }],
   [/^Bagian: (.*)$/, { en: m => 'Department: ' + m[1], zh: m => '部门：' + m[1] }],
   [/^· Posisi: (.*)$/, { en: m => '· Position: ' + m[1], zh: m => '· 职位：' + m[1] }],
   [/^(.*) · diajukan (.*)$/, { en: m => m[1] + ' · submitted ' + m[2], zh: m => m[1] + ' · 申请日期 ' + m[2] }],
