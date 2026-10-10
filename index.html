@@ -192,7 +192,15 @@
   .ld-bt button{flex:1;height:40px;border:0;border-radius:10px;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit}
   .ld-bt .l1{background:var(--line);color:var(--muted)}
   .ld-bt .l2{background:var(--pink);color:var(--on-pink)}
-  @media (prefers-reduced-motion: reduce){.ld-env{animation:none}.ld-ic.ok{animation:none}}
+  /* loading kecil khusus Cek / Cari: titik berkedip */
+  .ld.mini{background:rgba(31,45,61,.35)}
+  .ld-mini{background:var(--card);color:var(--ink);border-radius:16px;padding:18px 26px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+  .ld-dots{display:flex;gap:7px;justify-content:center}
+  .ld-dots i{width:10px;height:10px;border-radius:50%;background:var(--accent);animation:ldKedip 1s ease-in-out infinite}
+  .ld-dots i:nth-child(2){animation-delay:.18s}.ld-dots i:nth-child(3){animation-delay:.36s}
+  @keyframes ldKedip{0%,80%,100%{opacity:.25;transform:scale(.85)}40%{opacity:1;transform:scale(1)}}
+  .ld-mt{font-size:13px;color:var(--muted);margin-top:10px}
+  @media (prefers-reduced-motion: reduce){.ld-env{animation:none}.ld-ic.ok{animation:none}.ld-dots i{animation:none;opacity:.7}}
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#1E2A3A; --card:#27364A; --ink:#EEF3FB; --muted:#B8C6DA; --line:#3A4B63;
@@ -222,7 +230,8 @@
 <body>
 
 <div id="ldWrap" class="ld hide" role="dialog" aria-modal="true" aria-live="polite">
-  <div class="ld-box">
+  <div class="ld-mini hide" id="ldMini"><div class="ld-dots"><i></i><i></i><i></i></div><div class="ld-mt" id="ldMiniTeks">Mencari data...</div></div>
+  <div class="ld-box" id="ldBox">
     <div id="ldProses">
       <div class="ld-top"><b id="ldJudul">Mengirim ke HR...</b><span class="ld-pct" id="ldPct">0%</span></div>
       <div class="ld-trk">
@@ -529,17 +538,28 @@ function err(el, t){ el.textContent = t || ''; show(el, !!t); }
 const LD = (function () {
   let timer = null, p = 0, aksi = null;
   const set = v => { p = v; $('ldBar').style.width = v + '%'; $('ldEnv').style.left = 'calc(' + v + '% - ' + (v * 0.34) + 'px)'; $('ldPct').textContent = Math.round(v) + '%'; };
-  const tutup = () => { clearInterval(timer); show($('ldWrap'), false); document.body.style.overflow = ''; };
+  const tutup = () => { clearInterval(timer); show($('ldWrap'), false); $('ldWrap').classList.remove('mini'); document.body.style.overflow = ''; };
+  const besar = on => { show($('ldBox'), on); show($('ldMini'), !on); $('ldWrap').classList.toggle('mini', !on); };
   $('ldTutup').onclick = tutup;
   $('ldAksi').onclick = () => { const f = aksi; tutup(); if (f) f(); };
   return {
+    // loading amplop + persen: untuk MENYIMPAN data (kirim pengajuan / kirim laporan)
     mulai(judul) {
-      clearInterval(timer); aksi = null;
+      clearInterval(timer); aksi = null; besar(true);
       show($('ldProses'), true); show($('ldHasil'), false);
       $('ldJudul').textContent = judul || 'Mengirim ke HR...';
       set(0); show($('ldWrap'), true); document.body.style.overflow = 'hidden';
       timer = setInterval(() => set(Math.min(92, p + (92 - p) * 0.035 + 0.15)), 120);
     },
+    // loading kecil titik berkedip: khusus CEK / CARI (cek NIK, cari nama, cek status)
+    cari(teks) {
+      clearInterval(timer); aksi = null; besar(false);
+      $('ldMiniTeks').textContent = teks || 'Mencari data...';
+      show($('ldWrap'), true); document.body.style.overflow = 'hidden';
+    },
+    selesai() { tutup(); },
+    // gagal koneksi saat mencari: tampil silang merah + tombol Coba lagi
+    gagalCari(pesan, ulang) { this.gagal({ jenis: 'koneksi', judul: 'Gagal mencari', pesan: pesan, tombol: 'Coba lagi', aksi: ulang }); },
     berhasil(judul, sub, lanjut) {
       clearInterval(timer); set(100);
       setTimeout(() => {
@@ -552,7 +572,7 @@ const LD = (function () {
     },
     // o = { jenis: 'koneksi' | 'data', judul, pesan, tombol, aksi }
     gagal(o) {
-      clearInterval(timer);
+      clearInterval(timer); besar(true);
       show($('ldProses'), false); show($('ldHasil'), true);
       const kon = o.jenis === 'koneksi';
       $('ldIkon').className = 'ld-ic ' + (kon ? 'bad' : 'warn'); $('ldIkon').textContent = kon ? '✕' : '!';
@@ -582,8 +602,10 @@ function cariNamaAju(){
   err($('nikMsg'), ''); $('kandidat').innerHTML = ''; show($('kandidat'), false);
   if (q.replace(/\s/g, '').length < 3) { err($('nikMsg'), 'Ketik minimal 3 huruf nama.'); return; }
   $('btnCek').disabled = true; $('btnCek').textContent = '...';
+  LD.cari('Mencari data...');
   google.script.run
     .withSuccessHandler(r => {
+      LD.selesai();
       $('btnCek').disabled = false; $('btnCek').textContent = 'Cari';
       if (!r.ok) { err($('nikMsg'), r.msg); return; }
       $('kandidat').innerHTML = '<div class="meta" style="margin:10px 0 6px">Pilih nama Anda:</div>' +
@@ -598,7 +620,7 @@ function cariNamaAju(){
         muatKaryawan(k.token);
       });
     })
-    .withFailureHandler(e => { $('btnCek').disabled = false; $('btnCek').textContent = 'Cari'; err($('nikMsg'), 'Gagal mencari: ' + e.message); })
+    .withFailureHandler(e => { $('btnCek').disabled = false; $('btnCek').textContent = 'Cari'; err($('nikMsg'), 'Gagal mencari: ' + e.message); LD.gagalCari(e.message, cariNamaAju); })
     .cariKaryawanNama(q);
 }
 function cekNik(){
@@ -611,8 +633,10 @@ function cekNik(){
 function muatKaryawan(nik){
   const lbl = modeAju === 'nik' ? 'Cek' : 'Cari';
   $('btnCek').disabled = true; $('btnCek').textContent = '...';
+  LD.cari('Mencari data...');
   google.script.run
     .withSuccessHandler(r => {
+      LD.selesai();
       $('btnCek').disabled = false; $('btnCek').textContent = lbl;
       if(!r.ok){ current = null; $('who').style.display = 'none'; reveal(false); err($('nikMsg'), r.msg); return; }
       current = { nik, bagian: r.bagian || '', posisi: r.jabatan || '', pabrik: r.pabrik || '' };
@@ -625,6 +649,7 @@ function muatKaryawan(nik){
     .withFailureHandler(e => {
       $('btnCek').disabled = false; $('btnCek').textContent = lbl;
       err($('nikMsg'), 'Gagal cek data: ' + e.message);
+      LD.gagalCari(e.message, () => muatKaryawan(nik));
     })
     .lookupNik(nik);
 }
@@ -744,8 +769,10 @@ function cekStatusNama(){
   err($('sMsg'), ''); $('sHasil').innerHTML = '';
   if (q.replace(/\s/g, '').length < 3) { err($('sMsg'), 'Ketik minimal 3 huruf nama.'); return; }
   const b = $('btnStatus'); b.disabled = true; b.textContent = '...';
+  LD.cari('Mengecek status...');
   google.script.run
     .withSuccessHandler(r => {
+      LD.selesai();
       b.disabled = false; b.textContent = 'Cek';
       if (!r.ok) { err($('sMsg'), r.msg); return; }
       $('sHasil').innerHTML = (r.orang.length > 1 ? '<div class="meta" style="margin:12px 0 4px">' + r.orang.length +
@@ -754,7 +781,7 @@ function cekStatusNama(){
           o.list.length + ' pengajuan</span></div>' + o.list.map(kartuStatus).join('')).join('') +
         '<div class="meta" style="margin-top:10px">Untuk melihat alasan jika pengajuan ditolak, cek pakai NIK.</div>';
     })
-    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); })
+    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); LD.gagalCari(e.message, cekStatusNama); })
     .cekStatusNama(q);
 }
 function cekStatusNik(){
@@ -763,15 +790,17 @@ function cekStatusNik(){
   err($('sMsg'), ''); $('sHasil').innerHTML = '';
   if (!nik) { err($('sMsg'), 'Isi NIK dulu.'); return; }
   const b = $('btnStatus'); b.disabled = true; b.textContent = '...';
+  LD.cari('Mengecek status...');
   google.script.run
     .withSuccessHandler(r => {
+      LD.selesai();
       b.disabled = false; b.textContent = 'Cek';
       if (!r.ok) { err($('sMsg'), r.msg); return; }
       $('sHasil').innerHTML = '<div class="who" style="display:block"><b>' + esc(r.nama) + '</b><span>' + (r.list.length || 'Belum ada') +
         ' pengajuan ditemukan</span></div>' + (r.list.length ? r.list.map(kartuStatus).join('') :
         '<div class="st"><div class="meta">Belum ada pengajuan ID card untuk NIK ini.</div></div>');
     })
-    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); })
+    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); LD.gagalCari(e.message, cekStatusNik); })
     .cekStatus(nik);
 }
 $('btnStatus').onclick = cekStatusNik;
@@ -1151,6 +1180,7 @@ cekNotif();
 const D = {
   en: {
     'Human Resources Department':'Human Resources Department',
+    'Mencari data...':'Searching...','Mengecek status...':'Checking status...','Gagal mencari':'Search failed',
     'Mengirim ke HR...':'Sending to HR...','Mengirim laporan ke HR...':'Sending report to HR...','Jangan tutup halaman ini':'Do not close this page',
     'Berhasil terkirim!':'Sent successfully!','Membuka bukti pengajuan...':'Opening request receipt...','Laporan terkirim!':'Report sent!',
     'Gagal terkirim':'Failed to send','Pengajuan tidak bisa dikirim':'Request cannot be sent','Laporan tidak bisa dikirim':'Report cannot be sent',
@@ -1283,6 +1313,7 @@ const D = {
   },
   zh: {
     'Human Resources Department':'人力资源部',
+    'Mencari data...':'正在查找...','Mengecek status...':'正在查询状态...','Gagal mencari':'搜索失败',
     'Mengirim ke HR...':'正在发送给 HR...','Mengirim laporan ke HR...':'正在向 HR 发送报告...','Jangan tutup halaman ini':'请勿关闭此页面',
     'Berhasil terkirim!':'发送成功！','Membuka bukti pengajuan...':'正在打开申请凭证...','Laporan terkirim!':'报告已发送！',
     'Gagal terkirim':'发送失败','Pengajuan tidak bisa dikirim':'申请无法提交','Laporan tidak bisa dikirim':'报告无法发送',
