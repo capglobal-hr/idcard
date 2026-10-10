@@ -290,17 +290,9 @@
 </div>
 <div id="viewAjukan" class="hide">
 <div id="formWrap">
-  <!-- 0. PERUSAHAAN -->
-  <div class="card" id="cardPT">
-    <div class="step">Pilih perusahaan</div>
-    <div class="jenis">
-      <label class="opt"><input type="radio" name="pt" value="CAPGLOBAL"><div>PT CAPGLOBAL INDUSTRY INTERNATIONAL<small>Pabrik CII 1 · CII 2 · CII 3</small></div></label>
-      <label class="opt"><input type="radio" name="pt" value="CAPWORLD"><div>PT CAP WORLD MANUFACTURING INDONESIA<small>Pabrik CWMI 1 · CWMI 2 · CWMI 3</small></div></label>
-    </div>
-  </div>
 
   <!-- 1A. CAPGLOBAL: cek NIK -->
-  <div class="card hide" id="cardCG">
+  <div class="card" id="cardCG">
     <div class="step">1 · Data karyawan</div>
     <div class="seg" role="tablist" aria-label="Cari data karyawan">
       <button type="button" class="segb on" id="segANik">Cari pakai NIK</button>
@@ -336,25 +328,6 @@
     </div>
   </div>
 
-  <!-- 1B. CAP WORLD: identitas manual -->
-  <div class="card hide" id="cardCW">
-    <div class="step">1 · Data karyawan PT CAP WORLD MANUFACTURING INDONESIA</div>
-    <label for="mNik">NIK Karyawan</label>
-    <input id="mNik" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="NIK SESUAI KARTU / SLIP GAJI">
-    <label for="mNama">Nama lengkap</label>
-    <input id="mNama" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="NAMA SESUAI KTP">
-    <label for="mBagian">Bagian</label>
-    <select id="mBagian"><option value="">— pilih bagian —</option></select>
-    <input id="mBagianLain" class="caps hide" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="TULIS NAMA BAGIAN" style="margin-top:8px">
-    <label for="mPosisi">Posisi</label>
-    <input id="mPosisi" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="CONTOH: OPERATOR SEWING">
-    <label for="mPabrik">Lokasi pabrik</label>
-    <select id="mPabrik"><option value="">— pilih pabrik —</option><option>CWMI 1</option><option>CWMI 2</option><option>CWMI 3</option></select>
-    <label for="mHp">No. HP / WhatsApp</label>
-    <input id="mHp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx">
-    <div class="muted">NIK, nama, dan posisi otomatis HURUF BESAR.</div>
-    <div class="note ok">Pastikan data yang diisi sudah benar sebelum dikirim.</div>
-  </div>
 
   <!-- 2. JENIS -->
   <div class="card hide" id="cardJenis">
@@ -499,7 +472,8 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxnqUzWjhlshth-a4qybz9y
 </script>
 <script>
 const $ = id => document.getElementById(id);
-let current = null, fotoB64 = '', pasB64 = '', pt = '';
+let current = null, fotoB64 = '', pasB64 = '';
+const pt = 'CAPGLOBAL';   // web khusus PT CAPGLOBAL
 const WAJIB_PAS = ['SECURITY', 'OFFICE', 'TRANSLATOR'];
 
 function resetForm(){
@@ -511,8 +485,6 @@ function resetForm(){
   document.querySelectorAll('#formWrap input[type=checkbox], #formWrap input[type=radio]').forEach(el => el.checked = false);
   $('alasanGanti').value = ''; $('bagianBenar').value = ''; $('pabrikBenar').value = ''; $('foto').value = '';
   show($('prev'), false); $('prev').removeAttribute('src');
-  $('mBagian').value = ''; $('mPabrik').value = ''; show($('mBagianLain'), false);
-  pt = ''; show($('cardCG'), false); show($('cardCW'), false); show($('cardPT'), true);
   $('coName').textContent = 'PT CAPGLOBAL INDUSTRY INTERNATIONAL';
   show($('alasanLain'), false); 
   show($('bagianBenarBox'), false);
@@ -527,8 +499,7 @@ function resetForm(){
 
 function show(el, on){ el.classList.toggle('hide', !on); }
 function bagianSekarang(){
-  if (pt === 'CAPWORLD') return ($('mBagian').value === '__LAIN__' ? $('mBagianLain').value : $('mBagian').value).trim().toUpperCase();
-  if (pt === 'CAPGLOBAL' && current) return ($('bagianSalah').checked && $('bagianBenar').value ? $('bagianBenar').value : current.bagian).trim().toUpperCase();
+  if (current) return ($('bagianSalah').checked && $('bagianBenar').value ? $('bagianBenar').value : current.bagian).trim().toUpperCase();
   return '';
 }
 function cekPasFoto(){ show($('pasFotoBox'), WAJIB_PAS.indexOf(bagianSekarang()) > -1); }
@@ -654,9 +625,7 @@ function muatKaryawan(nik){
     .lookupNik(nik);
 }
 function reveal(on){
-  if (pt === 'CAPWORLD') on = true;
-  if (!pt) on = false;
-  show($('bagianBox'), on && pt === 'CAPGLOBAL'); show($('cardJenis'), on);
+  show($('bagianBox'), on); show($('cardJenis'), on);
   const j = document.querySelector('input[name=jenis]:checked');
   show($('cardDetail'), on && !!j); show($('btnKirim'), on && !!j);
 }
@@ -806,14 +775,6 @@ function cekStatusNik(){
 $('btnStatus').onclick = cekStatusNik;
 $('sNik').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); cekStatusNik(); } });
 $('sNik').addEventListener('input', () => { const s = $('sNik').selectionStart; $('sNik').value = $('sNik').value.toUpperCase(); try { $('sNik').setSelectionRange(s, s); } catch (x) {} });
-document.querySelectorAll('input[name=pt]').forEach(r => r.onchange = () => {
-  pt = r.value;
-  show($('cardCG'), pt === 'CAPGLOBAL'); show($('cardCW'), pt === 'CAPWORLD');
-  $('coName').textContent = pt === 'CAPWORLD' ? 'PT CAP WORLD MANUFACTURING INDONESIA' : 'PT CAPGLOBAL INDUSTRY INTERNATIONAL';
-  err($('sendMsg'), '');
-  reveal(pt === 'CAPWORLD' || !!current);
-  cekPasFoto();
-});
 $('btnLagi').onclick = resetForm;
 /* ===== Bukti pengajuan (tampil + unduh PNG) ===== */
 let buktiData = null;
@@ -897,8 +858,8 @@ $('btnUnduh').onclick = unduhBukti;
 let lastNik = '';
 $('lnkCekAwal').onclick = e => { e.preventDefault(); pilihMenu('status'); };
 $('lnkCek').onclick = e => { e.preventDefault(); pilihMenu('status'); pilihCari('nik'); if (lastNik) { $('sNik').value = lastNik; cekStatusNik(); } };
-/* HR penanggung jawab per pabrik (CWMI 1 sengaja tidak ada) */
-const HR_PJ = { 'CII 1': 'Destya', 'CII 2': 'Laila', 'CII 3': 'Nabilla', 'CWMI 2': 'Egi', 'CWMI 3': 'Bela' };
+/* HR penanggung jawab per pabrik */
+const HR_PJ = { 'CII 1': 'Destya', 'CII 2': 'Laila', 'CII 3': 'Nabilla' };
 function normPabrik(v){
   const s = String(v || '').toUpperCase().replace(/\s+/g, ' ').trim();
   let m = s.match(/^(?:PABRIK|CII) ?(\d)$/); if (m) return 'CII ' + m[1];
@@ -930,8 +891,6 @@ document.querySelectorAll('input[name=jenis]').forEach(r => r.onchange = () => {
 });
 
 $('alasanGanti').onchange = e => show($('alasanLain'), e.target.value === 'Lainnya');
-$('mBagian').onchange = e => { show($('mBagianLain'), e.target.value === '__LAIN__'); if (e.target.value === '__LAIN__') $('mBagianLain').focus(); cekPasFoto(); };
-$('mBagianLain').addEventListener('input', cekPasFoto);
 $('bagianBenar').addEventListener('change', cekPasFoto);
 
 function compress(file){
@@ -973,11 +932,8 @@ $('pasFoto').onchange = async e => {
 };
 
 google.script.run.withSuccessHandler(list => {
-  ['bagianBenar', 'mBagian'].forEach(id => {
-    const sel = $(id);
-    list.forEach(b => { const o = document.createElement('option'); o.value = b; o.textContent = b; sel.appendChild(o); });
-  });
-  const o = document.createElement('option'); o.value = '__LAIN__'; o.textContent = 'LAINNYA (tulis sendiri)'; $('mBagian').appendChild(o);
+  const sel = $('bagianBenar');
+  list.forEach(b => { const o = document.createElement('option'); o.value = b; o.textContent = b; sel.appendChild(o); });
 }).getBagianList();
 google.script.run.withSuccessHandler(list => {
   const sel = $('pabrikBenar');
@@ -987,18 +943,13 @@ google.script.run.withSuccessHandler(list => {
 
 $('btnKirim').onclick = () => {
   err($('sendMsg'), '');
-  if(!pt){ err($('sendMsg'), 'Pilih perusahaan dulu.'); return; }
-  if(pt === 'CAPGLOBAL' && !current){ err($('sendMsg'), 'Cek NIK dulu.'); return; }
+  if(!current){ err($('sendMsg'), 'Cek NIK dulu.'); return; }
   const j = document.querySelector('input[name=jenis]:checked');
   if(j && j.value === 'GANTI' && !fotoB64){ err($('sendMsg'), 'Foto ID card lama wajib diupload.'); return; }
   if(WAJIB_PAS.indexOf(bagianSekarang()) > -1 && !pasB64){ err($('sendMsg'), 'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.'); return; }
-  const cw = pt === 'CAPWORLD';
   const p = {
     pt: pt,
-    nik: cw ? '' : current.nik, hp: (cw ? $('mHp') : $('hp')).value.trim(), jenis: j ? j.value : '',
-    mNik: $('mNik').value.trim().toUpperCase(), mNama: $('mNama').value.trim().toUpperCase(),
-    mBagian: $('mBagian').value === '__LAIN__' ? $('mBagianLain').value.trim().toUpperCase() : $('mBagian').value,
-    mBagianLain: $('mBagian').value === '__LAIN__', mPosisi: $('mPosisi').value.trim().toUpperCase(), mPabrik: $('mPabrik').value,
+    nik: current.nik, hp: $('hp').value.trim(), jenis: j ? j.value : '',
     bagianSalah: $('bagianSalah').checked, bagianBenar: $('bagianBenar').value.trim().toUpperCase(),
     posisiBenar: $('posisiBenar').value.trim().toUpperCase(),
     pabrikBenar: $('pabrikBenar').value,
@@ -1010,7 +961,7 @@ $('btnKirim').onclick = () => {
     pasFoto: pasB64 ? { b64: pasB64 } : null
   };
   const b = $('btnKirim'); b.disabled = true; b.textContent = 'Mengirim...';
-  const nikKirim = cw ? p.mNik : current.nik;
+  const nikKirim = current.nik;
   const gagalKoneksi = pesan => LD.gagal({ jenis: 'koneksi', judul: 'Gagal terkirim', pesan: pesan, tombol: 'Coba lagi', aksi: () => $('btnKirim').click() });
   LD.mulai('Mengirim ke HR...');
   google.script.run
@@ -1028,14 +979,14 @@ $('btnKirim').onclick = () => {
       }
       LD.berhasil('Berhasil terkirim!', 'Membuka bukti pengajuan...', () => {
       $('doneMsg').textContent = r.msg;
-      lastNik = (r.bukti && r.bukti.nik) || (cw ? p.mNik : current.nik);
+      lastNik = (r.bukti && r.bukti.nik) || current.nik;
       ingatNik(lastNik);
-      const pab = normPabrik(cw ? p.mPabrik : (p.bagianSalah && p.pabrikBenar ? p.pabrikBenar : current.pabrik));
+      const pab = normPabrik(p.bagianSalah && p.pabrikBenar ? p.pabrikBenar : current.pabrik);
       const hr = HR_PJ[pab];
       const bk = r.bukti || {};
       tampilBukti({
-        no: bk.no || '', nama: bk.nama || (cw ? p.mNama : $('wNama').textContent), nik: bk.nik || lastNik,
-        jenis: bk.jenis || ({ HILANG: 'ID Card Hilang', GANTI: 'Ganti (Tidak Layak Pakai)', SUSULAN: 'Susulan (Terlewat)' })[j ? j.value : ''] || '', perusahaan: bk.perusahaan || (cw ? 'PT CAP WORLD MANUFACTURING INDONESIA' : 'PT CAPGLOBAL INDUSTRY INTERNATIONAL'),
+        no: bk.no || '', nama: bk.nama || $('wNama').textContent, nik: bk.nik || lastNik,
+        jenis: bk.jenis || ({ HILANG: 'ID Card Hilang', GANTI: 'Ganti (Tidak Layak Pakai)', SUSULAN: 'Susulan (Terlewat)' })[j ? j.value : ''] || '', perusahaan: bk.perusahaan || 'PT CAPGLOBAL INDUSTRY INTERNATIONAL',
         pabrik: pab, tanggal: bk.tanggal || new Date().toLocaleString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
         hr: hr ? hr + ' (' + pab + ')' : '', kode: j ? j.value : ''
       });
@@ -1180,6 +1131,7 @@ cekNotif();
 const D = {
   en: {
     'Human Resources Department':'Human Resources Department',
+    'Web ini khusus karyawan PT CAPGLOBAL. Karyawan PT CAP WORLD silakan hubungi HRD CAP WORLD.':'This site is for PT CAPGLOBAL employees only. PT CAP WORLD employees please contact CAP WORLD HRD.',
     'Mencari data...':'Searching...','Mengecek status...':'Checking status...','Gagal mencari':'Search failed',
     'Mengirim ke HR...':'Sending to HR...','Mengirim laporan ke HR...':'Sending report to HR...','Jangan tutup halaman ini':'Do not close this page',
     'Berhasil terkirim!':'Sent successfully!','Membuka bukti pengajuan...':'Opening request receipt...','Laporan terkirim!':'Report sent!',
@@ -1313,6 +1265,7 @@ const D = {
   },
   zh: {
     'Human Resources Department':'人力资源部',
+    'Web ini khusus karyawan PT CAPGLOBAL. Karyawan PT CAP WORLD silakan hubungi HRD CAP WORLD.':'本网站仅限 PT CAPGLOBAL 员工使用。PT CAP WORLD 员工请联系 CAP WORLD 的 HRD。',
     'Mencari data...':'正在查找...','Mengecek status...':'正在查询状态...','Gagal mencari':'搜索失败',
     'Mengirim ke HR...':'正在发送给 HR...','Mengirim laporan ke HR...':'正在向 HR 发送报告...','Jangan tutup halaman ini':'请勿关闭此页面',
     'Berhasil terkirim!':'发送成功！','Membuka bukti pengajuan...':'正在打开申请凭证...','Laporan terkirim!':'报告已发送！',
