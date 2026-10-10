@@ -671,7 +671,6 @@ function kartuStatus(it){
       '<div class="stl"><span>Menunggu</span><span>Diproses</span><span>Selesai cetak</span><span>Diambil</span></div>';
   }
   let info = ARTI[it.status] && !tolak ? '<div class="arti">' + ARTI[it.status] + '</div>' : '';
-  if (it.status === 'SELESAI CETAK') info += '<div class="note ok">ID card sudah jadi. Silakan ambil di HRD.</div>';
   if (it.status === 'SELESAI CETAK' && it.catatan) info += '<div class="note info"><b>📝 Catatan HRD:</b> <span>' + esc(it.catatan) + '</span></div>';
   if (it.status === 'SUDAH DISERAHKAN') {
     info += '<div class="meta">Diambil' + (it.selesai ? ' pada ' + esc(it.selesai) : '') + '.</div>';
