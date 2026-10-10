@@ -59,6 +59,7 @@
   .note.warn{background:var(--warnbg);color:var(--warn);border-left:4px solid var(--orange)}
   .note.bad{background:var(--badbg);color:var(--bad);border-left:4px solid #E07A8A}
   .note.ok{background:var(--green-lt);color:var(--ok);border-left:4px solid var(--green)}
+  .note.info{background:var(--pink-lt);color:var(--ink);border-left:4px solid var(--accent);white-space:pre-line}
   .hide{display:none!important}
   .preview{margin-top:10px;max-width:100%;max-height:220px;border-radius:10px;display:block;border:3px solid var(--peach)}
   .done{text-align:center;padding:30px 18px}
@@ -671,6 +672,7 @@ function kartuStatus(it){
   }
   let info = ARTI[it.status] && !tolak ? '<div class="arti">' + ARTI[it.status] + '</div>' : '';
   if (it.status === 'SELESAI CETAK') info += '<div class="note ok">ID card sudah jadi. Silakan ambil di HRD.</div>';
+  if (it.status === 'SELESAI CETAK' && it.catatan) info += '<div class="note info"><b>📝 Catatan HRD:</b> <span>' + esc(it.catatan) + '</span></div>';
   if (it.status === 'SUDAH DISERAHKAN') {
     info += '<div class="meta">Diambil' + (it.selesai ? ' pada ' + esc(it.selesai) : '') + '.</div>';
     if (it.komplain && it.komplain !== 'SELESAI') {
@@ -748,7 +750,7 @@ function cekStatusNama(){
           ' orang ditemukan dengan nama "' + esc(r.cari) + '". Pastikan pilih nama & NIK yang benar.</div>' : '') +
         r.orang.map(o => '<div class="who" style="display:block"><b>' + esc(o.nama) + '</b><span>NIK ' + esc(o.nik) + ' · ' +
           o.list.length + ' pengajuan</span></div>' + o.list.map(kartuStatus).join('')).join('') +
-        '<div class="meta" style="margin-top:10px">Untuk melihat alasan jika pengajuan ditolak, cek pakai NIK.</div>';
+        '<div class="meta" style="margin-top:10px">Untuk melihat catatan HRD atau alasan jika pengajuan ditolak, cek pakai NIK.</div>';
     })
     .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); LD.gagalCari(e.message, cekStatusNama); })
     .cekStatusNama(q);
@@ -1225,7 +1227,8 @@ const D = {
     'Keterangan (opsional)':'Notes (optional)','Kirim Laporan':'Send Report',
     'Laporan "ID card belum diterima" sudah dikirim. Status laporan:':'Your "ID card not received" report has been sent. Report status:',
     'Sedang dicek HR':'Being checked by HR','Diterima HR':'Received by HR','. HR akan menghubungi Anda.':'. HR will contact you.',
-    'Untuk melihat alasan jika pengajuan ditolak, cek pakai NIK.':'To see the reason if a request was rejected, check using your NIK.',
+    'Untuk melihat catatan HRD atau alasan jika pengajuan ditolak, cek pakai NIK.':'To see HRD notes or the reason a request was rejected, check using your NIK.',
+    '📝 Catatan HRD:':'📝 HRD note:',
     'Belum ada pengajuan ID card untuk NIK ini.':'There is no ID card request for this NIK yet.',
     'ID Card Karyawan Baru':'New Employee ID Card','Ganti (Tidak Layak Pakai)':'Replacement (Damaged)','Susulan (Terlewat)':'Missed (Late issue)',
     'Isi NIK dulu.':'Please enter your NIK first.','Ketik minimal 3 huruf nama.':'Type at least 3 letters of the name.',
@@ -1359,7 +1362,8 @@ const D = {
     'Keterangan (opsional)':'备注（选填）','Kirim Laporan':'发送反馈',
     'Laporan "ID card belum diterima" sudah dikirim. Status laporan:':'"未收到工牌"的反馈已发送。反馈状态：',
     'Sedang dicek HR':'HR 核查中','Diterima HR':'HR 已收到','. HR akan menghubungi Anda.':'。HR 会与您联系。',
-    'Untuk melihat alasan jika pengajuan ditolak, cek pakai NIK.':'如需查看申请被拒原因，请按工号查询。',
+    'Untuk melihat catatan HRD atau alasan jika pengajuan ditolak, cek pakai NIK.':'如需查看 HRD 备注或申请被拒原因，请按工号查询。',
+    '📝 Catatan HRD:':'📝 HRD 备注：',
     'Belum ada pengajuan ID card untuk NIK ini.':'此工号尚无工牌申请。',
     'ID Card Karyawan Baru':'新员工工牌','Ganti (Tidak Layak Pakai)':'更换（损坏）','Susulan (Terlewat)':'补发（遗漏）',
     'Isi NIK dulu.':'请先输入工号。','Ketik minimal 3 huruf nama.':'请至少输入姓名的 3 个字母。',
