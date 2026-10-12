@@ -147,6 +147,7 @@
   .st .pt{font-size:12.5px;color:var(--muted)}
   .badge{flex:none;font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;white-space:nowrap}
   .b-MENUNGGU{background:#cfe2f3;color:#073763}
+  .b-ACC-HR{background:#d9d2e9;color:#20124d}
   .b-DIPROSES{background:#fff2cc;color:#7f6000}
   .b-SELESAI-CETAK{background:#d9ead3;color:#274e13}
   .b-SUDAH-DISERAHKAN{background:#97D9A9;color:#1d4d2c}
@@ -164,7 +165,9 @@
   .legend summary{cursor:pointer;font-weight:700}
   .legend div{display:flex;gap:8px;align-items:flex-start;margin-top:8px;line-height:1.45}
   .legend .badge{min-width:104px;text-align:center}
-  .stl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+  .stl{display:flex;gap:4px;font-size:11px;color:var(--muted);line-height:1.25}
+  .stl span{flex:1;text-align:center}
+  .stl span:first-child{text-align:left}.stl span:last-child{text-align:right}
   .st .meta{font-size:13px;color:var(--muted);margin-top:8px}
 
   /* ===== Loading amplop ke HR ===== */
@@ -434,6 +437,7 @@
     <details class="legend">
       <summary>ℹ️ Arti setiap status</summary>
       <div><span class="badge b-MENUNGGU">Menunggu</span> <span>Data pengajuan sudah diterima HR, menunggu approval.</span></div>
+      <div><span class="badge b-ACC-HR">Disetujui HR</span> <span>Pengajuan sudah disetujui HR, menunggu dicetak tim IT.</span></div>
       <div><span class="badge b-DIPROSES">Diproses</span> <span>ID card sedang dalam proses pencetakan oleh tim IT.</span></div>
       <div><span class="badge b-SELESAI-CETAK">Selesai cetak</span> <span>ID card sudah selesai dicetak dan siap diambil di HRD.</span></div>
       <div><span class="badge b-SUDAH-DISERAHKAN">Sudah diambil</span> <span>ID card sudah diterima karyawan. Jika belum menerima, tekan <b>Laporkan</b> pada pengajuan tersebut.</span></div>
@@ -655,10 +659,11 @@ $('goStatus').onclick = () => pilihMenu('status');
 $('goRiwayat').onclick = () => pilihMenu('riwayat');
 $('tabRiwayat').onclick = () => pilihMenu('riwayat');
 
-const ALUR = ['MENUNGGU', 'DIPROSES', 'SELESAI CETAK', 'SUDAH DISERAHKAN'];
-const LBL = { 'MENUNGGU': 'Menunggu', 'DIPROSES': 'Diproses', 'SELESAI CETAK': 'Selesai cetak', 'SUDAH DISERAHKAN': 'Sudah diambil', 'DITOLAK': 'Ditolak' };
+const ALUR = ['MENUNGGU', 'ACC HR', 'DIPROSES', 'SELESAI CETAK', 'SUDAH DISERAHKAN'];
+const LBL = { 'MENUNGGU': 'Menunggu', 'ACC HR': 'Disetujui HR', 'DIPROSES': 'Diproses', 'SELESAI CETAK': 'Selesai cetak', 'SUDAH DISERAHKAN': 'Sudah diambil', 'DITOLAK': 'Ditolak' };
 const ARTI = {
   'MENUNGGU': 'Data pengajuan sudah diterima HR, menunggu approval.',
+  'ACC HR': 'Pengajuan sudah disetujui HR, menunggu dicetak tim IT.',
   'DIPROSES': 'ID card sedang dalam proses pencetakan oleh tim IT.',
   'SELESAI CETAK': 'ID card sudah selesai dicetak dan siap diambil di HRD.',
   'SUDAH DISERAHKAN': 'ID card sudah diterima karyawan.',
@@ -671,7 +676,7 @@ function kartuStatus(it){
   let steps = '';
   if (!tolak) {
     steps = '<div class="steps">' + ALUR.map((s, i) => '<i class="' + (i < idx || idx === ALUR.length - 1 ? 'lewat' : i === idx ? 'on' : '') + '"></i>').join('') + '</div>' +
-      '<div class="stl"><span>Menunggu</span><span>Diproses</span><span>Selesai cetak</span><span>Diambil</span></div>';
+      '<div class="stl"><span>Menunggu</span><span>Disetujui HR</span><span>Diproses</span><span>Selesai cetak</span><span>Diambil</span></div>';
   }
   let info = ARTI[it.status] && !tolak ? '<div class="arti">' + ARTI[it.status] + '</div>' : '';
   if (it.status === 'SELESAI CETAK' && it.catatan) info += '<div class="note info"><b>📝 Catatan HRD:</b> <span>' + esc(it.catatan) + '</span></div>';
@@ -1231,6 +1236,8 @@ const D = {
     'Menunggu':'Waiting','Diproses':'In process','Selesai cetak':'Printed','Sudah diambil':'Collected','Ditolak':'Rejected','Diambil':'Collected',
     'Data pengajuan sudah diterima HR, menunggu approval.':'Your request has been received by HR and is awaiting approval.',
     'ID card sedang dalam proses pencetakan oleh tim IT.':'The ID card is being printed by the IT team.',
+    'Disetujui HR':'Approved by HR',
+    'Pengajuan sudah disetujui HR, menunggu dicetak tim IT.':'Your request has been approved by HR and is waiting to be printed by IT.',
     'ID card sudah selesai dicetak dan siap diambil di HRD.':'The ID card has been printed and is ready to be collected at HRD.',
     'ID card sudah diterima karyawan.':'The ID card has been received by the employee.',
     'ID card sudah diterima karyawan. Jika belum menerima, tekan':'The ID card has been received by the employee. If you have not received it, press',
@@ -1373,6 +1380,8 @@ const D = {
     'Menunggu':'等待中','Diproses':'处理中','Selesai cetak':'已打印','Sudah diambil':'已领取','Ditolak':'已拒绝','Diambil':'已领取',
     'Data pengajuan sudah diterima HR, menunggu approval.':'HR 已收到申请资料，等待审批。',
     'ID card sedang dalam proses pencetakan oleh tim IT.':'IT 团队正在打印工牌。',
+    'Disetujui HR':'HR 已批准',
+    'Pengajuan sudah disetujui HR, menunggu dicetak tim IT.':'申请已获 HR 批准，等待 IT 打印。',
     'ID card sudah selesai dicetak dan siap diambil di HRD.':'工牌已打印完成，可到 HRD 领取。',
     'ID card sudah diterima karyawan.':'员工已领取工牌。',
     'ID card sudah diterima karyawan. Jika belum menerima, tekan':'员工已领取工牌。如未收到，请在该申请上点击',
