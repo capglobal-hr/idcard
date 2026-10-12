@@ -352,10 +352,12 @@
     </div>
 
     <div id="fHILANG" class="sec hide">
+      <div class="note warn" style="margin-top:0;margin-bottom:6px">⚠️ <b>Perhatian:</b> Pengajuan ID card hilang tidak bisa dibatalkan setelah dikirim. Pastikan ID card benar-benar hilang sebelum mengajukan.</div>
       <label for="tglHilang">Tanggal ID card hilang</label>
       <input id="tglHilang" type="date">
       <label for="kronologi">Kronologi kehilangan</label>
       <textarea id="kronologi" placeholder="Ceritakan singkat kapan & di mana hilang"></textarea>
+      <label class="chk" style="margin-top:12px"><input type="checkbox" id="setujuHilang"> Saya sudah membaca dan memahami perhatian di atas.</label>
     </div>
 
     <div id="fGANTI" class="sec hide">
@@ -392,6 +394,7 @@
   <h2 style="margin:0 0 6px">Pengajuan terkirim</h2>
   <p id="doneMsg" class="muted" style="font-size:15px"></p>
   <div id="bukti" class="bukti"></div>
+  <div class="note warn hide" id="infoSecurity" style="text-align:left;margin:0 0 12px">🛡️ <b>Penting:</b> Unduh bukti pengajuan ini dan tunjukkan ke security saat masuk PT selama ID card baru belum jadi.</div>
   <button class="btn full" id="btnUnduh" type="button">⬇️ Unduh Bukti Pengajuan</button>
   <div id="buktiImgWrap" class="hide" style="margin-top:12px">
     <p class="muted" style="font-size:13px;margin:0 0 8px">Jika file tidak otomatis terunduh, tekan lama gambar di bawah lalu pilih <b>Simpan gambar</b>.</p>
@@ -405,7 +408,7 @@
 <div id="viewRiwayat" class="hide">
   <div class="card">
     <div class="step">Riwayat pengajuan di HP ini</div>
-    <div class="meta" style="font-size:13px;color:var(--muted)">Semua pengajuan yang pernah dikirim dari HP ini. Pengajuan dari HP lain bisa dicek di menu Cek Status.</div>
+    <div class="meta" style="font-size:13px;color:var(--muted)">Pengajuan dari HP lain bisa dicek di menu Cek Status.</div>
     <div id="riwCariBox" class="hide" style="margin-top:12px">
       <input id="riwCari" type="text" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Cari nama, NIK, no. pengajuan, jenis, atau tanggal">
       <div class="riw-tot" id="riwTot"></div>
@@ -430,7 +433,7 @@
     <div id="sHasil"></div>
     <details class="legend">
       <summary>ℹ️ Arti setiap status</summary>
-      <div><span class="badge b-MENUNGGU">Menunggu</span> <span>Data pengajuan sudah diterima HR.</span></div>
+      <div><span class="badge b-MENUNGGU">Menunggu</span> <span>Data pengajuan sudah diterima HR, menunggu approval.</span></div>
       <div><span class="badge b-DIPROSES">Diproses</span> <span>ID card sedang dalam proses pencetakan oleh tim IT.</span></div>
       <div><span class="badge b-SELESAI-CETAK">Selesai cetak</span> <span>ID card sudah selesai dicetak dan siap diambil di HRD.</span></div>
       <div><span class="badge b-SUDAH-DISERAHKAN">Sudah diambil</span> <span>ID card sudah diterima karyawan. Jika belum menerima, tekan <b>Laporkan</b> pada pengajuan tersebut.</span></div>
@@ -655,7 +658,7 @@ $('tabRiwayat').onclick = () => pilihMenu('riwayat');
 const ALUR = ['MENUNGGU', 'DIPROSES', 'SELESAI CETAK', 'SUDAH DISERAHKAN'];
 const LBL = { 'MENUNGGU': 'Menunggu', 'DIPROSES': 'Diproses', 'SELESAI CETAK': 'Selesai cetak', 'SUDAH DISERAHKAN': 'Sudah diambil', 'DITOLAK': 'Ditolak' };
 const ARTI = {
-  'MENUNGGU': 'Data pengajuan sudah diterima HR.',
+  'MENUNGGU': 'Data pengajuan sudah diterima HR, menunggu approval.',
   'DIPROSES': 'ID card sedang dalam proses pencetakan oleh tim IT.',
   'SELESAI CETAK': 'ID card sudah selesai dicetak dan siap diambil di HRD.',
   'SUDAH DISERAHKAN': 'ID card sudah diterima karyawan.',
@@ -673,7 +676,7 @@ function kartuStatus(it){
   let info = ARTI[it.status] && !tolak ? '<div class="arti">' + ARTI[it.status] + '</div>' : '';
   if (it.status === 'SELESAI CETAK' && it.catatan) info += '<div class="note info"><b>📝 Catatan HRD:</b> <span>' + esc(it.catatan) + '</span></div>';
   if (it.status === 'SUDAH DISERAHKAN') {
-    info += '<div class="meta">Diambil' + (it.selesai ? ' pada ' + esc(it.selesai) : '') + '.</div>';
+    info += '<div class="meta">' + (it.selesai ? 'Diambil pada ' + esc(it.selesai) + '.' : 'Tanggal diambil belum dicatat HRD.') + '</div>';
     if (it.komplain && it.komplain !== 'SELESAI') {
       info += '<div class="note warn">Laporan "ID card belum diterima" sudah dikirim. Status laporan: <b>' +
         esc(it.komplain === 'DICEK HR' ? 'Sedang dicek HR' : 'Diterima HR') + '</b>. HR akan menghubungi Anda.</div>';
@@ -790,7 +793,9 @@ function tampilBukti(d){
   $('bukti').innerHTML = '<div class="bk-h">BUKTI PENGAJUAN ID CARD</div>' + buktiBaris(d).map(x =>
     '<div class="rw"><span>' + esc(x[0]) + '</span><b>' + (x[0] === 'Status' ? '<span class="badge b-MENUNGGU">Menunggu</span>' : esc(x[1])) + '</b></div>').join('');
   show($('buktiImgWrap'), false); $('buktiImg').removeAttribute('src');
+  show($('infoSecurity'), buktiHilang_(d));
 }
+function buktiHilang_(d){ if (!d) return false; return d.kode ? d.kode === 'HILANG' : /hilang/i.test(String(d.jenis || '')); }
 function bungkus(ctx, teks, maxW){
   const kata = String(teks).split(' '), out = []; let baris = '';
   kata.forEach(k => { const c = baris ? baris + ' ' + k : k; if (ctx.measureText(c).width > maxW && baris) { out.push(baris); baris = k; } else baris = c; });
@@ -802,7 +807,8 @@ function gambarBukti(d){
   const rows = buktiBaris(d);
   ctx.font = '700 34px ' + S;
   const rowsW = rows.map(x => bungkus(ctx, T(x[1]), W - P * 2 - 380));
-  const tinggi = 330 + rowsW.reduce((a, l) => a + Math.max(1, l.length) * 46 + 34, 0) + 175;
+  const hil = buktiHilang_(d), extra = hil ? 120 : 0;
+  const tinggi0 = 330 + rowsW.reduce((a, l) => a + Math.max(1, l.length) * 46 + 34, 0) + 175, tinggi = tinggi0 + extra;
   cv.width = W; cv.height = tinggi;
   ctx.fillStyle = '#F7F9FE'; ctx.fillRect(0, 0, W, tinggi);
   ctx.fillStyle = '#4A6E99'; ctx.fillRect(0, 0, W, 210);
@@ -815,7 +821,7 @@ function gambarBukti(d){
   ctx.font = '500 24px ' + S; ctx.fillText(T('Human Resources Department'), P + 130, 182);
   let y = 300;
   ctx.setLineDash([10, 8]); ctx.strokeStyle = '#C9D6EA'; ctx.lineWidth = 3;
-  ctx.strokeRect(P - 20, y - 50, W - (P - 20) * 2, tinggi - y - 160 + 20); ctx.setLineDash([]);
+  ctx.strokeRect(P - 20, y - 50, W - (P - 20) * 2, tinggi0 - y - 160 + 20); ctx.setLineDash([]);
   rows.forEach((x, i) => {
     ctx.fillStyle = '#5D6B80'; ctx.font = '500 30px ' + S; ctx.fillText(T(x[0]), P + 10, y + 10);
     ctx.font = '700 34px ' + S; ctx.textAlign = 'right';
@@ -832,6 +838,15 @@ function gambarBukti(d){
     y += Math.max(1, lines.length) * 46 + 34;
     if (i < rows.length - 1) { ctx.strokeStyle = '#C9D6EA'; ctx.lineWidth = 2; ctx.setLineDash([3, 7]); ctx.beginPath(); ctx.moveTo(P + 10, y - 40); ctx.lineTo(W - P - 10, y - 40); ctx.stroke(); ctx.setLineDash([]); }
   });
+  if (hil) {   // ID card hilang: bukti ini dipakai sementara untuk masuk PT
+    const by = tinggi0 - 160, bw = W - (P - 20) * 2;
+    ctx.fillStyle = '#FFF1C9'; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(P - 20, by, bw, 104, 18) : ctx.rect(P - 20, by, bw, 104); ctx.fill();
+    ctx.fillStyle = '#E0A800'; ctx.fillRect(P - 20, by, 10, 104);
+    ctx.textAlign = 'center'; ctx.fillStyle = '#6B4100';
+    ctx.font = '800 31px ' + S; ctx.fillText('🛡️ ' + T('Tunjukkan bukti ini ke security saat masuk PT'), W / 2, by + 45);
+    ctx.font = '600 26px ' + S; ctx.fillText(T('selama ID card baru belum jadi'), W / 2, by + 83);
+    ctx.textAlign = 'left';
+  }
   ctx.fillStyle = '#22324A'; ctx.font = '600 28px ' + S; ctx.textAlign = 'center';
   ctx.fillText(T('Silakan cek status pengajuan secara berkala'), W / 2, tinggi - 120);
   ctx.fillStyle = '#4A6E99'; ctx.font = '700 28px ' + S;
@@ -947,6 +962,7 @@ $('btnKirim').onclick = () => {
   if(!current){ err($('sendMsg'), 'Cek NIK dulu.'); return; }
   const j = document.querySelector('input[name=jenis]:checked');
   if(j && j.value === 'GANTI' && !fotoB64){ err($('sendMsg'), 'Foto ID card lama wajib diupload.'); return; }
+  if(j && j.value === 'HILANG' && !$('setujuHilang').checked){ err($('sendMsg'), 'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.'); $('setujuHilang').closest('label').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
   if(WAJIB_PAS.indexOf(bagianSekarang()) > -1 && !pasB64){ err($('sendMsg'), 'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.'); return; }
   const p = {
     pt: pt,
@@ -979,7 +995,8 @@ $('btnKirim').onclick = () => {
         return;
       }
       LD.berhasil('Berhasil terkirim!', 'Membuka bukti pengajuan...', () => {
-      $('doneMsg').textContent = r.msg;
+      $('doneMsg').textContent = /Laporan data tidak sesuai/.test(r.msg) ? 'Laporan data tidak sesuai sudah dicatat.' : '';
+      $('doneMsg').classList.toggle('hide', !$('doneMsg').textContent);
       lastNik = (r.bukti && r.bukti.nik) || current.nik;
       ingatNik(lastNik);
       const pab = normPabrik(p.bagianSalah && p.pabrikBenar ? p.pabrikBenar : current.pabrik);
@@ -1141,7 +1158,7 @@ const D = {
     'Koneksi gagal. Periksa internet lalu coba lagi.':'Connection failed. Check your internet and try again.',
     'Riwayat Pengajuan':'Request History','Semua pengajuan dari HP ini':'All requests from this phone','📜 Riwayat':'📜 History','🔍 Status':'🔍 Status',
     'Riwayat pengajuan di HP ini':'Request history on this phone',
-    'Semua pengajuan yang pernah dikirim dari HP ini. Pengajuan dari HP lain bisa dicek di menu Cek Status.':'All requests ever sent from this phone. Requests from other phones can be checked in the Check Status menu.',
+    'Pengajuan dari HP lain bisa dicek di menu Cek Status.':'Requests from other phones can be checked in the Check Status menu.',
     'Belum ada pengajuan dari HP ini.':'No requests from this phone yet.','Hapus riwayat di HP ini':'Clear history on this phone',
     'Unduh bukti':'Download receipt','Lihat status':'View status','Tidak ada yang cocok.':'No matches.',
     'Cari nama, NIK, no. pengajuan, jenis, atau tanggal':'Search name, NIK, request no., type, or date',
@@ -1212,7 +1229,7 @@ const D = {
     'Cek status pengajuan':'Check request status',
     'ℹ️ Arti setiap status':'ℹ️ What each status means',
     'Menunggu':'Waiting','Diproses':'In process','Selesai cetak':'Printed','Sudah diambil':'Collected','Ditolak':'Rejected','Diambil':'Collected',
-    'Data pengajuan sudah diterima HR.':'Your request has been received by HR.',
+    'Data pengajuan sudah diterima HR, menunggu approval.':'Your request has been received by HR and is awaiting approval.',
     'ID card sedang dalam proses pencetakan oleh tim IT.':'The ID card is being printed by the IT team.',
     'ID card sudah selesai dicetak dan siap diambil di HRD.':'The ID card has been printed and is ready to be collected at HRD.',
     'ID card sudah diterima karyawan.':'The ID card has been received by the employee.',
@@ -1233,6 +1250,13 @@ const D = {
     'Isi NIK dulu.':'Please enter your NIK first.','Ketik minimal 3 huruf nama.':'Type at least 3 letters of the name.',
     'Isi No. HP / WhatsApp yang benar.':'Enter a valid phone / WhatsApp number.',
     'Cek NIK dulu.':'Please check your NIK first.','Pilih perusahaan dulu.':'Please choose a company first.',
+    'Penting:':'Important:','Unduh bukti pengajuan ini dan tunjukkan ke security saat masuk PT selama ID card baru belum jadi.':'Download this receipt and show it to security when entering the company until your new ID card is ready.',
+    'Tunjukkan bukti ini ke security saat masuk PT':'Show this receipt to security when entering the company','selama ID card baru belum jadi':'until the new ID card is ready',
+    'Perhatian:':'Attention:','Pengajuan ID card hilang tidak bisa dibatalkan setelah dikirim. Pastikan ID card benar-benar hilang sebelum mengajukan.':'A lost ID card request cannot be cancelled once submitted. Make sure your ID card is really lost before submitting.',
+    'Saya sudah membaca dan memahami perhatian di atas.':'I have read and understood the notice above.',
+    'Laporan data tidak sesuai sudah dicatat.':'Your incorrect-data report has been recorded.',
+    'Tanggal diambil belum dicatat HRD.':'Collection date not yet recorded by HRD.',
+    'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.':'Please tick the statement that a lost ID card request cannot be cancelled.',
     'Foto ID card lama wajib diupload.':'A photo of the old ID card is required.',
     'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.':'SECURITY, OFFICE and TRANSLATOR departments must upload a formal passport photo.',
     'File bukan foto atau tidak bisa dibaca.':'The file is not a photo or cannot be read.',
@@ -1276,7 +1300,7 @@ const D = {
     'Koneksi gagal. Periksa internet lalu coba lagi.':'连接失败，请检查网络后重试。',
     'Riwayat Pengajuan':'申请记录','Semua pengajuan dari HP ini':'此手机提交的所有申请','📜 Riwayat':'📜 记录','🔍 Status':'🔍 状态',
     'Riwayat pengajuan di HP ini':'此手机的申请记录',
-    'Semua pengajuan yang pernah dikirim dari HP ini. Pengajuan dari HP lain bisa dicek di menu Cek Status.':'此手机提交过的所有申请。其他手机提交的申请可在"查询状态"菜单查询。',
+    'Pengajuan dari HP lain bisa dicek di menu Cek Status.':'其他手机提交的申请可在"查询状态"菜单查询。',
     'Belum ada pengajuan dari HP ini.':'此手机尚无申请。','Hapus riwayat di HP ini':'清除此手机上的记录',
     'Unduh bukti':'下载凭证','Lihat status':'查看状态','Tidak ada yang cocok.':'没有匹配的结果。',
     'Cari nama, NIK, no. pengajuan, jenis, atau tanggal':'搜索姓名、工号、申请编号、类型或日期',
@@ -1347,7 +1371,7 @@ const D = {
     'Cek status pengajuan':'查询申请状态',
     'ℹ️ Arti setiap status':'ℹ️ 各状态说明',
     'Menunggu':'等待中','Diproses':'处理中','Selesai cetak':'已打印','Sudah diambil':'已领取','Ditolak':'已拒绝','Diambil':'已领取',
-    'Data pengajuan sudah diterima HR.':'HR 已收到申请资料。',
+    'Data pengajuan sudah diterima HR, menunggu approval.':'HR 已收到申请资料，等待审批。',
     'ID card sedang dalam proses pencetakan oleh tim IT.':'IT 团队正在打印工牌。',
     'ID card sudah selesai dicetak dan siap diambil di HRD.':'工牌已打印完成，可到 HRD 领取。',
     'ID card sudah diterima karyawan.':'员工已领取工牌。',
@@ -1368,6 +1392,13 @@ const D = {
     'Isi NIK dulu.':'请先输入工号。','Ketik minimal 3 huruf nama.':'请至少输入姓名的 3 个字母。',
     'Isi No. HP / WhatsApp yang benar.':'请输入正确的手机 / WhatsApp 号码。',
     'Cek NIK dulu.':'请先查询工号。','Pilih perusahaan dulu.':'请先选择公司。',
+    'Penting:':'重要：','Unduh bukti pengajuan ini dan tunjukkan ke security saat masuk PT selama ID card baru belum jadi.':'请下载此申请凭证，在新工牌制作完成前，进入公司时出示给保安。',
+    'Tunjukkan bukti ini ke security saat masuk PT':'进入公司时请向保安出示此凭证','selama ID card baru belum jadi':'有效期至新工牌制作完成',
+    'Perhatian:':'注意：','Pengajuan ID card hilang tidak bisa dibatalkan setelah dikirim. Pastikan ID card benar-benar hilang sebelum mengajukan.':'工牌丢失申请提交后无法取消。请确认工牌确实已丢失后再申请。',
+    'Saya sudah membaca dan memahami perhatian di atas.':'我已阅读并理解上述注意事项。',
+    'Laporan data tidak sesuai sudah dicatat.':'资料不符的报告已记录。',
+    'Tanggal diambil belum dicatat HRD.':'HRD尚未登记领取日期。',
+    'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.':'请先勾选"工牌丢失申请无法取消"的声明。',
     'Foto ID card lama wajib diupload.':'必须上传旧工牌照片。',
     'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.':'SECURITY、OFFICE 和 TRANSLATOR 部门必须上传正式证件照。',
     'File bukan foto atau tidak bisa dibaca.':'文件不是照片或无法读取。',
