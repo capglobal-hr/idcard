@@ -437,7 +437,7 @@
     <details class="legend">
       <summary>ℹ️ Arti setiap status</summary>
       <div><span class="badge b-MENUNGGU">Menunggu</span> <span>Data pengajuan sudah diterima HR, menunggu approval.</span></div>
-      <div><span class="badge b-ACC-HR">Disetujui HR</span> <span>Pengajuan sudah disetujui HR, menunggu dicetak tim IT.</span></div>
+      <div><span class="badge b-ACC-HR">Disetujui HR</span> <span>Pengajuan sudah disetujui HR, menunggu dikirim ke tim IT.</span></div>
       <div><span class="badge b-DIPROSES">Diproses</span> <span>ID card sedang dalam proses pencetakan oleh tim IT.</span></div>
       <div><span class="badge b-SELESAI-CETAK">Selesai cetak</span> <span>ID card sudah selesai dicetak dan siap diambil di HRD.</span></div>
       <div><span class="badge b-SUDAH-DISERAHKAN">Sudah diambil</span> <span>ID card sudah diterima karyawan. Jika belum menerima, tekan <b>Laporkan</b> pada pengajuan tersebut.</span></div>
@@ -663,7 +663,7 @@ const ALUR = ['MENUNGGU', 'ACC HR', 'DIPROSES', 'SELESAI CETAK', 'SUDAH DISERAHK
 const LBL = { 'MENUNGGU': 'Menunggu', 'ACC HR': 'Disetujui HR', 'DIPROSES': 'Diproses', 'SELESAI CETAK': 'Selesai cetak', 'SUDAH DISERAHKAN': 'Sudah diambil', 'DITOLAK': 'Ditolak' };
 const ARTI = {
   'MENUNGGU': 'Data pengajuan sudah diterima HR, menunggu approval.',
-  'ACC HR': 'Pengajuan sudah disetujui HR, menunggu dicetak tim IT.',
+  'ACC HR': 'Pengajuan sudah disetujui HR, menunggu dikirim ke tim IT.',
   'DIPROSES': 'ID card sedang dalam proses pencetakan oleh tim IT.',
   'SELESAI CETAK': 'ID card sudah selesai dicetak dan siap diambil di HRD.',
   'SUDAH DISERAHKAN': 'ID card sudah diterima karyawan.',
@@ -1237,7 +1237,7 @@ const D = {
     'Data pengajuan sudah diterima HR, menunggu approval.':'Your request has been received by HR and is awaiting approval.',
     'ID card sedang dalam proses pencetakan oleh tim IT.':'The ID card is being printed by the IT team.',
     'Disetujui HR':'Approved by HR',
-    'Pengajuan sudah disetujui HR, menunggu dicetak tim IT.':'Your request has been approved by HR and is waiting to be printed by IT.',
+    'Pengajuan sudah disetujui HR, menunggu dikirim ke tim IT.':'Your request has been approved by HR and is waiting to be sent to the IT team.',
     'ID card sudah selesai dicetak dan siap diambil di HRD.':'The ID card has been printed and is ready to be collected at HRD.',
     'ID card sudah diterima karyawan.':'The ID card has been received by the employee.',
     'ID card sudah diterima karyawan. Jika belum menerima, tekan':'The ID card has been received by the employee. If you have not received it, press',
@@ -1381,7 +1381,7 @@ const D = {
     'Data pengajuan sudah diterima HR, menunggu approval.':'HR 已收到申请资料，等待审批。',
     'ID card sedang dalam proses pencetakan oleh tim IT.':'IT 团队正在打印工牌。',
     'Disetujui HR':'HR 已批准',
-    'Pengajuan sudah disetujui HR, menunggu dicetak tim IT.':'申请已获 HR 批准，等待 IT 打印。',
+    'Pengajuan sudah disetujui HR, menunggu dikirim ke tim IT.':'申请已获 HR 批准，等待发送给 IT 团队。',
     'ID card sudah selesai dicetak dan siap diambil di HRD.':'工牌已打印完成，可到 HRD 领取。',
     'ID card sudah diterima karyawan.':'员工已领取工牌。',
     'ID card sudah diterima karyawan. Jika belum menerima, tekan':'员工已领取工牌。如未收到，请在该申请上点击',
