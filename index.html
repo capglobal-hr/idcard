@@ -1,4 +1,1577 @@
 <!DOCTYPE html>
+<html lang="id" translate="no" class="notranslate">
+<head>
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="id">
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="0;url=https://script.google.com/macros/s/AKfycbzJSlVmQYssGzrLgIGl1GTLqCAiEvTpF3r0JxL8ROOgWeaceEAgL3Ha8IA6UU3TxE5f/exec">
-<a href="https://script.google.com/macros/s/AKfycbzJSlVmQYssGzrLgIGl1GTLqCAiEvTpF3r0JxL8ROOgWeaceEAgL3Ha8IA6UU3TxE5f/exec">Klik di sini jika tidak otomatis pindah</a>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<style>
+  :root{
+    /* palet Airy Nuance (versi D biru gelap tegas): #D2E0FB #F9F3CC #D7E5CA #8EACCD + #4A6E99 */
+    --pink:#4A6E99; --green:#A9C99A; --orange:#F2E3A0;
+    --pink-lt:#D2E0FB; --green-lt:#D7E5CA; --peach:#F9F3CC;
+    --bg:#F7F9FE; --card:#fff; --ink:#22324A; --muted:#5D6B80; --line:#DCE5F3;
+    --accent:#4A6E99; --ok:#2E5B2A; --bad:#A3263F; --badbg:#FFE4DF; --warn:#7A4A00; --warnbg:#FFF1DC;
+  }
+  :root{color-scheme:light dark; --on-pink:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+  header{background-color:var(--pink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='240' viewBox='0 0 320 240'%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round' opacity='.7'%3E%3Cpath d='M30 230 C 90 190 120 150 160 110 S 230 50 270 30'/%3E%3Cpath d='M160 110 C 170 140 200 160 240 168'/%3E%3Cg transform='translate(70 200) rotate(40) scale(1)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(105 170) rotate(-50) scale(0.9)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(130 140) rotate(35) scale(0.8)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(205 72) rotate(-55) scale(0.8)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(185 140) rotate(70) scale(0.8)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(222 158) rotate(-20) scale(0.7)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(270 30) scale(0.95)'%3E%3Cpath transform='rotate(10.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(10.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(82.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(82.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(154.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(154.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(226.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(226.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(298.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(298.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Ccircle r='4.5'/%3E%3Ccircle transform='rotate(0)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(45)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(90)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(135)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(180)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(225)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(270)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(315)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3C/g%3E%3Cg transform='translate(240 168) scale(0.6)'%3E%3Cpath transform='rotate(30.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(30.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(102.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(102.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(174.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(174.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(246.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(246.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Cpath transform='rotate(318.0)' d='M0 -4 C -9 -12 -9 -27 0 -34 C 9 -27 9 -12 0 -4 Z'/%3E%3Cpath transform='rotate(318.0)' d='M0 -6 L0 -22' stroke-width='.6'/%3E%3Ccircle r='4.5'/%3E%3Ccircle transform='rotate(0)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(45)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(90)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(135)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(180)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(225)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(270)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3Ccircle transform='rotate(315)' cx='0' cy='-8' r='.9' fill='%23fff' stroke='none'/%3E%3C/g%3E%3Cg transform='translate(160 110) rotate(-20) scale(0.9)'%3E%3Cpath d='M0 0 C -6 -6 -6 -16 0 -22 C 6 -16 6 -6 0 0 Z'/%3E%3Cpath d='M-5 -4 Q 0 -10 5 -4' /%3E%3C/g%3E%3Cg transform='translate(48 218) rotate(-60) scale(0.8)'%3E%3Cpath d='M0 0 C -6 -6 -6 -16 0 -22 C 6 -16 6 -6 0 0 Z'/%3E%3Cpath d='M-5 -4 Q 0 -10 5 -4' /%3E%3C/g%3E%3Ccircle cx='300' cy='90' r='1.4' fill='%23fff' stroke='none'/%3E%3Ccircle cx='120' cy='60' r='1.2' fill='%23fff' stroke='none'/%3E%3Ccircle cx='212' cy='20' r='1' fill='%23fff' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='170' viewBox='0 0 120 170'%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round' opacity='.35'%3E%3Cg transform='translate(40 120) rotate(-20) scale(0.9)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cg transform='translate(60 95) rotate(30) scale(0.8)'%3E%3Cpath d='M0 0 Q 11 -14 0 -32 Q -11 -14 0 0 Z'/%3E%3Cpath d='M0 -2 L0 -28' stroke-width='.6'/%3E%3C/g%3E%3Cpath d='M30 160 C 40 130 55 100 70 70'/%3E%3Cg transform='translate(70 70) rotate(15) scale(0.9)'%3E%3Cpath d='M0 0 C -6 -6 -6 -16 0 -22 C 6 -16 6 -6 0 0 Z'/%3E%3Cpath d='M-5 -4 Q 0 -10 5 -4' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");background-repeat:no-repeat,no-repeat;background-position:right -10px bottom -18px,left -14px bottom -40px;background-size:320px 240px,120px 170px;color:var(--on-pink);padding:22px 16px 30px;position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
+    background:linear-gradient(90deg,#D2E0FB 0 20%,#F9F3CC 0 40%,#D7E5CA 0 60%,#A9C99A 0 80%,#F2E3A0 0)}
+  header .in{max-width:560px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,.25)}
+  .logo{height:56px;width:auto;flex:none;border-radius:8px;display:block;box-shadow:0 0 0 3px rgba(255,255,255,.85)}
+  .co{font-weight:800;font-size:14px;letter-spacing:.04em;line-height:1.25}
+  .pill{display:inline-block;margin-top:5px;background:rgba(255,255,255,.2);border-radius:999px;padding:2px 10px;font-size:11.5px;font-weight:600}
+  header h1{margin:0;font-size:24px;line-height:1.25}
+  .sub{margin:6px 0 0;font-size:13.5px;font-weight:500;opacity:.85}
+  main{max-width:560px;margin:18px auto 40px;padding:0 16px}
+  .card{background:var(--card);border-radius:14px;padding:18px;margin-bottom:14px;border:1px solid var(--line);box-shadow:0 2px 6px rgba(74,110,153,.08)}
+  .step{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  label{display:block;font-weight:600;margin:12px 0 6px}
+  label:first-of-type{margin-top:0}
+  input[type=text],input[type=tel],input[type=date],textarea,select{
+    width:100%;padding:11px 12px;border:1px solid #C9D6EA;border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+  textarea{min-height:84px;resize:vertical}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--pink);outline-offset:-1px;border-color:transparent}
+  .row{display:flex;gap:8px}
+  .row input{flex:1}
+  button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;cursor:pointer}
+  .btn{background:var(--pink);color:var(--on-pink)}
+  .btn:hover{filter:brightness(.96)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.full{width:100%;padding:14px;font-size:16px}
+  .ghost{background:var(--pink-lt);color:var(--accent)}
+  .who{margin-top:12px;border:1px solid var(--green);background:var(--green-lt);border-radius:12px;padding:12px 14px;display:none}
+  .who b{display:block;font-size:17px}
+  .who span{color:var(--ok)}
+  .chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;margin-top:12px}
+  .chk input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+  .jenis{display:grid;gap:8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0;font-weight:500;cursor:pointer;background:#fff}
+  .opt input{margin-top:4px;flex:none;accent-color:var(--accent)}
+  .opt small{display:block;color:var(--muted);font-weight:400}
+  .opt:has(input:checked){border-color:var(--pink);background:var(--pink-lt)}
+  .note{border-radius:10px;padding:10px 12px;font-size:14px;margin-top:10px}
+  .note.warn{background:var(--warnbg);color:var(--warn);border-left:4px solid var(--orange)}
+  .note.bad{background:var(--badbg);color:var(--bad);border-left:4px solid #E07A8A}
+  .note.ok{background:var(--green-lt);color:var(--ok);border-left:4px solid var(--green)}
+  .note.info{background:var(--pink-lt);color:var(--ink);border-left:4px solid var(--accent);white-space:pre-line}
+  .hide{display:none!important}
+  .preview{margin-top:10px;max-width:100%;max-height:220px;border-radius:10px;display:block;border:3px solid var(--peach)}
+  .done{text-align:center;padding:30px 18px}
+  .cekb{margin:0 auto 12px;max-width:320px;font-size:14px;color:var(--ink)}
+  .cekb a{color:var(--accent);font-weight:700;white-space:nowrap}
+  .bukti{border:2px dashed #C9D6EA;border-radius:14px;padding:14px;text-align:left;margin:12px 0;background:#F7F9FE;color:#22324A}
+  .bukti .bk-h{text-align:center;font-size:12px;letter-spacing:.1em;color:#4A6E99;font-weight:800;margin-bottom:10px}
+  .bukti .rw{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:6px 0;border-bottom:1px dotted #C9D6EA}
+  .bukti .rw:last-child{border:0}
+  .bukti .rw > span{color:#5D6B80;flex:none}
+  .bukti .rw > b{text-align:right;word-break:break-word}
+  .hrpj{margin:4px auto 16px;max-width:320px;background:#EAF2E2;border:1px solid #A9C99A;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5;color:#2E4A24}
+  .hrpj .nm{display:inline-block;margin-top:4px;font-size:18px;font-weight:800}
+  .done .ic{width:56px;height:56px;border-radius:50%;background:var(--green);color:#1f4d30;font-size:30px;line-height:56px;margin:0 auto 12px}
+  .muted{color:var(--muted);font-size:13px;margin-top:4px}
+  .caps{text-transform:uppercase}
+  .tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:5px;margin-bottom:14px}
+  .tab{flex:1;background:transparent;color:var(--muted);padding:10px 8px;border-radius:10px;font-size:14.5px}
+  .tab.on{background:var(--pink);color:var(--on-pink)}
+  .seg{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;margin:2px 0 14px}
+  .segb{flex:1;background:transparent;color:var(--muted);padding:8px 6px;border-radius:8px;font-size:13.5px;font-weight:700;border:0}
+  header{padding-bottom:70px !important}
+  .brand{border-bottom:0 !important;margin-bottom:0 !important;padding-bottom:0 !important}
+  main{padding-top:0 !important}
+  .brand{gap:14px !important}
+  .brand .logo{height:58px}
+  .brand .tx{border-left:3px solid rgba(255,255,255,.75);padding-left:12px}
+  .brand .co{font-size:14px}
+  .brand .sub2{display:inline-block;margin-top:6px;background:rgba(255,255,255,.2);border-radius:999px;padding:2px 10px;font-size:11.5px;font-weight:600}
+  .float{position:relative;z-index:2;margin:-54px 0 16px;background:var(--card);border-radius:18px;padding:16px;
+    box-shadow:0 8px 24px rgba(74,110,153,.22);display:flex;gap:12px;align-items:center}
+  .float .fic{width:48px;height:48px;border-radius:14px;background:#D2E0FB;display:grid;place-items:center;font-size:24px;flex:none}
+  .float b{display:block;font-size:18px;color:var(--ink)}
+  .float span{font-size:12.5px;color:var(--muted)}
+  .hello{text-align:center;padding:6px 6px 2px}
+  .hello .wave{font-size:34px}
+  .hello h2{margin:4px 0;font-size:21px;color:var(--ink)}
+  .hello p{margin:0 0 14px;color:var(--muted);font-size:14px}
+  .gpt{text-align:center;margin:10px 0 4px;font-size:12.5px}.gpt a{color:var(--muted);text-decoration:underline}
+  .bigb{display:flex;align-items:center;gap:12px;width:100%;border-radius:16px;padding:14px;margin-bottom:10px;border:0;
+    text-align:left;font-size:15px;cursor:pointer;box-shadow:0 4px 14px rgba(74,110,153,.18);font-family:inherit}
+  .bigb .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:rgba(255,255,255,.55);flex:none}
+  .bigb b{display:block;font-size:16px}
+  .bigb span span{font-size:12.5px;opacity:.9}
+  .b-aju{background:#4A6E99;color:#fff}
+  .b-cek{background:#D7E5CA;color:#2E4A24}
+  .b-riw{background:#F9F3CC;color:#5A4A12}
+  .riw-bt{display:flex;gap:8px;margin-top:10px}
+  .riw-tot{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .riw-bt .ghost{flex:1;font-size:13px;padding:9px 8px}
+  .riw-img{width:100%;margin-top:10px;border-radius:10px;border:1px solid var(--line)}
+  .tabs .tab{font-size:13.5px;padding:10px 6px}
+  .tab.home{flex:0 0 auto;padding:10px 12px}
+  .filebtn{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0;font-weight:400;cursor:pointer}
+  .filebtn input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+  .fb-btn{background:var(--pink-lt);color:var(--accent);font-weight:700;border-radius:10px;padding:9px 14px;font-size:14px}
+  .fb-nama{font-size:13px;color:var(--muted);word-break:break-all}
+  .nb{display:flex;align-items:center;gap:10px;width:100%;border:0;font-weight:400;border-radius:14px;padding:10px 12px;margin-bottom:8px;font-size:13.5px;text-align:left;cursor:pointer;font-family:inherit}
+  .nb .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:17px;flex:none;background:#fff}
+  .nb .tx{flex:1;line-height:1.35;min-width:0}
+  .nb .tx b{display:block;font-size:14px}
+  .nb .ch{font-size:22px;opacity:.6}
+  .nb.bad{background:#FFE4DF;color:#7a1f33}
+  .nb.ok{background:#D7E5CA;color:#2E4A24}
+  .n-hapus{display:block;text-align:center;font-size:12px;color:var(--muted);margin:2px 0 12px}
+  .lang{position:relative;display:flex;justify-content:flex-end;margin:-10px 0 10px;z-index:5}
+  .lang-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);color:inherit;border:0;border-radius:999px;padding:4px 10px 4px 6px;font-size:12.5px;font-weight:800;cursor:pointer;font-family:inherit}
+  .lang .flag{width:22px;height:15px;border-radius:3px;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+  .lang .car{font-size:10px;opacity:.8}
+  .lang-menu{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border-radius:14px;padding:6px;min-width:190px;box-shadow:0 10px 28px rgba(20,35,60,.22)}
+  .lang-menu button{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:0;border-radius:10px;padding:9px 10px;font-size:14px;color:#22324A;cursor:pointer;font-family:inherit;text-align:left}
+  .lang-menu button:hover,.lang-menu button.on{background:#E4ECFB}
+  .lang-menu button.on{font-weight:800}
+  .lang-menu .flag{width:28px;height:19px}
+  .penting{background:linear-gradient(135deg,#D2E0FB,#F9F3CC);color:#22324A;border-radius:14px;padding:12px 14px;margin:0 0 14px;font-size:13.5px;line-height:1.55}
+  .penting .pj{font-weight:800;font-size:14.5px;margin-bottom:6px}
+  .penting a{color:#4A6E99;font-weight:800}
+  .kand{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;color:var(--ink);cursor:pointer}
+  .kand:hover{border-color:var(--pink)}
+  .kand b{display:block;font-size:15px}
+  .kand span{font-size:12.5px;color:var(--muted)}
+  .segb.on{background:var(--card);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+  .st{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px;background:var(--card)}
+  .st .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .st .jn{font-weight:700}
+  .st .pt{font-size:12.5px;color:var(--muted)}
+  .badge{flex:none;font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .b-MENUNGGU{background:#cfe2f3;color:#073763}
+  .b-ACC-HR,.b-DIPROSES{background:#fff2cc;color:#7f6000}
+  .b-SELESAI-CETAK{background:#d9ead3;color:#274e13}
+  .b-SUDAH-DISERAHKAN{background:#97D9A9;color:#1d4d2c}
+  .b-DITOLAK{background:#f4cccc;color:#990000}
+  .steps{display:flex;gap:4px;margin:14px 0 6px}
+  .steps i{flex:1;height:6px;border-radius:6px;background:var(--line)}
+  .steps i.on{background:var(--pink)}
+  .steps i.lewat{background:var(--green)}
+  .st .arti{font-size:13px;color:var(--ink);margin-top:8px}
+  .komp-btn{margin-top:10px;width:100%}
+  .komp{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+  .komp label{font-size:13px;margin-top:6px}
+  .komp .btn{margin-top:10px}
+  .legend{margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;color:var(--ink)}
+  .legend summary{cursor:pointer;font-weight:700}
+  .legend div{display:flex;gap:8px;align-items:flex-start;margin-top:8px;line-height:1.45}
+  .legend .badge{min-width:104px;text-align:center}
+  .stl{display:flex;gap:4px;font-size:11px;color:var(--muted);line-height:1.25}
+  .stl span{flex:1;text-align:center}
+  .stl span:first-child{text-align:left}.stl span:last-child{text-align:right}
+  .st .meta{font-size:13px;color:var(--muted);margin-top:8px}
+
+  /* ===== Loading amplop ke HR ===== */
+  .ld{position:fixed;inset:0;z-index:999;background:rgba(31,45,61,.5);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;padding:16px}
+  .ld.hide{display:none}
+  .ld-box{background:var(--card);color:var(--ink);border-radius:20px;padding:20px 20px 18px;width:100%;max-width:300px;box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:center}
+  .ld-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;text-align:left}
+  .ld-top b{font-size:15px}.ld-pct{color:var(--accent);font-weight:900;font-size:15px}
+  .ld-trk{position:relative;height:60px;margin:6px 6px 2px}
+  .ld-rd{position:absolute;left:10px;right:10px;top:34px;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+  .ld-rd i{display:block;height:100%;width:0;background:var(--pink);border-radius:2px;transition:width .15s linear}
+  .ld-me,.ld-hr{position:absolute;top:24px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .ld-me{left:-4px;background:var(--pink-lt);color:var(--accent)}
+  .ld-hr{right:-4px;background:var(--green);color:#1f4d30;font-size:10px;font-weight:900}
+  .ld-env{position:absolute;top:2px;left:0;width:34px;height:26px;transition:left .15s linear;animation:ldTerbang .9s ease-in-out infinite}
+  @keyframes ldTerbang{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-5px) rotate(4deg)}}
+  .ld-sub{font-size:12.5px;color:var(--muted);text-align:left;margin-top:2px}
+  .ld-ic{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;margin:4px auto 10px}
+  .ld-ic.ok{background:var(--green);color:#1f4d30;animation:ldPop .35s ease-out}
+  .ld-ic.bad,.ld-ic.warn{background:var(--badbg);color:var(--bad);border:3px solid #F4A9A0}
+  @keyframes ldPop{0%{transform:scale(.4)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
+  .ld-j{font-weight:800;font-size:15.5px}
+  .ld-s{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .ld-why{margin-top:10px;background:var(--badbg);color:var(--bad);border-radius:10px;padding:9px 10px;font-size:12.5px;text-align:left;line-height:1.45}
+  .ld-bt{display:flex;gap:8px;margin-top:14px}
+  .ld-bt button{flex:1;height:40px;border:0;border-radius:10px;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit}
+  .ld-bt .l1{background:var(--line);color:var(--muted)}
+  .ld-bt .l2{background:var(--pink);color:var(--on-pink)}
+  /* loading kecil khusus Cek / Cari: titik berkedip */
+  .ld.mini{background:rgba(31,45,61,.35)}
+  .ld-mini{background:var(--card);color:var(--ink);border-radius:16px;padding:18px 26px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+  .ld-dots{display:flex;gap:7px;justify-content:center}
+  .ld-dots i{width:10px;height:10px;border-radius:50%;background:var(--accent);animation:ldKedip 1s ease-in-out infinite}
+  .ld-dots i:nth-child(2){animation-delay:.18s}.ld-dots i:nth-child(3){animation-delay:.36s}
+  @keyframes ldKedip{0%,80%,100%{opacity:.25;transform:scale(.85)}40%{opacity:1;transform:scale(1)}}
+  .ld-mt{font-size:13px;color:var(--muted);margin-top:10px}
+  @media (prefers-reduced-motion: reduce){.ld-env{animation:none}.ld-ic.ok{animation:none}.ld-dots i{animation:none;opacity:.7}}
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1E2A3A; --card:#27364A; --ink:#EEF3FB; --muted:#B8C6DA; --line:#3A4B63;
+      --accent:#A9C4EA; --ok:#CFE6C0; --bad:#FFD1C9; --badbg:#5B3A44; --warn:#FFE0B0; --warnbg:#5E4630;
+      --pink-lt:#34496A; --green-lt:#3A4D3A; --peach:#4A4630;
+    }
+    .card{box-shadow:0 2px 10px rgba(5,10,20,.3)}
+    input[type=text],input[type=tel],input[type=date],textarea,select{background:#2F4057;color:var(--ink);border-color:var(--line)}
+    input::placeholder,textarea::placeholder{color:#9FB0C8}
+    .opt{background:#2F4057;border-color:#3A4B63}
+    .ghost{color:#D2E0FB}
+    .who{border-color:#6FAF8A}
+    .preview{border-color:#4E6380}
+    .penting{background:linear-gradient(135deg,#34496A,#4A4630);color:#EEF3FB}
+    .float{box-shadow:0 8px 24px rgba(5,10,20,.4)}
+    .float .fic{background:#34496A}
+    .nb.bad{background:#5B3A44;color:#FFE4DF}
+    .nb.ok{background:#3A4D3A;color:#CFE6C0}
+    .nb .ic{background:rgba(255,255,255,.15)}
+    .b-cek{background:#3A4D3A;color:#CFE6C0}
+    .b-riw{background:#4A4630;color:#F9F3CC}
+    .penting a{color:#A9C4EA}
+    .hrpj{background:var(--green-lt);border-color:#6FAF8A;color:var(--ok)}
+  }
+</style>
+</head>
+<body>
+
+<div id="ldWrap" class="ld hide" role="dialog" aria-modal="true" aria-live="polite">
+  <div class="ld-mini hide" id="ldMini"><div class="ld-dots"><i></i><i></i><i></i></div><div class="ld-mt" id="ldMiniTeks">Mencari data...</div></div>
+  <div class="ld-box" id="ldBox">
+    <div id="ldProses">
+      <div class="ld-top"><b id="ldJudul">Mengirim ke HR...</b><span class="ld-pct" id="ldPct">0%</span></div>
+      <div class="ld-trk">
+        <div class="ld-rd"><i id="ldBar"></i></div>
+        <div class="ld-me"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.8-4.6 4.2-7 8.5-7s7.7 2.4 8.5 7z"/></svg></div>
+        <svg class="ld-env" id="ldEnv" viewBox="0 0 34 26" aria-hidden="true"><rect x="1.5" y="1.5" width="31" height="23" rx="4" fill="#fff" stroke="#4A6E99" stroke-width="2.4"/><path d="M4 5l13 10L30 5" fill="none" stroke="#4A6E99" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="ld-hr">HR</div>
+      </div>
+      <div class="ld-sub">Jangan tutup halaman ini</div>
+    </div>
+    <div id="ldHasil" class="hide">
+      <div class="ld-ic" id="ldIkon">✓</div>
+      <div class="ld-j" id="ldHJudul"></div>
+      <div class="ld-s hide" id="ldHSub"></div>
+      <div class="ld-why hide" id="ldPesan"></div>
+      <div class="ld-bt hide" id="ldTombol"><button type="button" class="l1" id="ldTutup">Tutup</button><button type="button" class="l2" id="ldAksi"></button></div>
+    </div>
+  </div>
+</div>
+<header><div class="in">
+  <div class="lang"><button type="button" class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false"><span id="langFlag"><svg viewBox="0 0 30 20" class="flag"><rect width="30" height="10" fill="#E70011"/><rect y="10" width="30" height="10" fill="#fff"/></svg></span><span id="langNow">ID</span><span class="car">▾</span></button><div class="lang-menu hide" id="langMenu" role="menu"><button type="button" data-l="id" role="menuitem"><span class="fl"><svg viewBox="0 0 30 20" class="flag"><rect width="30" height="10" fill="#E70011"/><rect y="10" width="30" height="10" fill="#fff"/></svg></span>Bahasa Indonesia</button><button type="button" data-l="en" role="menuitem"><span class="fl"><svg viewBox="0 0 60 30" class="flag"><clipPath id="gbc"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#gbc)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg></span>English</button><button type="button" data-l="zh" role="menuitem"><span class="fl"><svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#EE1C25"/><g fill="#FFFF00"><polygon points="5,2 5.9,4.8 8.8,4.8 6.5,6.5 7.4,9.3 5,7.6 2.6,9.3 3.5,6.5 1.2,4.8 4.1,4.8"/><circle cx="10" cy="2" r=".9"/><circle cx="12" cy="4" r=".9"/><circle cx="12" cy="7" r=".9"/><circle cx="10" cy="9" r=".9"/></g></svg></span>中文</button></div></div>
+  <div class="brand">
+    <img class="logo" alt="Logo CAPGLOBAL" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFsAAACQCAAAAABCckgyAAAC/UlEQVR42u1bu47TQBQ9Z66zD7FLgWipkZAooKHhS/YD+ImtFgm0X8DXgESNhECiQbQrCiooVpH2MfdSOMkm69fY8U1iyYkUO+PM8cm5j7kej/n2YgIigATJADL/RhIMYL47b5t9u9tZ3c5+g/wTT+H2yo5kT8sOGAjACMAAcNYIWjq2xqhOvIOfJCP2iL117Kx4NvphXzvyfv0o0gWbZh+e+/G+Ug1O2JTQl/PchzEGP//2xIYnbzr69wI7Wu9+svgn0jdvm2ti+HyRrQVtJf6dH1B598lJbwJHsh971pvzU8QY4xg73vkEBN1ifqB5sMdctVk/ceTdY6EV/MqquvxdY2Urv/pqxK6kcVN6QiMIGkt6ZqmaUJ8cR5iamZqZ6fK+5S2N2BWs5eb85FbU1FShqma6/NbInyeamL9L9aTUm271wjZrFZdW3aBh2lTHQuqwWdMQmkOlP/du49+rOrADdnPMLwoYa+jRzpYAcD2dBAlC3p2EqbzrsW+zj28eWBZERLJsku3Hl2dmTOTdJMn096oX/zlL5t2oiYSD2zsWcnWcbktpwjbV5diuqb3WHy/NcWxog926zK40/0Y1cR3n22JrJfV186C51ifJehOhLfU2toSnf9sOxY7tiCaOcdlWb9iO8B5tuVn/tlETvxq5LH8PMnY887cv713CHmjsAKPem8O20b93N5/IQONyqJpwGP6dpWuiMRIRsTt2tSaHIoDgYTLx5Hk246+vf6+ml9dfqF15V2FHOT2dddG+eQOT/LZSYS66D2xLnK7vM+Y9/Vv9Yh4DjXlHvWlu81UAtKrPRjWRDrY0N97YhiY1+SSIpLhJMLS8J2CGyzhNof0vth3TSLy6OWxeD8F4eJB+n2Sxfb+u4DXjZery08qZ5zpbbv9aakewXe8xmnVaV1XSLbvvTnucdCIpKPTji2/L66ipzx53W/Zo4fJ7A2/+6E/fgt57nY1ZKCay4gjl54MYsUfsEXvb2JkTruXYlidAlD2HUmhJeVRl/pjNf75jGBHAGlFPAAAAAElFTkSuQmCC">
+    <div class="tx">
+      <div class="co" id="coName">PT CAPGLOBAL · PT CAP WORLD</div>
+      <div class="sub2">Human Resources Department</div>
+    </div>
+  </div>
+</div></header>
+
+<main>
+<div class="float">
+  <div class="fic">🪪</div>
+  <div><b>Layanan ID Card Karyawan</b><span>Pengajuan, cek status &amp; laporan ID card</span></div>
+</div>
+
+<div id="viewPt">
+  <div class="hello"><div class="wave">🏭</div><h2>Pilih perusahaan Anda</h2><p>Pilih tempat Anda bekerja dulu.</p></div>
+  <button class="bigb b-aju" type="button" id="ptCG"><span class="ic">🏢</span><span><b>PT CAPGLOBAL</b><span>Pabrik CII 1 · CII 2 · CII 3</span></span></button>
+  <button class="bigb b-aju" type="button" id="ptCW"><span class="ic">🏢</span><span><b>PT CAP WORLD</b><span>Pabrik CWMI 1 · CWMI 2 · CWMI 3</span></span></button>
+</div>
+
+<div id="viewHome" class="hide">
+  <div id="notifBox" class="hide"></div>
+  <div class="hello"><div class="wave">👋</div><h2>Halo, ada yang bisa HR bantu?</h2><p>Pilih salah satu menu di bawah ini.</p></div>
+  <button class="bigb b-aju" type="button" id="goAjukan"><span class="ic">📝</span><span><b>Ajukan ID Card</b><span>ID card hilang, rusak, atau belum dapat</span></span></button>
+  <button class="bigb b-cek" type="button" id="goStatus"><span class="ic">🔍</span><span><b>Cek Status Pengajuan</b><span>Lihat proses ID card Anda</span></span></button>
+  <button class="bigb b-riw" type="button" id="goRiwayat"><span class="ic">📜</span><span><b>Riwayat Pengajuan</b><span>Semua pengajuan dari HP ini</span></span></button>
+  <div class="penting" id="infoDobel" style="margin-top:6px">
+    <div class="pj">⚠️ Penting sebelum mengajukan</div>
+    <div>1. Sudah pernah mengajukan? <a href="#" id="lnkCekAwal">Cek status</a> dulu.</div>
+    <div>2. Jangan mengajukan dua kali untuk keperluan yang sama.</div>
+    <div>3. Pastikan NIK &amp; data sudah benar.</div>
+  </div>
+  <p class="gpt"><a href="#" id="gantiPt">‹ Ganti perusahaan</a></p>
+</div>
+
+<div class="tabs hide" role="tablist" id="tabsBar">
+  <button class="tab home" type="button" id="tabHome" aria-label="Menu utama">‹ Menu</button>
+  <button class="tab on" type="button" id="tabAjukan">📝 Ajukan</button>
+  <button class="tab" type="button" id="tabStatus">🔍 Status</button>
+  <button class="tab" type="button" id="tabRiwayat">📜 Riwayat</button>
+</div>
+<div id="viewAjukan" class="hide">
+<div id="formWrap">
+
+  <!-- 1A. CAPGLOBAL: cek NIK -->
+  <div class="card" id="cardCG">
+    <div class="step">1 · Data karyawan</div>
+    <div class="seg" role="tablist" aria-label="Cari data karyawan">
+      <button type="button" class="segb on" id="segANik">Cari pakai NIK</button>
+      <button type="button" class="segb" id="segANama">Cari pakai Nama</button>
+    </div>
+    <label for="nik" id="aLbl">NIK Karyawan</label>
+    <div class="row">
+      <input id="nik" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Contoh: ACC0006" style="text-transform:uppercase">
+      <button class="ghost" id="btnCek" type="button">Cek</button>
+    </div>
+    <div id="nikMsg" class="note bad hide"></div>
+    <div id="kandidat" class="hide"></div>
+
+    <div class="who" id="who">
+      <b id="wNama"></b>
+      <span id="wBagian"></span><span id="wJab"></span>
+    </div>
+
+    <div id="bagianBox" class="hide">
+      <label class="chk"><input type="checkbox" id="bagianSalah"> Bagian / posisi / lokasi pabrik saya di atas tidak sesuai</label>
+      <div id="bagianBenarBox" class="hide">
+        <label for="bagianBenar">Bagian yang benar</label>
+        <select id="bagianBenar"><option value="">— pilih bagian —</option></select>
+        <label for="posisiBenar">Posisi yang benar</label>
+        <input id="posisiBenar" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="CONTOH: OPERATOR SEWING">
+        <div class="muted">Ditulis dengan HURUF BESAR (otomatis).</div>
+        <label for="pabrikBenar">Lokasi pabrik yang benar</label>
+        <select id="pabrikBenar"><option value="">— pilih pabrik —</option></select>
+        <div class="note warn">Laporan ini akan dicek HRD dan dicatat sebagai <b>data tidak sesuai</b>.</div>
+      </div>
+      <label for="hp">No. HP / WhatsApp</label>
+      <input id="hp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx">
+    </div>
+  </div>
+
+
+  <!-- 2. JENIS -->
+  <div class="card hide" id="cardJenis">
+    <div class="step">2 · Jenis pengajuan</div>
+    <div class="jenis">
+      <label class="opt"><input type="radio" name="jenis" value="HILANG"><div>ID Card Hilang<small>ID card hilang dan perlu dibuat ulang.</small></div></label>
+      <label class="opt"><input type="radio" name="jenis" value="GANTI"><div>Ganti ID Card Tidak Layak Pakai<small>Wajib upload foto ID card lama.</small></div></label>
+      <label class="opt"><input type="radio" name="jenis" value="SUSULAN"><div>ID Card Susulan<small>Belum dapat ID card karena terlewat.</small></div></label>
+    </div>
+  </div>
+
+  <!-- 3. DETAIL -->
+  <div class="card hide" id="cardDetail">
+    <div class="step">3 · Detail pengajuan</div>
+
+    <div id="pasFotoBox" class="hide" style="padding-bottom:16px;margin-bottom:4px;border-bottom:1px dashed var(--line)">
+      <label for="pasFoto">Pas foto <span style="color:var(--accent)">(wajib untuk SECURITY, OFFICE &amp; TRANSLATOR)</span></label>
+      <div class="note warn" style="margin-top:0;margin-bottom:8px">Pas foto <b>formal</b>, wajah terlihat jelas menghadap depan. Warna background bebas.</div>
+      <label class="filebtn"><input id="pasFoto" type="file" accept="image/*"><span class="fb-btn">📷 Pilih / ambil foto</span><span class="fb-nama" data-for="pasFoto">Belum ada foto dipilih</span></label>
+      <img id="prevPas" class="preview hide" alt="Pratinjau pas foto">
+    </div>
+
+    <div id="fHILANG" class="sec hide">
+      <div class="note warn" style="margin-top:0;margin-bottom:6px">⚠️ <b>Perhatian:</b> Pengajuan ID card hilang tidak bisa dibatalkan setelah dikirim. Pastikan ID card benar-benar hilang sebelum mengajukan.</div>
+      <label for="tglHilang">Tanggal ID card hilang</label>
+      <input id="tglHilang" type="date">
+      <label for="kronologi">Kronologi kehilangan</label>
+      <textarea id="kronologi" placeholder="Ceritakan singkat kapan & di mana hilang"></textarea>
+      <label class="chk" style="margin-top:12px"><input type="checkbox" id="setujuHilang"> Saya sudah membaca dan memahami perhatian di atas.</label>
+    </div>
+
+    <div id="fGANTI" class="sec hide">
+      <label for="alasanGanti">Alasan penggantian</label>
+      <select id="alasanGanti">
+        <option value="">— pilih —</option>
+        <option>Patah / Retak</option>
+        <option>Foto / Tulisan Pudar</option>
+        <option>Kartu Rusak / Tertekuk</option>
+        <option>Barcode / Chip Tidak Terbaca</option>
+        <option>Lainnya</option>
+      </select>
+      <input id="alasanLain" type="text" class="hide" placeholder="Tulis alasan lainnya" style="margin-top:8px">
+      <label for="foto">Foto ID card lama <span style="color:var(--accent)">(wajib)</span></label>
+      <label class="filebtn"><input id="foto" type="file" accept="image/*"><span class="fb-btn">📷 Pilih / ambil foto</span><span class="fb-nama" data-for="foto">Belum ada foto dipilih</span></label>
+      <img id="prev" class="preview hide" alt="Pratinjau foto">
+      <div class="muted">Foto hanya dipakai untuk pengecekan HRD dan dihapus otomatis setelah pengajuan selesai.</div>
+    </div>
+
+    <div id="fSUSULAN" class="sec hide">
+      <label for="tglSus">Tanggal masuk kerja</label>
+      <input id="tglSus" type="date">
+      <label for="alasanSus">Alasan ID card terlewat</label>
+      <textarea id="alasanSus"></textarea>
+    </div>
+  </div>
+
+  <div id="sendMsg" class="note bad hide"></div>
+  <button class="btn full hide" id="btnKirim" type="button">Kirim Pengajuan</button>
+</div>
+
+<div id="doneWrap" class="card done hide">
+  <div class="ic">✓</div>
+  <h2 style="margin:0 0 6px">Pengajuan terkirim</h2>
+  <p id="doneMsg" class="muted" style="font-size:15px"></p>
+  <div id="bukti" class="bukti"></div>
+  <div class="note warn hide" id="infoSecurity" style="text-align:left;margin:0 0 12px">🛡️ <b>Penting:</b> Unduh bukti pengajuan ini dan tunjukkan ke security saat masuk PT selama ID card baru belum jadi.</div>
+  <button class="btn full" id="btnUnduh" type="button">⬇️ Unduh Bukti Pengajuan</button>
+  <div id="buktiImgWrap" class="hide" style="margin-top:12px">
+    <p class="muted" style="font-size:13px;margin:0 0 8px">Jika file tidak otomatis terunduh, tekan lama gambar di bawah lalu pilih <b>Simpan gambar</b>.</p>
+    <img id="buktiImg" alt="Bukti pengajuan" style="width:100%;border-radius:12px;border:1px solid var(--line)">
+  </div>
+  <p class="cekb" style="margin-top:14px">Silakan cek status pengajuan secara berkala di menu <a href="#" id="lnkCek">🔍 Cek Status</a>.</p>
+  <button class="ghost" type="button" id="btnLagi">Ajukan lagi</button>
+</div>
+</div>
+
+<div id="viewRiwayat" class="hide">
+  <div class="card">
+    <div class="step">Riwayat pengajuan di HP ini</div>
+    <div class="meta" style="font-size:13px;color:var(--muted)">Pengajuan dari HP lain bisa dicek di menu Cek Status.</div>
+    <div id="riwCariBox" class="hide" style="margin-top:12px">
+      <input id="riwCari" type="text" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Cari nama, NIK, no. pengajuan, jenis, atau tanggal">
+      <div class="riw-tot" id="riwTot"></div>
+    </div>
+    <div id="riwList"></div>
+    <a href="#" id="riwHapus" class="n-hapus hide" style="margin-top:12px">Hapus riwayat di HP ini</a>
+  </div>
+</div>
+<div id="viewStatus" class="hide">
+  <div class="card">
+    <div class="step">Cek status pengajuan</div>
+    <div class="seg" role="tablist" aria-label="Cari berdasarkan">
+      <button type="button" class="segb on" id="segNik">Cari pakai NIK</button>
+      <button type="button" class="segb" id="segNama">Cari pakai Nama</button>
+    </div>
+    <label for="sNik" id="sLbl">NIK Karyawan</label>
+    <div class="row">
+      <input id="sNik" class="caps" type="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Contoh: ACC0006">
+      <button class="btn" id="btnStatus" type="button">Cek</button>
+    </div>
+    <div id="sMsg" class="note bad hide"></div>
+    <div id="sHasil"></div>
+    <details class="legend">
+      <summary>ℹ️ Arti setiap status</summary>
+      <div><span class="badge b-MENUNGGU">Perlu ACC</span> <span>Data pengajuan sudah diterima HR, menunggu approval.</span></div>
+      <div><span class="badge b-ACC-HR">Proses dicetak</span> <span>Pengajuan sudah disetujui HR, ID card sedang diproses untuk dicetak oleh tim IT.</span></div>
+      <div><span class="badge b-SELESAI-CETAK">Siap diserahkan</span> <span>ID card sudah selesai dicetak dan siap diambil di HRD.</span></div>
+      <div><span class="badge b-SUDAH-DISERAHKAN">Selesai</span> <span>ID card sudah diterima karyawan. Jika belum menerima, tekan <b>Laporkan</b> pada pengajuan tersebut.</span></div>
+      <div><span class="badge b-DITOLAK">Ditolak</span> <span>Pengajuan tidak dapat diproses. Hubungi HRD.</span></div>
+    </details>
+  </div>
+</div>
+</main>
+
+<script>
+/* ===== Penghubung ke Google Apps Script (versi GitHub Pages) =====
+   Ganti API_URL kalau link Web App (/exec) berubah. */
+const API_URL = window.CAPHUB_API || 'https://script.google.com/macros/s/AKfycbzJSlVmQYssGzrLgIGl1GTLqCAiEvTpF3r0JxL8ROOgWeaceEAgL3Ha8IA6UU3TxE5f/exec';
+(function () {
+  function makeRun() {
+    let ok = function () {}, fail = function (e) { console.error(e); };
+    const c = { withSuccessHandler: function (f) { ok = f; return c; }, withFailureHandler: function (f) { fail = f; return c; } };
+    ['lookupNik', 'getBagianList', 'getPabrikList', 'submitWeb', 'cekStatus', 'cekStatusNama', 'cariKaryawanNama', 'ajukanKomplain'].forEach(function (fn) {
+      c[fn] = function () {
+        const args = Array.prototype.slice.call(arguments);
+        fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: fn, args: args }) })
+          .then(function (r) { return r.json(); })
+          .then(function (res) { if (res && res.error) fail(new Error(res.error)); else ok(res.result); })
+          .catch(function () { fail(new Error('Koneksi gagal. Periksa internet lalu coba lagi.')); });
+      };
+    });
+    return c;
+  }
+  window.google = { script: {} };
+  Object.defineProperty(window.google.script, 'run', { get: makeRun });
+})();
+</script>
+<script src="config.js"></script>
+<script>
+window.T = window.T || (x => x);
+const $ = id => document.getElementById(id);
+let current = null, fotoB64 = '', pasB64 = '';
+let ptOk = false;   // true setelah karyawan memilih PT di layar awal
+const CO_NAMA = { CAPGLOBAL: 'PT CAPGLOBAL INDUSTRY INTERNATIONAL', CAPWORLD: 'PT CAP WORLD MANUFACTURING INDONESIA' };
+let pt = 'CAPGLOBAL';   // diisi dari data karyawan setelah NIK dicek (CAPGLOBAL / CAPWORLD)
+const WAJIB_PAS = ['SECURITY', 'OFFICE', 'TRANSLATOR'];
+
+function setCo(){
+  if (ptOk) $('coName').textContent = CO_NAMA[pt] || CO_NAMA.CAPGLOBAL;
+  else $('coName').textContent = 'PT CAPGLOBAL · PT CAP WORLD';
+}
+function pilihPt(k){ pt = k; ptOk = true; try { localStorage.setItem('idc_pt', k); } catch (e) {} muatDaftar(pt); setCo(); pilihMenu('home'); }
+function resetForm(){
+  current = null; fotoB64 = ''; pasB64 = '';
+  document.querySelectorAll('.fb-nama').forEach(n => n.textContent = 'Belum ada foto dipilih');
+  $('pasFoto').value = ''; show($('prevPas'), false); $('prevPas').removeAttribute('src'); show($('pasFotoBox'), false);
+  document.querySelectorAll('#formWrap input[type=text], #formWrap input[type=tel], #formWrap input[type=date], #formWrap textarea')
+    .forEach(el => el.value = '');
+  document.querySelectorAll('#formWrap input[type=checkbox], #formWrap input[type=radio]').forEach(el => el.checked = false);
+  $('alasanGanti').value = ''; $('bagianBenar').value = ''; $('pabrikBenar').value = ''; $('foto').value = '';
+  show($('prev'), false); $('prev').removeAttribute('src');
+  setCo();
+  show($('alasanLain'), false); 
+  show($('bagianBenarBox'), false);
+  document.querySelectorAll('.sec').forEach(s => show(s, false));
+  $('who').style.display = 'none';
+  pilihAju('nik');
+  err($('nikMsg'), ''); err($('sendMsg'), '');
+  reveal(false);
+  show($('doneWrap'), false); show($('formWrap'), true);
+  window.scrollTo(0, 0);
+}
+
+function show(el, on){ el.classList.toggle('hide', !on); }
+function bagianSekarang(){
+  if (current) return ($('bagianSalah').checked && $('bagianBenar').value ? $('bagianBenar').value : current.bagian).trim().toUpperCase();
+  return '';
+}
+function cekPasFoto(){ show($('pasFotoBox'), WAJIB_PAS.indexOf(bagianSekarang()) > -1); }
+function err(el, t){ el.textContent = t || ''; show(el, !!t); }
+
+/* ===== LOADING: amplop terbang ke HR (persen perkiraan, 100% saat server selesai) ===== */
+const LD = (function () {
+  let timer = null, p = 0, aksi = null;
+  const set = v => { p = v; $('ldBar').style.width = v + '%'; $('ldEnv').style.left = 'calc(' + v + '% - ' + (v * 0.34) + 'px)'; $('ldPct').textContent = Math.round(v) + '%'; };
+  const tutup = () => { clearInterval(timer); show($('ldWrap'), false); $('ldWrap').classList.remove('mini'); document.body.style.overflow = ''; };
+  const besar = on => { show($('ldBox'), on); show($('ldMini'), !on); $('ldWrap').classList.toggle('mini', !on); };
+  $('ldTutup').onclick = tutup;
+  $('ldAksi').onclick = () => { const f = aksi; tutup(); if (f) f(); };
+  return {
+    // loading amplop + persen: untuk MENYIMPAN data (kirim pengajuan / kirim laporan)
+    mulai(judul) {
+      clearInterval(timer); aksi = null; besar(true);
+      show($('ldProses'), true); show($('ldHasil'), false);
+      $('ldJudul').textContent = judul || 'Mengirim ke HR...';
+      set(0); show($('ldWrap'), true); document.body.style.overflow = 'hidden';
+      timer = setInterval(() => set(Math.min(92, p + (92 - p) * 0.035 + 0.15)), 120);
+    },
+    // loading kecil titik berkedip: khusus CEK / CARI (cek NIK, cari nama, cek status)
+    cari(teks) {
+      clearInterval(timer); aksi = null; besar(false);
+      $('ldMiniTeks').textContent = teks || 'Mencari data...';
+      show($('ldWrap'), true); document.body.style.overflow = 'hidden';
+    },
+    selesai() { tutup(); },
+    // gagal koneksi saat mencari: tampil silang merah + tombol Coba lagi
+    gagalCari(pesan, ulang) { this.gagal({ jenis: 'koneksi', judul: 'Gagal mencari', pesan: pesan, tombol: 'Coba lagi', aksi: ulang }); },
+    berhasil(judul, sub, lanjut) {
+      clearInterval(timer); set(100);
+      setTimeout(() => {
+        show($('ldProses'), false); show($('ldHasil'), true);
+        $('ldIkon').className = 'ld-ic ok'; $('ldIkon').textContent = '✓';
+        $('ldHJudul').textContent = judul; $('ldHSub').textContent = sub || ''; show($('ldHSub'), !!sub);
+        show($('ldPesan'), false); show($('ldTombol'), false);
+        setTimeout(() => { tutup(); if (lanjut) lanjut(); }, 1100);
+      }, 350);
+    },
+    // o = { jenis: 'koneksi' | 'data', judul, pesan, tombol, aksi }
+    gagal(o) {
+      clearInterval(timer); besar(true);
+      show($('ldProses'), false); show($('ldHasil'), true);
+      const kon = o.jenis === 'koneksi';
+      $('ldIkon').className = 'ld-ic ' + (kon ? 'bad' : 'warn'); $('ldIkon').textContent = kon ? '✕' : '!';
+      $('ldHJudul').textContent = o.judul; show($('ldHSub'), false);
+      $('ldPesan').textContent = o.pesan || ''; show($('ldPesan'), !!o.pesan);
+      show($('ldTombol'), true);
+      aksi = o.aksi || null; $('ldAksi').textContent = o.tombol || 'Oke'; show($('ldAksi'), !!o.tombol);
+    },
+    tutup
+  };
+})();
+
+let modeAju = 'nik';
+function pilihAju(m){
+  modeAju = m;
+  $('segANik').classList.toggle('on', m === 'nik'); $('segANama').classList.toggle('on', m === 'nama');
+  $('aLbl').textContent = m === 'nik' ? 'NIK Karyawan' : 'Nama Karyawan';
+  $('nik').placeholder = m === 'nik' ? 'Contoh: ACC0006' : 'Contoh: YUNIAR (minimal 3 huruf)';
+  $('btnCek').textContent = m === 'nik' ? 'Cek' : 'Cari';
+  $('nik').value = ''; err($('nikMsg'), ''); $('kandidat').innerHTML = ''; show($('kandidat'), false);
+  current = null; $('who').style.display = 'none'; reveal(false);
+}
+$('segANik').onclick = () => { pilihAju('nik'); $('nik').focus(); };
+$('segANama').onclick = () => { pilihAju('nama'); $('nik').focus(); };
+function cariNamaAju(){
+  const q = $('nik').value.trim().toUpperCase();
+  err($('nikMsg'), ''); $('kandidat').innerHTML = ''; show($('kandidat'), false);
+  if (q.replace(/\s/g, '').length < 3) { err($('nikMsg'), 'Ketik minimal 3 huruf nama.'); return; }
+  $('btnCek').disabled = true; $('btnCek').textContent = '...';
+  LD.cari('Mencari data...');
+  google.script.run
+    .withSuccessHandler(r => {
+      LD.selesai();
+      $('btnCek').disabled = false; $('btnCek').textContent = 'Cari';
+      if (!r.ok) { err($('nikMsg'), r.msg); return; }
+      $('kandidat').innerHTML = '<div class="meta" style="margin:10px 0 6px">Pilih nama Anda:</div>' +
+        r.list.map((k, i) => '<button type="button" class="kand" data-i="' + i + '"><b>' + esc(k.nama) + '</b><span>' +
+          esc([k.bagian, k.posisi].filter(Boolean).join(' · ')) + (k.pabrik ? ' · ' + esc(k.pabrik) : '') +
+          ' · NIK ' + esc(k.nik) + '</span></button>').join('');
+      show($('kandidat'), true);
+      $('kandidat').querySelectorAll('.kand').forEach(el => el.onclick = () => {
+        const k = r.list[Number(el.dataset.i)];
+        $('kandidat').innerHTML = ''; show($('kandidat'), false);
+        $('nik').value = k.nama;
+        muatKaryawan(k.token);
+      });
+    })
+    .withFailureHandler(e => { $('btnCek').disabled = false; $('btnCek').textContent = 'Cari'; err($('nikMsg'), 'Gagal mencari: ' + e.message); LD.gagalCari(e.message, cariNamaAju); })
+    .cariKaryawanNama(q);
+}
+function cekNik(){
+  if (modeAju === 'nama') { cariNamaAju(); return; }
+  const nik = $('nik').value.trim().toUpperCase();
+  err($('nikMsg'), '');
+  if(!nik){ err($('nikMsg'), 'Isi NIK dulu.'); return; }
+  muatKaryawan(nik);
+}
+function muatKaryawan(nik){
+  const lbl = modeAju === 'nik' ? 'Cek' : 'Cari';
+  $('btnCek').disabled = true; $('btnCek').textContent = '...';
+  LD.cari('Mencari data...');
+  google.script.run
+    .withSuccessHandler(r => {
+      LD.selesai();
+      $('btnCek').disabled = false; $('btnCek').textContent = lbl;
+      if(!r.ok){ current = null; $('who').style.display = 'none'; reveal(false); err($('nikMsg'), r.msg); return; }
+      current = { nik, bagian: r.bagian || '', posisi: r.jabatan || '', pabrik: r.pabrik || '' };
+      pt = r.pt || 'CAPGLOBAL';
+      ptOk = true; setCo();
+      muatDaftar(pt);
+      $('wNama').textContent = r.nama;
+      $('wBagian').textContent = 'Bagian: ' + (r.bagian || '-');
+      $('wJab').textContent = (r.jabatan ? ' · Posisi: ' + r.jabatan : '') + (r.pabrik ? ' · ' + r.pabrik : '');
+      $('who').style.display = 'block';
+      reveal(true); cekPasFoto();
+    })
+    .withFailureHandler(e => {
+      $('btnCek').disabled = false; $('btnCek').textContent = lbl;
+      err($('nikMsg'), 'Gagal cek data: ' + e.message);
+      LD.gagalCari(e.message, () => muatKaryawan(nik));
+    })
+    .lookupNik(nik);
+}
+function reveal(on){
+  show($('bagianBox'), on); show($('cardJenis'), on);
+  const j = document.querySelector('input[name=jenis]:checked');
+  show($('cardDetail'), on && !!j); show($('btnKirim'), on && !!j);
+}
+
+$('btnCek').onclick = cekNik;
+
+/* ---------- menu Ajukan / Cek Status ---------- */
+function pilihMenu(v){
+  $('tabAjukan').classList.toggle('on', v === 'ajukan');
+  $('tabStatus').classList.toggle('on', v === 'status');
+  show($('viewHome'), v === 'home' && ptOk); show($('viewPt'), v === 'home' && !ptOk); show($('tabsBar'), v !== 'home');
+  show($('viewAjukan'), v === 'ajukan'); show($('viewStatus'), v === 'status');
+  show($('viewRiwayat'), v === 'riwayat'); $('tabRiwayat').classList.toggle('on', v === 'riwayat');
+  if (v === 'riwayat') tampilRiwayat();
+  window.scrollTo(0, 0);
+  if (v === 'status') $('sNik').focus();
+}
+$('tabAjukan').onclick = () => pilihMenu('ajukan');
+$('tabStatus').onclick = () => pilihMenu('status');
+$('tabHome').onclick = () => pilihMenu('home');
+$('ptCG').onclick = () => pilihPt('CAPGLOBAL');
+$('ptCW').onclick = () => pilihPt('CAPWORLD');
+$('gantiPt').onclick = e => { e.preventDefault(); ptOk = false; try { localStorage.removeItem('idc_pt'); } catch (x) {} resetForm(); pilihMenu('home'); };
+$('goAjukan').onclick = () => pilihMenu('ajukan');
+$('goStatus').onclick = () => pilihMenu('status');
+$('goRiwayat').onclick = () => pilihMenu('riwayat');
+$('tabRiwayat').onclick = () => pilihMenu('riwayat');
+
+const ALUR = ['MENUNGGU', 'ACC HR', 'SELESAI CETAK', 'SUDAH DISERAHKAN'];
+const LBL = { 'MENUNGGU': 'Perlu ACC', 'ACC HR': 'Proses dicetak', 'DIPROSES': 'Proses dicetak', 'SELESAI CETAK': 'Siap diserahkan', 'SUDAH DISERAHKAN': 'Selesai', 'DITOLAK': 'Ditolak' };
+const ARTI = {
+  'MENUNGGU': 'Data pengajuan sudah diterima HR, menunggu approval.',
+  'ACC HR': 'Pengajuan sudah disetujui HR, ID card sedang diproses untuk dicetak oleh tim IT.',
+  'DIPROSES': 'Pengajuan sudah disetujui HR, ID card sedang diproses untuk dicetak oleh tim IT.',
+  'SELESAI CETAK': 'ID card sudah selesai dicetak dan siap diambil di HRD.',
+  'SUDAH DISERAHKAN': 'ID card sudah diterima karyawan.',
+  'DITOLAK': 'Pengajuan tidak dapat diproses.'
+};
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function kartuStatus(it){
+  const idx = ALUR.indexOf(it.status === 'DIPROSES' ? 'ACC HR' : it.status), tolak = it.status === 'DITOLAK';
+  const cls = 'b-' + it.status.replace(/\s+/g, '-');
+  let steps = '';
+  if (!tolak) {
+    steps = '<div class="steps">' + ALUR.map((s, i) => '<i class="' + (i < idx || idx === ALUR.length - 1 ? 'lewat' : i === idx ? 'on' : '') + '"></i>').join('') + '</div>' +
+      '<div class="stl"><span>Perlu ACC</span><span>Proses dicetak</span><span>Siap diserahkan</span><span>Selesai</span></div>';
+  }
+  let info = ARTI[it.status] && !tolak ? '<div class="arti">' + ARTI[it.status] + '</div>' : '';
+  if (it.status === 'SELESAI CETAK' && it.catatan) info += '<div class="note info"><b>📝 Catatan HRD:</b> <span>' + esc(it.catatan) + '</span></div>';
+  if (it.status === 'SUDAH DISERAHKAN') {
+    info += '<div class="meta">' + (it.selesai ? 'Diambil pada ' + esc(it.selesai) + '.' : 'Tanggal diambil belum dicatat HRD.') + '</div>';
+    if (it.komplain && it.komplain !== 'SELESAI') {
+      info += '<div class="note warn">Laporan "ID card belum diterima" sudah dikirim. Status laporan: <b>' +
+        esc(it.komplain === 'DICEK HR' ? 'Sedang dicek HR' : 'Diterima HR') + '</b>. HR akan menghubungi Anda.</div>';
+    } else if (it.ref) {
+      info += '<button type="button" class="ghost komp-btn" data-ref="' + esc(it.ref) + '">Belum menerima ID card? Laporkan</button>' +
+        '<div class="komp hide" data-form="' + esc(it.ref) + '">' +
+        '<label>No. HP / WhatsApp yang bisa dihubungi</label><input type="tel" class="komp-hp" inputmode="tel" placeholder="08xxxxxxxxxx">' +
+        '<label>Keterangan (opsional)</label><textarea class="komp-ket" rows="2" placeholder="Contoh: belum pernah menerima ID card"></textarea>' +
+        '<div class="note bad hide komp-msg"></div>' +
+        '<button type="button" class="btn full komp-kirim">Kirim Laporan</button></div>';
+    }
+  }
+  if (tolak) info = '<div class="note bad">Pengajuan ditolak' + (it.alasan ? ': ' + esc(it.alasan).replace(/\.?$/, '.') : '.') + ' Hubungi HRD untuk info lebih lanjut.</div>';
+  return '<div class="st"><div class="top"><div><div class="jn">' + esc(it.jenis) + '</div><div class="pt">' + esc(it.perusahaan) +
+    ' · diajukan ' + esc(it.tanggal) + '</div></div><span class="badge ' + cls + '">' + esc(LBL[it.status] || it.status) + '</span></div>' +
+    steps + info + '</div>';
+}
+// laporan "belum diterima"
+$('sHasil').addEventListener('click', e => {
+  const tb = e.target.closest('.komp-btn');
+  if (tb) {
+    const fm = tb.nextElementSibling; show(fm, fm.classList.contains('hide'));
+    if (!fm.classList.contains('hide')) fm.querySelector('.komp-hp').focus();
+    return;
+  }
+  const kb = e.target.closest('.komp-kirim');
+  if (!kb) return;
+  const fm = kb.closest('.komp'), msg = fm.querySelector('.komp-msg');
+  const hp = fm.querySelector('.komp-hp').value.trim(), ket = fm.querySelector('.komp-ket').value.trim();
+  err(msg, '');
+  if (!/^[0-9+ -]{8,16}$/.test(hp)) { err(msg, 'Isi No. HP / WhatsApp yang benar.'); return; }
+  kb.disabled = true; kb.textContent = 'Mengirim...';
+  LD.mulai('Mengirim laporan ke HR...');
+  google.script.run
+    .withSuccessHandler(r => {
+      if (!r.ok) {
+        kb.disabled = false; kb.textContent = 'Kirim Laporan'; err(msg, r.msg);
+        LD.gagal({ jenis: 'data', judul: 'Laporan tidak bisa dikirim', pesan: r.msg });
+        return;
+      }
+      LD.berhasil('Laporan terkirim!', '', () => {
+        fm.previousElementSibling.remove(); fm.outerHTML = '<div class="note ok">' + esc(r.msg) + '</div>';
+      });
+    })
+    .withFailureHandler(x => {
+      kb.disabled = false; kb.textContent = 'Kirim Laporan'; err(msg, 'Gagal mengirim: ' + x.message);
+      LD.gagal({ jenis: 'koneksi', judul: 'Gagal terkirim', pesan: x.message, tombol: 'Coba lagi', aksi: () => kb.click() });
+    })
+    .ajukanKomplain({ ref: fm.dataset.form, hp: hp, ket: ket });
+});
+let modeCari = 'nik';
+function pilihCari(m){
+  modeCari = m;
+  $('segNik').classList.toggle('on', m === 'nik'); $('segNama').classList.toggle('on', m === 'nama');
+  $('sLbl').textContent = m === 'nik' ? 'NIK Karyawan' : 'Nama Karyawan';
+  $('sNik').placeholder = m === 'nik' ? 'Contoh: ACC0006' : 'Contoh: YUNIAR (minimal 3 huruf)';
+  $('sNik').value = ''; err($('sMsg'), ''); $('sHasil').innerHTML = ''; $('sNik').focus();
+}
+$('segNik').onclick = () => pilihCari('nik');
+$('segNama').onclick = () => pilihCari('nama');
+function cekStatusNama(){
+  const q = $('sNik').value.trim().toUpperCase();
+  err($('sMsg'), ''); $('sHasil').innerHTML = '';
+  if (q.replace(/\s/g, '').length < 3) { err($('sMsg'), 'Ketik minimal 3 huruf nama.'); return; }
+  const b = $('btnStatus'); b.disabled = true; b.textContent = '...';
+  LD.cari('Mengecek status...');
+  google.script.run
+    .withSuccessHandler(r => {
+      LD.selesai();
+      b.disabled = false; b.textContent = 'Cek';
+      if (!r.ok) { err($('sMsg'), r.msg); return; }
+      $('sHasil').innerHTML = (r.orang.length > 1 ? '<div class="meta" style="margin:12px 0 4px">' + r.orang.length +
+          ' orang ditemukan dengan nama "' + esc(r.cari) + '". Pastikan pilih nama & NIK yang benar.</div>' : '') +
+        r.orang.map(o => '<div class="who" style="display:block"><b>' + esc(o.nama) + '</b><span>NIK ' + esc(o.nik) + ' · ' +
+          o.list.length + ' pengajuan</span></div>' + o.list.map(kartuStatus).join('')).join('') +
+        '<div class="meta" style="margin-top:10px">Untuk melihat catatan HRD atau alasan jika pengajuan ditolak, cek pakai NIK.</div>';
+    })
+    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); LD.gagalCari(e.message, cekStatusNama); })
+    .cekStatusNama(q);
+}
+function cekStatusNik(){
+  if (modeCari === 'nama') { cekStatusNama(); return; }
+  const nik = $('sNik').value.trim().toUpperCase();
+  err($('sMsg'), ''); $('sHasil').innerHTML = '';
+  if (!nik) { err($('sMsg'), 'Isi NIK dulu.'); return; }
+  const b = $('btnStatus'); b.disabled = true; b.textContent = '...';
+  LD.cari('Mengecek status...');
+  google.script.run
+    .withSuccessHandler(r => {
+      LD.selesai();
+      b.disabled = false; b.textContent = 'Cek';
+      if (!r.ok) { err($('sMsg'), r.msg); return; }
+      $('sHasil').innerHTML = '<div class="who" style="display:block"><b>' + esc(r.nama) + '</b><span>' + (r.list.length || 'Belum ada') +
+        ' pengajuan ditemukan</span></div>' + (r.list.length ? r.list.map(kartuStatus).join('') :
+        '<div class="st"><div class="meta">Belum ada pengajuan ID card untuk NIK ini.</div></div>');
+    })
+    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Cek'; err($('sMsg'), 'Gagal cek status: ' + e.message); LD.gagalCari(e.message, cekStatusNik); })
+    .cekStatus(nik);
+}
+$('btnStatus').onclick = cekStatusNik;
+$('sNik').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); cekStatusNik(); } });
+$('sNik').addEventListener('input', () => { const s = $('sNik').selectionStart; $('sNik').value = $('sNik').value.toUpperCase(); try { $('sNik').setSelectionRange(s, s); } catch (x) {} });
+$('btnLagi').onclick = resetForm;
+/* ===== Bukti pengajuan (tampil + unduh PNG) ===== */
+let buktiData = null;
+function buktiBaris(d){
+  const r = [['No. Pengajuan', d.no], ['Nama', d.nama], ['NIK', d.nik], ['Jenis', d.jenis], ['Perusahaan', d.perusahaan],
+    ['Lokasi pabrik', d.pabrik], ['Tanggal', d.tanggal], ['Status', d.statusTeks || 'Menunggu']];
+  if (d.hr) r.push(['HR penanggung jawab', d.hr]);
+  return r.filter(x => x[1]);
+}
+function tampilBukti(d){
+  buktiData = d;
+  $('bukti').innerHTML = '<div class="bk-h">BUKTI PENGAJUAN ID CARD</div>' + buktiBaris(d).map(x =>
+    '<div class="rw"><span>' + esc(x[0]) + '</span><b>' + (x[0] === 'Status' ? '<span class="badge b-MENUNGGU">Menunggu</span>' : esc(x[1])) + '</b></div>').join('');
+  show($('buktiImgWrap'), false); $('buktiImg').removeAttribute('src');
+  show($('infoSecurity'), buktiHilang_(d));
+}
+function buktiHilang_(d){ if (!d) return false; return d.kode ? d.kode === 'HILANG' : /hilang/i.test(String(d.jenis || '')); }
+function bungkus(ctx, teks, maxW){
+  const kata = String(teks).split(' '), out = []; let baris = '';
+  kata.forEach(k => { const c = baris ? baris + ' ' + k : k; if (ctx.measureText(c).width > maxW && baris) { out.push(baris); baris = k; } else baris = c; });
+  if (baris) out.push(baris); return out;
+}
+function gambarBukti(d){
+  const W = 1080, P = 70, S = 'Inter, "Segoe UI", Roboto, Arial, sans-serif';
+  const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+  const rows = buktiBaris(d);
+  ctx.font = '700 34px ' + S;
+  const rowsW = rows.map(x => bungkus(ctx, T(x[1]), W - P * 2 - 380));
+  const hil = buktiHilang_(d), extra = hil ? 120 : 0;
+  const tinggi0 = 330 + rowsW.reduce((a, l) => a + Math.max(1, l.length) * 46 + 34, 0) + 175, tinggi = tinggi0 + extra;
+  cv.width = W; cv.height = tinggi;
+  ctx.fillStyle = '#F7F9FE'; ctx.fillRect(0, 0, W, tinggi);
+  ctx.fillStyle = '#4A6E99'; ctx.fillRect(0, 0, W, 210);
+  const strip = ['#D2E0FB', '#F9F3CC', '#D7E5CA', '#A9C99A', '#F2E3A0'];
+  strip.forEach((c, i) => { ctx.fillStyle = c; ctx.fillRect(i * W / 5, 210, W / 5 + 1, 12); });
+  const logo = document.querySelector('img.logo');
+  try { if (logo && logo.complete) { ctx.fillStyle = '#fff'; ctx.fillRect(P - 6, 44, 104, 132); ctx.drawImage(logo, P, 50, 92, 120); } } catch (e) {}
+  ctx.fillStyle = '#fff'; ctx.font = '800 40px ' + S; ctx.fillText(T('BUKTI PENGAJUAN ID CARD'), P + 130, 100);
+  ctx.font = '600 28px ' + S; ctx.fillText(d.perusahaan || '', P + 130, 145);
+  ctx.font = '500 24px ' + S; ctx.fillText(T('Human Resources Department'), P + 130, 182);
+  let y = 300;
+  ctx.setLineDash([10, 8]); ctx.strokeStyle = '#C9D6EA'; ctx.lineWidth = 3;
+  ctx.strokeRect(P - 20, y - 50, W - (P - 20) * 2, tinggi0 - y - 160 + 20); ctx.setLineDash([]);
+  rows.forEach((x, i) => {
+    ctx.fillStyle = '#5D6B80'; ctx.font = '500 30px ' + S; ctx.fillText(T(x[0]), P + 10, y + 10);
+    ctx.font = '700 34px ' + S; ctx.textAlign = 'right';
+    const lines = rowsW[i];
+    if (x[0] === 'Status') {
+      const tw = ctx.measureText(T(x[1])).width + 40; ctx.fillStyle = '#cfe2f3';
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(W - P - 10 - tw, y - 28, tw, 50, 25) : ctx.rect(W - P - 10 - tw, y - 28, tw, 50); ctx.fill();
+      ctx.fillStyle = '#073763'; ctx.fillText(T(x[1]), W - P - 30, y + 10);
+    } else {
+      ctx.fillStyle = x[0] === 'No. Pengajuan' ? '#4A6E99' : '#22324A';
+      lines.forEach((l, j) => ctx.fillText(l, W - P - 10, y + 10 + j * 46));
+    }
+    ctx.textAlign = 'left';
+    y += Math.max(1, lines.length) * 46 + 34;
+    if (i < rows.length - 1) { ctx.strokeStyle = '#C9D6EA'; ctx.lineWidth = 2; ctx.setLineDash([3, 7]); ctx.beginPath(); ctx.moveTo(P + 10, y - 40); ctx.lineTo(W - P - 10, y - 40); ctx.stroke(); ctx.setLineDash([]); }
+  });
+  if (hil) {   // ID card hilang: bukti ini dipakai sementara untuk masuk PT
+    const by = tinggi0 - 160, bw = W - (P - 20) * 2;
+    ctx.fillStyle = '#FFF1C9'; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(P - 20, by, bw, 104, 18) : ctx.rect(P - 20, by, bw, 104); ctx.fill();
+    ctx.fillStyle = '#E0A800'; ctx.fillRect(P - 20, by, 10, 104);
+    ctx.textAlign = 'center'; ctx.fillStyle = '#6B4100';
+    ctx.font = '800 31px ' + S; ctx.fillText('🛡️ ' + T('Tunjukkan bukti ini ke security saat masuk PT'), W / 2, by + 45);
+    ctx.font = '600 26px ' + S; ctx.fillText(T('selama ID card baru belum jadi'), W / 2, by + 83);
+    ctx.textAlign = 'left';
+  }
+  ctx.fillStyle = '#22324A'; ctx.font = '600 28px ' + S; ctx.textAlign = 'center';
+  ctx.fillText(T('Silakan cek status pengajuan secara berkala'), W / 2, tinggi - 120);
+  ctx.fillStyle = '#4A6E99'; ctx.font = '700 28px ' + S;
+  ctx.fillText(T('Web Pengajuan ID Card  →  menu Cek Status'), W / 2, tinggi - 78);
+  ctx.fillStyle = '#5D6B80'; ctx.font = '500 22px ' + S;
+  ctx.fillText(T('Dibuat otomatis oleh sistem pengajuan ID card · simpan bukti ini'), W / 2, tinggi - 38);
+  return cv;
+}
+function unduhBukti(){
+  if (!buktiData) return;
+  const cv = gambarBukti(buktiData);
+  const bersih = x => String(x || '').replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, ' ').trim().toUpperCase();
+  const nama = [bersih(buktiData.nama), bersih(buktiData.nik), 'ID CARD ' + bersih(buktiData.kode || buktiData.jenis)].filter(Boolean).join('_') + '.png';
+  const url = cv.toDataURL('image/png');
+  $('buktiImg').src = url; show($('buktiImgWrap'), true);
+  try {
+    cv.toBlob(bl => {
+      const a = document.createElement('a'); a.href = URL.createObjectURL(bl); a.download = nama;
+      document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    }, 'image/png');
+  } catch (e) {}
+}
+$('btnUnduh').onclick = unduhBukti;
+
+let lastNik = '';
+$('lnkCekAwal').onclick = e => { e.preventDefault(); pilihMenu('status'); };
+$('lnkCek').onclick = e => { e.preventDefault(); pilihMenu('status'); pilihCari('nik'); if (lastNik) { $('sNik').value = lastNik; cekStatusNik(); } };
+/* HR penanggung jawab per pabrik */
+const HR_PJ = { 'CII 1': 'Destya', 'CII 2': 'Laila', 'CII 3': 'Nabilla', 'CWMI 2': 'Egi', 'CWMI 3': 'Bella' };   // pabrik CAP WORLD: nama HR belum ada, kosong
+function normPabrik(v){
+  const s = String(v || '').toUpperCase().replace(/\s+/g, ' ').trim();
+  let m = s.match(/^(?:PABRIK|CII) ?(\d)$/); if (m) return 'CII ' + m[1];
+  m = s.match(/^CWMI ?(\d)$/); if (m) return 'CWMI ' + m[1];
+  return s;
+}
+$('nik').addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); cekNik(); } });
+$('nik').addEventListener('input', () => { if(current){ current = null; $('who').style.display='none'; reveal(false); } });
+
+$('bagianSalah').onchange = e => {
+  show($('bagianBenarBox'), e.target.checked);
+  setTimeout(cekPasFoto, 0);
+  if (e.target.checked && current) {               // isi awal dengan data sekarang, tinggal diubah
+    if (!$('bagianBenar').value) $('bagianBenar').value = current.bagian.trim().toUpperCase();
+    if (!$('posisiBenar').value) $('posisiBenar').value = current.posisi.toUpperCase();
+    if (!$('pabrikBenar').value) $('pabrikBenar').value = current.pabrik.trim().toUpperCase();
+  }
+};
+document.querySelectorAll('input.caps').forEach(el => el.addEventListener('input', () => {
+  const s = el.selectionStart, e = el.selectionEnd, up = el.value.toUpperCase();
+  if (el.value !== up) { el.value = up; try { el.setSelectionRange(s, e); } catch (x) {} }
+}));
+
+document.querySelectorAll('input[name=jenis]').forEach(r => r.onchange = () => {
+  document.querySelectorAll('.sec').forEach(s => show(s, false));
+  show($('f' + r.value), true);
+  show($('cardDetail'), true); show($('btnKirim'), true);
+  err($('sendMsg'), '');
+});
+
+$('alasanGanti').onchange = e => show($('alasanLain'), e.target.value === 'Lainnya');
+$('bagianBenar').addEventListener('change', cekPasFoto);
+
+function compress(file){
+  return new Promise((res, rej) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const max = 1280, s = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', 0.75));
+    };
+    img.onerror = () => rej(new Error('File bukan foto atau tidak bisa dibaca.'));
+    img.src = url;
+  });
+}
+document.querySelectorAll('.filebtn input').forEach(inp => inp.addEventListener('change', () => {
+  const n = document.querySelector('.fb-nama[data-for="' + inp.id + '"]');
+  if (n) n.textContent = inp.files && inp.files[0] ? inp.files[0].name : 'Belum ada foto dipilih';
+}));
+$('foto').onchange = async e => {
+  fotoB64 = ''; show($('prev'), false);
+  const f = e.target.files[0]; if(!f) return;
+  try{
+    const dataUrl = await compress(f);
+    fotoB64 = dataUrl.split(',')[1];
+    $('prev').src = dataUrl; show($('prev'), true);
+  }catch(x){ err($('sendMsg'), x.message); }
+};
+$('pasFoto').onchange = async e => {
+  pasB64 = ''; show($('prevPas'), false);
+  const f = e.target.files[0]; if(!f) return;
+  try{
+    const dataUrl = await compress(f);
+    pasB64 = dataUrl.split(',')[1];
+    $('prevPas').src = dataUrl; show($('prevPas'), true);
+  }catch(x){ err($('sendMsg'), x.message); }
+};
+
+/* daftar bagian & pabrik untuk koreksi data: dimuat sesuai PT karyawan setelah NIK dicek */
+let daftarPt = '';
+function isiPilihan(sel, list, awal){
+  while (sel.options.length > 1) sel.remove(1);
+  list.forEach(b => { const o = document.createElement('option'); o.value = b; o.textContent = b; sel.appendChild(o); });
+}
+function muatDaftar(p){
+  if (daftarPt === p) return; daftarPt = p;
+  google.script.run.withSuccessHandler(list => isiPilihan($('bagianBenar'), list)).getBagianList(p);
+  google.script.run.withSuccessHandler(list => isiPilihan($('pabrikBenar'), list)).getPabrikList(p);
+}
+
+$('btnKirim').onclick = () => {
+  err($('sendMsg'), '');
+  if(!current){ err($('sendMsg'), 'Cek NIK dulu.'); return; }
+  const j = document.querySelector('input[name=jenis]:checked');
+  if(j && j.value === 'GANTI' && !fotoB64){ err($('sendMsg'), 'Foto ID card lama wajib diupload.'); return; }
+  if(j && j.value === 'HILANG' && !$('setujuHilang').checked){ err($('sendMsg'), 'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.'); $('setujuHilang').closest('label').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  if(WAJIB_PAS.indexOf(bagianSekarang()) > -1 && !pasB64){ err($('sendMsg'), 'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.'); return; }
+  const p = {
+    pt: pt,
+    nik: current.nik, hp: $('hp').value.trim(), jenis: j ? j.value : '',
+    bagianSalah: $('bagianSalah').checked, bagianBenar: $('bagianBenar').value.trim().toUpperCase(),
+    posisiBenar: $('posisiBenar').value.trim().toUpperCase(),
+    pabrikBenar: $('pabrikBenar').value,
+    tglMasuk: $('tglSus').value,
+    tglHilang: $('tglHilang').value, kronologi: $('kronologi').value.trim(),
+    alasanGanti: $('alasanGanti').value, alasanLain: $('alasanLain').value.trim(),
+    alasanSusulan: $('alasanSus').value.trim(),
+    foto: fotoB64 ? { b64: fotoB64 } : null,
+    pasFoto: pasB64 ? { b64: pasB64 } : null
+  };
+  const b = $('btnKirim'); b.disabled = true; b.textContent = 'Mengirim...';
+  const nikKirim = current.nik;
+  const gagalKoneksi = pesan => LD.gagal({ jenis: 'koneksi', judul: 'Gagal terkirim', pesan: pesan, tombol: 'Coba lagi', aksi: () => $('btnKirim').click() });
+  LD.mulai('Mengirim ke HR...');
+  google.script.run
+    .withSuccessHandler(r => {
+      b.disabled = false; b.textContent = 'Kirim Pengajuan';
+      if(!r.ok){
+        err($('sendMsg'), r.msg);
+        if (/^Gagal menyimpan/.test(r.msg)) { gagalKoneksi(r.msg); return; }
+        const dobel = /masih punya pengajuan/.test(r.msg);
+        LD.gagal({ jenis: 'data', judul: 'Pengajuan tidak bisa dikirim', pesan: r.msg,
+          tombol: dobel ? 'Cek Status' : 'Perbaiki isian',
+          aksi: dobel ? () => { pilihMenu('status'); pilihCari('nik'); $('sNik').value = nikKirim; cekStatusNik(); }
+                      : () => $('sendMsg').scrollIntoView({ behavior: 'smooth', block: 'center' }) });
+        return;
+      }
+      LD.berhasil('Berhasil terkirim!', 'Membuka bukti pengajuan...', () => {
+      $('doneMsg').textContent = /Laporan data tidak sesuai/.test(r.msg) ? 'Laporan data tidak sesuai sudah dicatat.' : '';
+      $('doneMsg').classList.toggle('hide', !$('doneMsg').textContent);
+      lastNik = (r.bukti && r.bukti.nik) || current.nik;
+      ingatNik(lastNik);
+      const pab = normPabrik(p.bagianSalah && p.pabrikBenar ? p.pabrikBenar : current.pabrik);
+      const hr = HR_PJ[pab];
+      const bk = r.bukti || {};
+      tampilBukti({
+        no: bk.no || '', nama: bk.nama || $('wNama').textContent, nik: bk.nik || lastNik,
+        jenis: bk.jenis || ({ HILANG: 'ID Card Hilang', GANTI: 'Ganti (Tidak Layak Pakai)', SUSULAN: 'Susulan (Terlewat)' })[j ? j.value : ''] || '', perusahaan: bk.perusahaan || 'PT CAPGLOBAL INDUSTRY INTERNATIONAL',
+        pabrik: pab, tanggal: bk.tanggal || new Date().toLocaleString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        hr: hr ? hr + ' (' + pab + ')' : '', kode: j ? j.value : ''
+      });
+      try { simpanRiwayat(buktiData); } catch (x) {}
+      show($('formWrap'), false); show($('doneWrap'), true); window.scrollTo(0,0);
+      });
+    })
+    .withFailureHandler(e => {
+      b.disabled = false; b.textContent = 'Kirim Pengajuan';
+      err($('sendMsg'), 'Gagal mengirim: ' + e.message);
+      gagalKoneksi(e.message);
+    })
+    .submitWeb(p);
+};
+/* ===== NOTIFIKASI di HP karyawan: hanya SELESAI CETAK & DITOLAK ===== */
+const NOTIF_KEY = 'idcard_nik_saya', NOTIF_TUTUP = 'idcard_notif_tutup';
+function simpanBaca(k, def){ try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v == null ? def : v; } catch (e) { return def; } }
+function simpanTulis(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+function ingatNik(nik){
+  nik = String(nik || '').trim().toUpperCase(); if (!nik) return;
+  const l = simpanBaca(NOTIF_KEY, []).filter(x => x !== nik); l.unshift(nik); simpanTulis(NOTIF_KEY, l.slice(0, 3));
+}
+function cekNotif(){
+  const niks = simpanBaca(NOTIF_KEY, []), tutup = simpanBaca(NOTIF_TUTUP, []);
+  const box = $('notifBox'); box.innerHTML = ''; show(box, false);
+  if (!niks.length) return;
+  const semua = [];
+  let sisa = niks.length;
+  const selesai = () => {
+    if (--sisa > 0) return;
+    const tampil = semua.filter(x => tutup.indexOf(x.key) < 0);
+    if (!tampil.length) return;
+    box.innerHTML = tampil.map(x => {
+      const tolak = x.it.status === 'DITOLAK';
+      return '<button type="button" class="nb ' + (tolak ? 'bad' : 'ok') + '" data-key="' + esc(x.key) + '" data-nik="' + esc(x.nik) + '">' +
+        '<span class="ic">' + (tolak ? '⚠️' : '🎉') + '</span>' +
+        '<span class="tx"><b>' + (tolak ? 'Pengajuan ditolak' : 'ID card Anda sudah jadi!') + '</b>' +
+        '<span><span>' + esc(x.it.jenis) + '</span> · <span>' + (tolak ? (x.it.alasan ? 'Alasan: ' + esc(x.it.alasan) : 'Hubungi HRD') : 'ambil di HRD') + '</span></span></span>' +
+        '<span class="ch">›</span></button>';
+    }).join('') + '<a href="#" class="n-hapus">Bukan Anda? Hapus pengingat di HP ini</a>';
+    show(box, true);
+  };
+  niks.forEach(nik => {
+    google.script.run
+      .withSuccessHandler(r => {
+        if (r && r.ok) (r.list || []).forEach(it => {
+          if (it.status === 'SELESAI CETAK' || it.status === 'DITOLAK')
+            semua.push({ nik: nik, nama: r.nama, it: it, key: (it.ref || it.jenis + it.tanggal) + '|' + it.status });
+        });
+        selesai();
+      })
+      .withFailureHandler(() => selesai())
+      .cekStatus(nik);
+  });
+}
+$('notifBox').addEventListener('click', e => {
+  const nb = e.target.closest('.nb');
+  if (nb) {   // dibuka = dianggap sudah dibaca, tidak muncul lagi
+    const t = simpanBaca(NOTIF_TUTUP, []); t.push(nb.dataset.key); simpanTulis(NOTIF_TUTUP, t.slice(-50));
+    const nik = nb.dataset.nik; nb.remove();
+    if (!$('notifBox').querySelector('.nb')) { $('notifBox').innerHTML = ''; show($('notifBox'), false); }
+    pilihMenu('status'); pilihCari('nik'); $('sNik').value = nik; cekStatusNik();
+    return;
+  }
+  if (e.target.closest('.n-hapus')) {
+    e.preventDefault(); simpanTulis(NOTIF_KEY, []); $('notifBox').innerHTML = ''; show($('notifBox'), false);
+  }
+});
+
+/* ===== RIWAYAT PENGAJUAN (tersimpan di HP ini) ===== */
+const RIW_KEY = 'idcard_riwayat';
+function simpanRiwayat(d){
+  const l = simpanBaca(RIW_KEY, []).filter(x => !(d.no && x.no === d.no));
+  l.unshift(Object.assign({}, d, { disimpan: Date.now() }));
+  simpanTulis(RIW_KEY, l.slice(0, 50));
+}
+function tampilRiwayat(){
+  const l = simpanBaca(RIW_KEY, []), box = $('riwList');
+  $('riwHapus').classList.toggle('hide', !l.length);
+  show($('riwCariBox'), l.length > 1); $('riwCari').value = ''; $('riwTot').textContent = '';
+  if (!l.length) { box.innerHTML = '<div class="st"><div class="meta">Belum ada pengajuan dari HP ini.</div></div>'; return; }
+  box.innerHTML = l.map((d, i) =>
+    '<div class="st riw" data-i="' + i + '"><div class="top"><div><div class="jn">' + esc(d.jenis) + '</div>' +
+    '<div class="pt"><span>No. Pengajuan</span>: ' + esc(d.no || '-') + '</div>' +
+    '<div class="pt">' + esc(d.nama) + ' · NIK ' + esc(d.nik) + '</div>' +
+    '<div class="pt"><span>Tanggal</span>: ' + esc(d.tanggal) + '</div></div>' +
+    '<span class="badge b-MENUNGGU riw-st">…</span></div>' +
+    '<div class="riw-bt"><button type="button" class="ghost riw-unduh">⬇️ <span>Unduh bukti</span></button>' +
+    '<button type="button" class="ghost riw-cek">🔍 <span>Lihat status</span></button></div>' +
+    '<img class="riw-img hide" alt="Bukti pengajuan"></div>').join('');
+  // status terkini per NIK
+  const niks = [...new Set(l.map(d => d.nik).filter(Boolean))];
+  niks.forEach(nik => google.script.run
+    .withSuccessHandler(r => {
+      const list = (r && r.ok && r.list) || [];
+      l.forEach((d, i) => {
+        if (d.nik !== nik) return;
+        const it = list.find(x => d.no && x.no === d.no) ||
+          list.find(x => x.jenis === d.jenis && String(d.tanggal || '').indexOf(x.tanggal) === 0);
+        const el = box.querySelector('.riw[data-i="' + i + '"] .riw-st');
+        if (!el) return;
+        if (it) { d.status = it.status; el.className = 'badge riw-st b-' + it.status.replace(/\s+/g, '-'); el.textContent = LBL[it.status] || it.status; }
+        else { el.className = 'badge riw-st'; el.textContent = '-'; }
+      });
+    })
+    .withFailureHandler(() => {})
+    .cekStatus(nik));
+}
+$('riwList').addEventListener('click', e => {
+  const card = e.target.closest('.riw'); if (!card) return;
+  const d = simpanBaca(RIW_KEY, [])[Number(card.dataset.i)]; if (!d) return;
+  if (e.target.closest('.riw-cek')) { pilihMenu('status'); pilihCari('nik'); $('sNik').value = d.nik; cekStatusNik(); return; }
+  if (e.target.closest('.riw-unduh')) {
+    const st = card.querySelector('.riw-st').textContent;
+    const cv = gambarBukti(Object.assign({}, d, { statusTeks: st && st !== '…' && st !== '-' ? st : '' }));
+    const bersih = x => String(x || '').replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, ' ').trim().toUpperCase();
+    const nama = [bersih(d.nama), bersih(d.nik), 'ID CARD ' + bersih(d.kode || d.jenis)].filter(Boolean).join('_') + '.png';
+    const img = card.querySelector('.riw-img'); img.src = cv.toDataURL('image/png'); show(img, true);
+    try { cv.toBlob(bl => { const a = document.createElement('a'); a.href = URL.createObjectURL(bl); a.download = nama;
+      document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); }, 'image/png'); } catch (x) {}
+  }
+});
+$('riwCari').addEventListener('input', () => {
+  const q = $('riwCari').value.trim().toUpperCase();
+  const kartu = [...$('riwList').querySelectorAll('.riw')];
+  let n = 0;
+  kartu.forEach(k => {
+    const d = simpanBaca(RIW_KEY, [])[Number(k.dataset.i)] || {};
+    const teks = [d.nama, d.nik, d.no, d.jenis, d.tanggal, d.pabrik, k.querySelector('.riw-st').textContent].join(' ').toUpperCase();
+    const cocok = !q || teks.indexOf(q) > -1;
+    show(k, cocok); if (cocok) n++;
+  });
+  $('riwTot').textContent = q ? (n ? n + ' dari ' + kartu.length + ' pengajuan' : 'Tidak ada yang cocok.') : '';
+});
+$('riwHapus').onclick = e => { e.preventDefault(); simpanTulis(RIW_KEY, []); tampilRiwayat(); };
+cekNotif();
+
+</script>
+<script>
+/* ===================== PILIHAN BAHASA (ID / EN / 中文) ===================== */
+(function(){
+const D = {
+  en: {
+    'Human Resources Department':'Human Resources Department',
+    'Web ini khusus karyawan PT CAPGLOBAL. Karyawan PT CAP WORLD silakan hubungi HRD CAP WORLD.':'This site is for PT CAPGLOBAL employees only. PT CAP WORLD employees please contact CAP WORLD HRD.',
+    'Mencari data...':'Searching...','Mengecek status...':'Checking status...','Gagal mencari':'Search failed',
+    'Mengirim ke HR...':'Sending to HR...','Mengirim laporan ke HR...':'Sending report to HR...','Jangan tutup halaman ini':'Do not close this page',
+    'Berhasil terkirim!':'Sent successfully!','Membuka bukti pengajuan...':'Opening request receipt...','Laporan terkirim!':'Report sent!',
+    'Gagal terkirim':'Failed to send','Pengajuan tidak bisa dikirim':'Request cannot be sent','Laporan tidak bisa dikirim':'Report cannot be sent',
+    'Coba lagi':'Try again','Cek Status':'Check Status','Perbaiki isian':'Fix the form','Oke':'OK',
+    'Koneksi gagal. Periksa internet lalu coba lagi.':'Connection failed. Check your internet and try again.',
+    'Riwayat Pengajuan':'Request History','Semua pengajuan dari HP ini':'All requests from this phone','📜 Riwayat':'📜 History','🔍 Status':'🔍 Status',
+    'Riwayat pengajuan di HP ini':'Request history on this phone',
+    'Pengajuan dari HP lain bisa dicek di menu Cek Status.':'Requests from other phones can be checked in the Check Status menu.',
+    'Belum ada pengajuan dari HP ini.':'No requests from this phone yet.','Hapus riwayat di HP ini':'Clear history on this phone',
+    'Unduh bukti':'Download receipt','Lihat status':'View status','Tidak ada yang cocok.':'No matches.',
+    'Cari nama, NIK, no. pengajuan, jenis, atau tanggal':'Search name, NIK, request no., type, or date',
+
+    'Pengajuan ditolak':'Request rejected','ID card Anda sudah jadi!':'Your ID card is ready!',
+    'Silakan hubungi HRD untuk info lebih lanjut.':'Please contact HRD for more information.',
+    'Silakan ambil ID card Anda di HRD.':'Please collect your ID card at HRD.','Lihat detail':'See details',
+    'Bukan Anda? Hapus pengingat di HP ini':'Not you? Remove reminders on this phone','Tutup':'Close','ambil di HRD':'collect at HRD','Hubungi HRD':'Contact HRD',
+
+    'Layanan ID Card Karyawan':'Employee ID Card Service',
+    'Pengajuan, cek status & laporan ID card':'Requests, status check & ID card reports',
+    'Pilih perusahaan Anda':'Choose your company','Pilih tempat Anda bekerja dulu.':'First choose where you work.','‹ Ganti perusahaan':'‹ Change company',
+    'Halo, ada yang bisa HR bantu?':'Hello, how can HR help you?',
+    'Pilih salah satu menu di bawah ini.':'Choose one of the menus below.',
+    'Ajukan ID Card':'Request ID Card',
+    'ID card hilang, rusak, atau belum dapat':'ID card lost, damaged, or not received yet',
+    'Cek Status Pengajuan':'Check Request Status',
+    'Lihat proses ID card Anda':'See the progress of your ID card',
+    '⚠️ Penting sebelum mengajukan':'⚠️ Important before submitting',
+    '1. Sudah pernah mengajukan?':'1. Already submitted a request?',
+    'Cek status':'Check the status','dulu.':'first.',
+    '2. Jangan mengajukan dua kali untuk keperluan yang sama.':'2. Do not submit twice for the same purpose.',
+    '3. Pastikan NIK & data sudah benar.':'3. Make sure your employee ID (NIK) & data are correct.',
+    '‹ Menu':'‹ Menu','📝 Ajukan':'📝 Request','🔍 Cek Status':'🔍 Check Status',
+    'Pilih perusahaan':'Choose company',
+    'Pabrik CII 1 · CII 2 · CII 3':'Factory CII 1 · CII 2 · CII 3',
+    'Pabrik CWMI 1 · CWMI 2 · CWMI 3':'Factory CWMI 1 · CWMI 2 · CWMI 3',
+    '1 · Data karyawan':'1 · Employee data',
+    'Cari pakai NIK':'Search by NIK','Cari pakai Nama':'Search by name',
+    'NIK Karyawan':'Employee ID (NIK)','Nama Karyawan':'Employee name',
+    'Cek':'Check','Cari':'Search',
+    'Pilih nama Anda:':'Select your name:',
+    'Bagian / posisi / lokasi pabrik saya di atas tidak sesuai':'My department / position / factory above is incorrect',
+    'Bagian yang benar':'Correct department','— pilih bagian —':'— choose department —',
+    'Posisi yang benar':'Correct position','Ditulis dengan HURUF BESAR (otomatis).':'Written in CAPITAL LETTERS (automatic).',
+    'Lokasi pabrik yang benar':'Correct factory location','— pilih pabrik —':'— choose factory —',
+    'Laporan ini akan dicek HRD dan dicatat sebagai':'This report will be checked by HRD and recorded as',
+    'data tidak sesuai':'incorrect data',
+    'No. HP / WhatsApp':'Phone / WhatsApp number',
+    'Nama lengkap':'Full name','Bagian':'Department','LAINNYA (tulis sendiri)':'OTHER (write it yourself)',
+    'Posisi':'Position','Lokasi pabrik':'Factory location',
+    'NIK, nama, dan posisi otomatis HURUF BESAR.':'NIK, name and position are automatically in CAPITAL LETTERS.',
+    'Pastikan data yang diisi sudah benar sebelum dikirim.':'Make sure the data is correct before submitting.',
+    '2 · Jenis pengajuan':'2 · Request type',
+    'ID Card Hilang':'Lost ID Card','ID card hilang dan perlu dibuat ulang.':'ID card is lost and needs to be reissued.',
+    'Ganti ID Card Tidak Layak Pakai':'Replace Damaged ID Card','Wajib upload foto ID card lama.':'Photo of the old ID card is required.',
+    'ID Card Susulan':'Missed ID Card','Belum dapat ID card karena terlewat.':'Have not received an ID card because it was missed.',
+    '3 · Detail pengajuan':'3 · Request details',
+    'Pas foto':'Passport photo','(wajib untuk SECURITY, OFFICE & TRANSLATOR)':'(required for SECURITY, OFFICE & TRANSLATOR)',
+    'formal':'formal',', wajah terlihat jelas menghadap depan. Warna background bebas.':', face clearly visible facing forward. Any background color.',
+    '📷 Pilih / ambil foto':'📷 Choose / take photo','Belum ada foto dipilih':'No photo selected',
+    'Tanggal ID card hilang':'Date the ID card was lost','Kronologi kehilangan':'How it was lost',
+    'Alasan penggantian':'Reason for replacement','— pilih —':'— choose —',
+    'Patah / Retak':'Broken / Cracked','Foto / Tulisan Pudar':'Faded photo / text','Kartu Rusak / Tertekuk':'Damaged / Bent card',
+    'Barcode / Chip Tidak Terbaca':'Barcode / Chip unreadable','Lainnya':'Other',
+    'Foto ID card lama':'Photo of old ID card','(wajib)':'(required)',
+    'Foto hanya dipakai untuk pengecekan HRD dan dihapus otomatis setelah pengajuan selesai.':'The photo is only used for HRD checking and is deleted automatically after the request is completed.',
+    'Tanggal masuk kerja':'Start date of work','Alasan ID card terlewat':'Reason the ID card was missed',
+    'Kirim Pengajuan':'Submit Request','Mengirim...':'Sending...',
+    'Pengajuan terkirim':'Request submitted',
+    '⬇️ Unduh Bukti Pengajuan':'⬇️ Download Request Receipt',
+    'Jika file tidak otomatis terunduh, tekan lama gambar di bawah lalu pilih':'If the file does not download automatically, press and hold the image below, then choose',
+    'Simpan gambar':'Save image',
+    'Silakan cek status pengajuan secara berkala di menu':'Please check your request status regularly in the menu',
+    'Ajukan lagi':'Submit another',
+    'BUKTI PENGAJUAN ID CARD':'ID CARD REQUEST RECEIPT',
+    'No. Pengajuan':'Request No.','Nama':'Name','Jenis':'Type','Perusahaan':'Company','Tanggal':'Date','Status':'Status',
+    'HR penanggung jawab':'HR in charge',
+    'Cek status pengajuan':'Check request status',
+    'ℹ️ Arti setiap status':'ℹ️ What each status means',
+    'Menunggu':'Waiting','Diproses':'In process','Selesai cetak':'Printed','Sudah diambil':'Collected','Ditolak':'Rejected','Diambil':'Collected',
+    'Data pengajuan sudah diterima HR, menunggu approval.':'Your request has been received by HR and is awaiting approval.',
+    'ID card sedang dalam proses pencetakan oleh tim IT.':'The ID card is being printed by the IT team.',
+    'Disetujui HR':'Approved by HR','Perlu ACC':'Awaiting HR approval','Proses dicetak':'Being printed','Siap diserahkan':'Ready to collect','Selesai':'Done','Pengajuan sudah disetujui HR, ID card sedang diproses untuk dicetak oleh tim IT.':'Approved by HR; the ID card is being printed by the IT team.',
+    'Pengajuan sudah disetujui HR, menunggu dikirim ke tim IT.':'Your request has been approved by HR and is waiting to be sent to the IT team.',
+    'ID card sudah selesai dicetak dan siap diambil di HRD.':'The ID card has been printed and is ready to be collected at HRD.',
+    'ID card sudah diterima karyawan.':'The ID card has been received by the employee.',
+    'ID card sudah diterima karyawan. Jika belum menerima, tekan':'The ID card has been received by the employee. If you have not received it, press',
+    'Laporkan':'Report','pada pengajuan tersebut.':'on that request.',
+    'Pengajuan tidak dapat diproses. Hubungi HRD.':'The request cannot be processed. Please contact HRD.',
+    'Pengajuan tidak dapat diproses.':'The request cannot be processed.',
+    'ID card sudah jadi. Silakan ambil di HRD.':'Your ID card is ready. Please collect it at HRD.',
+    'Belum menerima ID card? Laporkan':'Have not received your ID card? Report it',
+    'No. HP / WhatsApp yang bisa dihubungi':'Phone / WhatsApp number we can contact',
+    'Keterangan (opsional)':'Notes (optional)','Kirim Laporan':'Send Report',
+    'Laporan "ID card belum diterima" sudah dikirim. Status laporan:':'Your "ID card not received" report has been sent. Report status:',
+    'Sedang dicek HR':'Being checked by HR','Diterima HR':'Received by HR','. HR akan menghubungi Anda.':'. HR will contact you.',
+    'Untuk melihat catatan HRD atau alasan jika pengajuan ditolak, cek pakai NIK.':'To see HRD notes or the reason a request was rejected, check using your NIK.',
+    '📝 Catatan HRD:':'📝 HRD note:',
+    'Belum ada pengajuan ID card untuk NIK ini.':'There is no ID card request for this NIK yet.',
+    'ID Card Karyawan Baru':'New Employee ID Card','Ganti (Tidak Layak Pakai)':'Replacement (Damaged)','Susulan (Terlewat)':'Missed (Late issue)',
+    'Isi NIK dulu.':'Please enter your NIK first.','Ketik minimal 3 huruf nama.':'Type at least 3 letters of the name.',
+    'Isi No. HP / WhatsApp yang benar.':'Enter a valid phone / WhatsApp number.',
+    'Cek NIK dulu.':'Please check your NIK first.','Pilih perusahaan dulu.':'Please choose a company first.',
+    'Penting:':'Important:','Unduh bukti pengajuan ini dan tunjukkan ke security saat masuk PT selama ID card baru belum jadi.':'Download this receipt and show it to security when entering the company until your new ID card is ready.',
+    'Tunjukkan bukti ini ke security saat masuk PT':'Show this receipt to security when entering the company','selama ID card baru belum jadi':'until the new ID card is ready',
+    'Perhatian:':'Attention:','Pengajuan ID card hilang tidak bisa dibatalkan setelah dikirim. Pastikan ID card benar-benar hilang sebelum mengajukan.':'A lost ID card request cannot be cancelled once submitted. Make sure your ID card is really lost before submitting.',
+    'Saya sudah membaca dan memahami perhatian di atas.':'I have read and understood the notice above.',
+    'Laporan data tidak sesuai sudah dicatat.':'Your incorrect-data report has been recorded.',
+    'Tanggal diambil belum dicatat HRD.':'Collection date not yet recorded by HRD.',
+    'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.':'Please tick the statement that a lost ID card request cannot be cancelled.',
+    'Foto ID card lama wajib diupload.':'A photo of the old ID card is required.',
+    'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.':'SECURITY, OFFICE and TRANSLATOR departments must upload a formal passport photo.',
+    'File bukan foto atau tidak bisa dibaca.':'The file is not a photo or cannot be read.',
+    'NIK tidak terdaftar. Hubungi HRD.':'NIK is not registered. Please contact HRD.',
+    'NIK ini tercatat ganda di data HRD. Hubungi HRD untuk diperbaiki.':'This NIK is recorded twice in HRD data. Please contact HRD to fix it.',
+    'NIK ini tercatat sudah tidak aktif (resign). Hubungi HRD.':'This NIK is recorded as inactive (resigned). Please contact HRD.',
+    'Bagian harus dipilih dari daftar.':'Department must be chosen from the list.',
+    'Bagian, posisi, dan pabrik yang diisi sama dengan data. Hilangkan centang jika data sudah benar.':'The department, position and factory you entered are the same as the data. Untick the box if the data is correct.',
+    'Data karyawan belum ada. Hubungi HRD.':'Employee data is not available yet. Please contact HRD.',
+    'Data pengajuan tidak ditemukan. Silakan cek status ulang.':'Request data not found. Please check the status again.',
+    'Data sudah berubah. Silakan cek status ulang.':'The data has changed. Please check the status again.',
+    'Data tidak valid. Silakan cek status ulang.':'Invalid data. Please check the status again.',
+    'Isi NIK dengan benar.':'Enter a valid NIK.','Isi No. HP / WhatsApp yang bisa dihubungi.':'Enter a phone / WhatsApp number we can contact.',
+    'Isi alasan ID card terlewat.':'Enter the reason the ID card was missed.','Isi alasan penggantian.':'Enter the reason for replacement.',
+    'Isi kronologi kehilangan.':'Describe how it was lost.','Isi nama lengkap.':'Enter your full name.',
+    'Isi posisi (huruf besar).':'Enter your position (capital letters).','Isi posisi yang benar (huruf besar).':'Enter the correct position (capital letters).',
+    'Isi tanggal ID card hilang.':'Enter the date the ID card was lost.','Isi tanggal masuk kerja.':'Enter your start date of work.',
+    'Laporan hanya bisa dikirim jika status sudah "Sudah diambil".':'A report can only be sent when the status is "Collected".',
+    'Lokasi pabrik harus dipilih dari daftar.':'Factory location must be chosen from the list.',
+    'No. HP tidak valid.':'Invalid phone number.','Pilih bagian yang benar.':'Choose the correct department.',
+    'Pilih jenis pengajuan.':'Choose a request type.','Pilih lokasi pabrik CWMI 1 / CWMI 2 / CWMI 3.':'Choose factory location CWMI 1 / CWMI 2 / CWMI 3.',
+    'Pilih lokasi pabrik yang benar.':'Choose the correct factory location.','Tulis nama bagian.':'Write the department name.',
+    'Ukuran foto terlalu besar.':'The photo is too large.','Ukuran pas foto terlalu besar.':'The passport photo is too large.',
+    'Silakan cek status pengajuan secara berkala':'Please check your request status regularly',
+    'Web Pengajuan ID Card  →  menu Cek Status':'ID Card Request Web  →  Check Status menu',
+    'Dibuat otomatis oleh sistem pengajuan ID card · simpan bukti ini':'Generated automatically by the ID card request system · keep this receipt',
+    'Contoh: ACC0006':'Example: ACC0006','Contoh: YUNIAR (minimal 3 huruf)':'Example: YUNIAR (at least 3 letters)',
+    'CONTOH: OPERATOR SEWING':'EXAMPLE: OPERATOR SEWING','NIK SESUAI KARTU / SLIP GAJI':'NIK AS ON CARD / PAYSLIP',
+    'NAMA SESUAI KTP':'NAME AS ON ID CARD (KTP)','TULIS NAMA BAGIAN':'WRITE DEPARTMENT NAME',
+    'Ceritakan singkat kapan & di mana hilang':'Briefly describe when & where it was lost','Tulis alasan lainnya':'Write the other reason',
+    'Contoh: belum pernah menerima ID card':'Example: never received the ID card'
+  },
+  zh: {
+    'Human Resources Department':'人力资源部',
+    'Web ini khusus karyawan PT CAPGLOBAL. Karyawan PT CAP WORLD silakan hubungi HRD CAP WORLD.':'本网站仅限 PT CAPGLOBAL 员工使用。PT CAP WORLD 员工请联系 CAP WORLD 的 HRD。',
+    'Mencari data...':'正在查找...','Mengecek status...':'正在查询状态...','Gagal mencari':'搜索失败',
+    'Mengirim ke HR...':'正在发送给 HR...','Mengirim laporan ke HR...':'正在向 HR 发送报告...','Jangan tutup halaman ini':'请勿关闭此页面',
+    'Berhasil terkirim!':'发送成功！','Membuka bukti pengajuan...':'正在打开申请凭证...','Laporan terkirim!':'报告已发送！',
+    'Gagal terkirim':'发送失败','Pengajuan tidak bisa dikirim':'申请无法提交','Laporan tidak bisa dikirim':'报告无法发送',
+    'Coba lagi':'重试','Cek Status':'查询状态','Perbaiki isian':'修改填写内容','Oke':'好的',
+    'Koneksi gagal. Periksa internet lalu coba lagi.':'连接失败，请检查网络后重试。',
+    'Riwayat Pengajuan':'申请记录','Semua pengajuan dari HP ini':'此手机提交的所有申请','📜 Riwayat':'📜 记录','🔍 Status':'🔍 状态',
+    'Riwayat pengajuan di HP ini':'此手机的申请记录',
+    'Pengajuan dari HP lain bisa dicek di menu Cek Status.':'其他手机提交的申请可在"查询状态"菜单查询。',
+    'Belum ada pengajuan dari HP ini.':'此手机尚无申请。','Hapus riwayat di HP ini':'清除此手机上的记录',
+    'Unduh bukti':'下载凭证','Lihat status':'查看状态','Tidak ada yang cocok.':'没有匹配的结果。',
+    'Cari nama, NIK, no. pengajuan, jenis, atau tanggal':'搜索姓名、工号、申请编号、类型或日期',
+
+    'Pengajuan ditolak':'申请被拒','ID card Anda sudah jadi!':'您的工牌已制作完成！',
+    'Silakan hubungi HRD untuk info lebih lanjut.':'详情请联系 HRD。',
+    'Silakan ambil ID card Anda di HRD.':'请到 HRD 领取您的工牌。','Lihat detail':'查看详情',
+    'Bukan Anda? Hapus pengingat di HP ini':'不是您本人？清除此手机上的提醒','Tutup':'关闭','ambil di HRD':'请到 HRD 领取','Hubungi HRD':'请联系 HRD',
+
+    'Layanan ID Card Karyawan':'员工工牌服务',
+    'Pengajuan, cek status & laporan ID card':'申请、查询状态及工牌问题反馈',
+    'Pilih perusahaan Anda':'请选择您的公司','Pilih tempat Anda bekerja dulu.':'请先选择您工作的公司。','‹ Ganti perusahaan':'‹ 更换公司',
+    'Halo, ada yang bisa HR bantu?':'您好，HR 可以为您做什么？',
+    'Pilih salah satu menu di bawah ini.':'请选择下方的一个菜单。',
+    'Ajukan ID Card':'申请工牌',
+    'ID card hilang, rusak, atau belum dapat':'工牌丢失、损坏或尚未领取',
+    'Cek Status Pengajuan':'查询申请状态',
+    'Lihat proses ID card Anda':'查看您的工牌进度',
+    '⚠️ Penting sebelum mengajukan':'⚠️ 申请前请注意',
+    '1. Sudah pernah mengajukan?':'1. 已经申请过？请先',
+    'Cek status':'查询状态','dulu.':'。',
+    '2. Jangan mengajukan dua kali untuk keperluan yang sama.':'2. 同一事项请勿重复申请。',
+    '3. Pastikan NIK & data sudah benar.':'3. 请确认工号（NIK）和资料正确。',
+    '‹ Menu':'‹ 菜单','📝 Ajukan':'📝 申请','🔍 Cek Status':'🔍 查询状态',
+    'Pilih perusahaan':'选择公司',
+    'Pabrik CII 1 · CII 2 · CII 3':'工厂 CII 1 · CII 2 · CII 3',
+    'Pabrik CWMI 1 · CWMI 2 · CWMI 3':'工厂 CWMI 1 · CWMI 2 · CWMI 3',
+    '1 · Data karyawan':'1 · 员工资料',
+    'Cari pakai NIK':'按工号查询','Cari pakai Nama':'按姓名查询',
+    'NIK Karyawan':'员工工号（NIK）','Nama Karyawan':'员工姓名',
+    'Cek':'查询','Cari':'搜索',
+    'Pilih nama Anda:':'请选择您的姓名：',
+    'Bagian / posisi / lokasi pabrik saya di atas tidak sesuai':'以上我的部门 / 职位 / 工厂信息不正确',
+    'Bagian yang benar':'正确的部门','— pilih bagian —':'— 选择部门 —',
+    'Posisi yang benar':'正确的职位','Ditulis dengan HURUF BESAR (otomatis).':'自动转为大写字母。',
+    'Lokasi pabrik yang benar':'正确的工厂','— pilih pabrik —':'— 选择工厂 —',
+    'Laporan ini akan dicek HRD dan dicatat sebagai':'此反馈将由 HRD 核查，并记录为',
+    'data tidak sesuai':'资料不符',
+    'No. HP / WhatsApp':'手机 / WhatsApp 号码',
+    'Nama lengkap':'全名','Bagian':'部门','LAINNYA (tulis sendiri)':'其他（自行填写）',
+    'Posisi':'职位','Lokasi pabrik':'工厂',
+    'NIK, nama, dan posisi otomatis HURUF BESAR.':'工号、姓名和职位会自动转为大写字母。',
+    'Pastikan data yang diisi sudah benar sebelum dikirim.':'提交前请确认填写的资料正确。',
+    '2 · Jenis pengajuan':'2 · 申请类型',
+    'ID Card Hilang':'工牌丢失','ID card hilang dan perlu dibuat ulang.':'工牌丢失，需要补办。',
+    'Ganti ID Card Tidak Layak Pakai':'更换损坏的工牌','Wajib upload foto ID card lama.':'必须上传旧工牌照片。',
+    'ID Card Susulan':'补发工牌','Belum dapat ID card karena terlewat.':'因遗漏尚未领到工牌。',
+    '3 · Detail pengajuan':'3 · 申请详情',
+    'Pas foto':'证件照','(wajib untuk SECURITY, OFFICE & TRANSLATOR)':'（SECURITY、OFFICE 和 TRANSLATOR 必须上传）',
+    'formal':'正式',', wajah terlihat jelas menghadap depan. Warna background bebas.':'，正面清晰露脸，背景颜色不限。',
+    '📷 Pilih / ambil foto':'📷 选择 / 拍摄照片','Belum ada foto dipilih':'尚未选择照片',
+    'Tanggal ID card hilang':'工牌丢失日期','Kronologi kehilangan':'丢失经过',
+    'Alasan penggantian':'更换原因','— pilih —':'— 请选择 —',
+    'Patah / Retak':'断裂 / 破裂','Foto / Tulisan Pudar':'照片 / 文字褪色','Kartu Rusak / Tertekuk':'卡片损坏 / 弯折',
+    'Barcode / Chip Tidak Terbaca':'条码 / 芯片无法读取','Lainnya':'其他',
+    'Foto ID card lama':'旧工牌照片','(wajib)':'（必填）',
+    'Foto hanya dipakai untuk pengecekan HRD dan dihapus otomatis setelah pengajuan selesai.':'照片仅用于 HRD 核查，申请完成后会自动删除。',
+    'Tanggal masuk kerja':'入职日期','Alasan ID card terlewat':'工牌遗漏原因',
+    'Kirim Pengajuan':'提交申请','Mengirim...':'提交中...',
+    'Pengajuan terkirim':'申请已提交',
+    '⬇️ Unduh Bukti Pengajuan':'⬇️ 下载申请凭证',
+    'Jika file tidak otomatis terunduh, tekan lama gambar di bawah lalu pilih':'如果文件没有自动下载，请长按下方图片并选择',
+    'Simpan gambar':'保存图片',
+    'Silakan cek status pengajuan secara berkala di menu':'请定期在以下菜单查询申请状态：',
+    'Ajukan lagi':'再次申请',
+    'BUKTI PENGAJUAN ID CARD':'工牌申请凭证',
+    'No. Pengajuan':'申请编号','Nama':'姓名','Jenis':'类型','Perusahaan':'公司','Tanggal':'日期','Status':'状态',
+    'HR penanggung jawab':'负责 HR',
+    'Cek status pengajuan':'查询申请状态',
+    'ℹ️ Arti setiap status':'ℹ️ 各状态说明',
+    'Menunggu':'等待中','Diproses':'处理中','Selesai cetak':'已打印','Sudah diambil':'已领取','Ditolak':'已拒绝','Diambil':'已领取',
+    'Data pengajuan sudah diterima HR, menunggu approval.':'HR 已收到申请资料，等待审批。',
+    'ID card sedang dalam proses pencetakan oleh tim IT.':'IT 团队正在打印工牌。',
+    'Disetujui HR':'HR 已批准','Perlu ACC':'等待 HR 批准','Proses dicetak':'打印中','Siap diserahkan':'待领取','Selesai':'已完成','Pengajuan sudah disetujui HR, ID card sedang diproses untuk dicetak oleh tim IT.':'HR 已批准，IT 团队正在打印工牌。',
+    'Pengajuan sudah disetujui HR, menunggu dikirim ke tim IT.':'申请已获 HR 批准，等待发送给 IT 团队。',
+    'ID card sudah selesai dicetak dan siap diambil di HRD.':'工牌已打印完成，可到 HRD 领取。',
+    'ID card sudah diterima karyawan.':'员工已领取工牌。',
+    'ID card sudah diterima karyawan. Jika belum menerima, tekan':'员工已领取工牌。如未收到，请在该申请上点击',
+    'Laporkan':'反馈','pada pengajuan tersebut.':'。',
+    'Pengajuan tidak dapat diproses. Hubungi HRD.':'申请无法处理，请联系 HRD。',
+    'Pengajuan tidak dapat diproses.':'申请无法处理。',
+    'ID card sudah jadi. Silakan ambil di HRD.':'工牌已制作完成，请到 HRD 领取。',
+    'Belum menerima ID card? Laporkan':'还没收到工牌？点此反馈',
+    'No. HP / WhatsApp yang bisa dihubungi':'可联系的手机 / WhatsApp 号码',
+    'Keterangan (opsional)':'备注（选填）','Kirim Laporan':'发送反馈',
+    'Laporan "ID card belum diterima" sudah dikirim. Status laporan:':'"未收到工牌"的反馈已发送。反馈状态：',
+    'Sedang dicek HR':'HR 核查中','Diterima HR':'HR 已收到','. HR akan menghubungi Anda.':'。HR 会与您联系。',
+    'Untuk melihat catatan HRD atau alasan jika pengajuan ditolak, cek pakai NIK.':'如需查看 HRD 备注或申请被拒原因，请按工号查询。',
+    '📝 Catatan HRD:':'📝 HRD 备注：',
+    'Belum ada pengajuan ID card untuk NIK ini.':'此工号尚无工牌申请。',
+    'ID Card Karyawan Baru':'新员工工牌','Ganti (Tidak Layak Pakai)':'更换（损坏）','Susulan (Terlewat)':'补发（遗漏）',
+    'Isi NIK dulu.':'请先输入工号。','Ketik minimal 3 huruf nama.':'请至少输入姓名的 3 个字母。',
+    'Isi No. HP / WhatsApp yang benar.':'请输入正确的手机 / WhatsApp 号码。',
+    'Cek NIK dulu.':'请先查询工号。','Pilih perusahaan dulu.':'请先选择公司。',
+    'Penting:':'重要：','Unduh bukti pengajuan ini dan tunjukkan ke security saat masuk PT selama ID card baru belum jadi.':'请下载此申请凭证，在新工牌制作完成前，进入公司时出示给保安。',
+    'Tunjukkan bukti ini ke security saat masuk PT':'进入公司时请向保安出示此凭证','selama ID card baru belum jadi':'有效期至新工牌制作完成',
+    'Perhatian:':'注意：','Pengajuan ID card hilang tidak bisa dibatalkan setelah dikirim. Pastikan ID card benar-benar hilang sebelum mengajukan.':'工牌丢失申请提交后无法取消。请确认工牌确实已丢失后再申请。',
+    'Saya sudah membaca dan memahami perhatian di atas.':'我已阅读并理解上述注意事项。',
+    'Laporan data tidak sesuai sudah dicatat.':'资料不符的报告已记录。',
+    'Tanggal diambil belum dicatat HRD.':'HRD尚未登记领取日期。',
+    'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.':'请先勾选"工牌丢失申请无法取消"的声明。',
+    'Foto ID card lama wajib diupload.':'必须上传旧工牌照片。',
+    'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.':'SECURITY、OFFICE 和 TRANSLATOR 部门必须上传正式证件照。',
+    'File bukan foto atau tidak bisa dibaca.':'文件不是照片或无法读取。',
+    'NIK tidak terdaftar. Hubungi HRD.':'工号未登记，请联系 HRD。',
+    'NIK ini tercatat ganda di data HRD. Hubungi HRD untuk diperbaiki.':'此工号在 HRD 资料中重复，请联系 HRD 更正。',
+    'NIK ini tercatat sudah tidak aktif (resign). Hubungi HRD.':'此工号已登记为离职，请联系 HRD。',
+    'Bagian harus dipilih dari daftar.':'部门必须从列表中选择。',
+    'Bagian, posisi, dan pabrik yang diisi sama dengan data. Hilangkan centang jika data sudah benar.':'填写的部门、职位和工厂与资料相同。如资料正确，请取消勾选。',
+    'Data karyawan belum ada. Hubungi HRD.':'暂无员工资料，请联系 HRD。',
+    'Data pengajuan tidak ditemukan. Silakan cek status ulang.':'未找到申请资料，请重新查询状态。',
+    'Data sudah berubah. Silakan cek status ulang.':'资料已变更，请重新查询状态。',
+    'Data tidak valid. Silakan cek status ulang.':'资料无效，请重新查询状态。',
+    'Isi NIK dengan benar.':'请输入正确的工号。','Isi No. HP / WhatsApp yang bisa dihubungi.':'请输入可联系的手机 / WhatsApp 号码。',
+    'Isi alasan ID card terlewat.':'请填写工牌遗漏原因。','Isi alasan penggantian.':'请填写更换原因。',
+    'Isi kronologi kehilangan.':'请填写丢失经过。','Isi nama lengkap.':'请填写全名。',
+    'Isi posisi (huruf besar).':'请填写职位（大写字母）。','Isi posisi yang benar (huruf besar).':'请填写正确的职位（大写字母）。',
+    'Isi tanggal ID card hilang.':'请填写工牌丢失日期。','Isi tanggal masuk kerja.':'请填写入职日期。',
+    'Laporan hanya bisa dikirim jika status sudah "Sudah diambil".':'只有状态为"已领取"时才能发送反馈。',
+    'Lokasi pabrik harus dipilih dari daftar.':'工厂必须从列表中选择。',
+    'No. HP tidak valid.':'手机号码无效。','Pilih bagian yang benar.':'请选择正确的部门。',
+    'Pilih jenis pengajuan.':'请选择申请类型。','Pilih lokasi pabrik CWMI 1 / CWMI 2 / CWMI 3.':'请选择工厂 CWMI 1 / CWMI 2 / CWMI 3。',
+    'Pilih lokasi pabrik yang benar.':'请选择正确的工厂。','Tulis nama bagian.':'请填写部门名称。',
+    'Ukuran foto terlalu besar.':'照片太大。','Ukuran pas foto terlalu besar.':'证件照太大。',
+    'Silakan cek status pengajuan secara berkala':'请定期查询申请状态',
+    'Web Pengajuan ID Card  →  menu Cek Status':'工牌申请网站  →  查询状态',
+    'Dibuat otomatis oleh sistem pengajuan ID card · simpan bukti ini':'由工牌申请系统自动生成 · 请保存此凭证',
+    'Contoh: ACC0006':'例如：ACC0006','Contoh: YUNIAR (minimal 3 huruf)':'例如：YUNIAR（至少 3 个字母）',
+    'CONTOH: OPERATOR SEWING':'例如：OPERATOR SEWING','NIK SESUAI KARTU / SLIP GAJI':'与工牌 / 工资单一致的工号',
+    'NAMA SESUAI KTP':'与身份证（KTP）一致的姓名','TULIS NAMA BAGIAN':'填写部门名称',
+    'Ceritakan singkat kapan & di mana hilang':'简要说明何时、何地丢失','Tulis alasan lainnya':'填写其他原因',
+    'Contoh: belum pernah menerima ID card':'例如：从未收到工牌'
+  }
+};
+// kalimat yang berisi data (nama, tanggal, jumlah)
+const R = [
+  [/^1 · Data karyawan (.+)$/, { en: m => '1 · Employee data ' + m[1], zh: m => '1 · 员工资料 ' + m[1] }],
+  [/^Alasan: (.*)$/, { en: m => 'Reason: ' + m[1], zh: m => '原因：' + m[1] }],
+  [/^: (.*)$/, { en: m => ': ' + m[1], zh: m => '：' + m[1] }],
+  [/^(.*) · NIK ([^·]*)$/, { en: m => m[1] + ' · NIK ' + m[2], zh: m => m[1] + ' · 工号 ' + m[2] }],
+  [/^(\d+) dari (\d+) pengajuan$/, { en: m => m[1] + ' of ' + m[2] + ' requests', zh: m => m[2] + ' 条申请中的 ' + m[1] + ' 条' }],
+  [/^Bagian: (.*)$/, { en: m => 'Department: ' + m[1], zh: m => '部门：' + m[1] }],
+  [/^· Posisi: (.*)$/, { en: m => '· Position: ' + m[1], zh: m => '· 职位：' + m[1] }],
+  [/^(.*) · diajukan (.*)$/, { en: m => m[1] + ' · submitted ' + m[2], zh: m => m[1] + ' · 申请日期 ' + m[2] }],
+  [/^(\d+) pengajuan ditemukan$/, { en: m => m[1] + ' request(s) found', zh: m => '找到 ' + m[1] + ' 条申请' }],
+  [/^Belum ada pengajuan ditemukan$/, { en: () => 'No requests found', zh: () => '未找到申请' }],
+  [/^NIK (.*) · (\d+) pengajuan$/, { en: m => 'NIK ' + m[1] + ' · ' + m[2] + ' request(s)', zh: m => '工号 ' + m[1] + ' · ' + m[2] + ' 条申请' }],
+  [/^(.*) · NIK (.*)$/, { en: m => m[1] + ' · NIK ' + m[2], zh: m => m[1] + ' · 工号 ' + m[2] }],
+  [/^Diambil pada (.*)\.$/, { en: m => 'Collected on ' + m[1] + '.', zh: m => '领取日期：' + m[1] + '。' }],
+  [/^Diambil\.$/, { en: () => 'Collected.', zh: () => '已领取。' }],
+  [/^(\d+) orang ditemukan dengan nama "(.*)"\. Pastikan pilih nama & NIK yang benar\.$/, { en: m => m[1] + ' people found named "' + m[2] + '". Make sure you choose the correct name & NIK.', zh: m => '找到 ' + m[1] + ' 位名为"' + m[2] + '"的员工，请确认选择正确的姓名和工号。' }],
+  [/^Pengajuan ditolak: (.*?)\.? Hubungi HRD untuk info lebih lanjut\.$/, { en: m => 'Request rejected: ' + m[1] + '. Contact HRD for more information.', zh: m => '申请被拒：' + m[1] + '。详情请联系 HRD。' }],
+  [/^Pengajuan ditolak\. Hubungi HRD untuk info lebih lanjut\.$/, { en: () => 'Request rejected. Contact HRD for more information.', zh: () => '申请被拒。详情请联系 HRD。' }],
+  [/^Pengajuan (.*) atas nama (.*) sudah diterima HRD\.( Laporan data tidak sesuai sudah dicatat\.)?$/, { en: m => 'Your request "' + tr(m[1]) + '" for ' + m[2] + ' has been received by HRD.' + (m[3] ? ' Your incorrect-data report has been recorded.' : ''), zh: m => m[2] + ' 的"' + tr(m[1]) + '"申请已被 HRD 接收。' + (m[3] ? '资料不符的反馈已记录。' : '') }],
+  [/^Belum ada pengajuan ID card untuk NIK (.*)\.$/, { en: m => 'There is no ID card request for NIK ' + m[1] + ' yet.', zh: m => '工号 ' + m[1] + ' 尚无工牌申请。' }],
+  [/^Tidak ada pengajuan atas nama "(.*)"\. Coba ketik nama lain atau pakai NIK\.$/, { en: m => 'No requests under the name "' + m[1] + '". Try another name or use NIK.', zh: m => '没有姓名为"' + m[1] + '"的申请。请尝试其他姓名或使用工号。' }],
+  [/^Ditemukan (\d+) orang dengan nama "(.*)"\. Ketik nama lebih lengkap atau pakai NIK\.$/, { en: m => m[1] + ' people found named "' + m[2] + '". Type a more complete name or use NIK.', zh: m => '找到 ' + m[1] + ' 位名为"' + m[2] + '"的员工。请输入更完整的姓名或使用工号。' }],
+  [/^Ada (\d+) karyawan dengan nama "(.*)"\. Ketik nama lebih lengkap atau pakai NIK\.$/, { en: m => 'There are ' + m[1] + ' employees named "' + m[2] + '". Type a more complete name or use NIK.', zh: m => '有 ' + m[1] + ' 位员工名为"' + m[2] + '"。请输入更完整的姓名或使用工号。' }],
+  [/^Nama "(.*)" tidak ditemukan di data karyawan\. Coba ketik nama lain atau pakai NIK\.$/, { en: m => 'The name "' + m[1] + '" was not found in employee data. Try another name or use NIK.', zh: m => '员工资料中找不到姓名"' + m[1] + '"。请尝试其他姓名或使用工号。' }],
+  [/^Anda masih punya pengajuan "(.*)" yang belum selesai\. Hubungi HRD\.$/, { en: m => 'You still have an unfinished "' + tr(m[1]) + '" request. Please contact HRD.', zh: m => '您还有未完成的"' + tr(m[1]) + '"申请，请联系 HRD。' }],
+  [/^Laporan terkirim\. HR akan menghubungi Anda di nomor (.*)\.$/, { en: m => 'Report sent. HR will contact you at ' + m[1] + '.', zh: m => '反馈已发送。HR 会通过 ' + m[1] + ' 与您联系。' }],
+  [/^Laporan untuk pengajuan ini sudah dikirim dan sedang ditangani HR \(status: (.*)\)\.$/, { en: m => 'A report for this request has already been sent and is being handled by HR (status: ' + m[1] + ').', zh: m => '此申请的反馈已发送，HR 正在处理（状态：' + m[1] + '）。' }],
+  [/^Gagal (mengirim|cek status|cek data|mencari|menyimpan): (.*)$/, { en: m => ({ 'mengirim':'Failed to send','cek status':'Failed to check status','cek data':'Failed to check data','mencari':'Search failed','menyimpan':'Failed to save' })[m[1]] + ': ' + m[2], zh: m => ({ 'mengirim':'发送失败','cek status':'查询状态失败','cek data':'查询资料失败','mencari':'搜索失败','menyimpan':'保存失败' })[m[1]] + '：' + m[2] }],
+  [/^Koneksi gagal\. Periksa internet lalu coba lagi\.$/, { en: () => 'Connection failed. Check your internet and try again.', zh: () => '连接失败，请检查网络后重试。' }]
+];
+let LANG = 'id';
+try { LANG = localStorage.getItem('idcard_lang') || 'id'; } catch (e) {}
+if (!D[LANG] && LANG !== 'id') LANG = 'id';
+function tr(s){
+  if (LANG === 'id' || s == null) return s;
+  const t = String(s), core = t.trim();
+  if (!core) return t;
+  const pre = t.slice(0, t.indexOf(core)), post = t.slice(t.indexOf(core) + core.length);
+  let out = D[LANG][core];
+  if (out === undefined) {
+    for (const [re, f] of R) { const m = core.match(re); if (m) { out = f[LANG](m); break; } }
+  }
+  return out === undefined ? t : pre + out + post;
+}
+window.T = tr;
+const SRC = new WeakMap(), OUT = new WeakMap();
+let sibuk = false;
+function terjemahNode(n){
+  if (n.nodeType === 3) {
+    if (!n.parentElement || n.parentElement.closest('script,style,.lang')) return;
+    if (OUT.get(n) === n.nodeValue) return;
+    SRC.set(n, n.nodeValue);
+    const o = tr(n.nodeValue);
+    OUT.set(n, o);
+    if (o !== n.nodeValue) n.nodeValue = o;
+  } else if (n.nodeType === 1) {
+    if (n.matches && n.matches('script,style,.lang')) return;
+    ['placeholder', 'aria-label', 'alt'].forEach(a => {
+      if (!n.hasAttribute || !n.hasAttribute(a)) return;
+      const cur = n.getAttribute(a), key = 'data-i18n-' + a;
+      if (n.getAttribute(key + '-out') === cur) return;
+      n.setAttribute(key, cur);
+      const o = tr(cur); n.setAttribute(key + '-out', o);
+      if (o !== cur) n.setAttribute(a, o);
+    });
+    n.childNodes.forEach(terjemahNode);
+  }
+}
+function terapkanUlang(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let n; while ((n = w.nextNode())) {
+    if (!n.parentElement || n.parentElement.closest('script,style,.lang')) continue;
+    if (SRC.has(n) && OUT.get(n) === n.nodeValue) n.nodeValue = SRC.get(n);   // kembalikan ke asli dulu
+    OUT.delete(n);
+  }
+  root.querySelectorAll('[data-i18n-placeholder],[data-i18n-aria-label],[data-i18n-alt]').forEach(el => {
+    ['placeholder', 'aria-label', 'alt'].forEach(a => {
+      const key = 'data-i18n-' + a;
+      if (el.hasAttribute(key) && el.getAttribute(a) === el.getAttribute(key + '-out')) el.setAttribute(a, el.getAttribute(key));
+      el.removeAttribute(key + '-out');
+    });
+  });
+  terjemahNode(root);
+}
+function setBahasa(l){
+  LANG = l;
+  try { localStorage.setItem('idcard_lang', l); } catch (e) {}
+  document.documentElement.lang = l === 'zh' ? 'zh-CN' : l;
+  document.querySelectorAll('.lang-menu button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
+  const pil = document.querySelector('.lang-menu button[data-l="' + l + '"]');
+  if (pil) { document.getElementById('langFlag').innerHTML = pil.querySelector('.fl').innerHTML; document.getElementById('langNow').textContent = l === 'zh' ? '中文' : l.toUpperCase(); }
+  sibuk = true; terapkanUlang(document.body); sibuk = false;
+}
+const mo = new MutationObserver(list => {
+  if (sibuk) return;
+  sibuk = true;
+  list.forEach(m => {
+    if (m.type === 'characterData') terjemahNode(m.target);
+    else if (m.type === 'attributes') terjemahNode(m.target);
+    else m.addedNodes.forEach(terjemahNode);
+  });
+  sibuk = false;
+});
+mo.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['placeholder', 'aria-label', 'alt'] });
+const lb = document.getElementById('langBtn'), lm = document.getElementById('langMenu');
+function tutupMenu(){ lm.classList.add('hide'); lb.setAttribute('aria-expanded', 'false'); }
+lb.onclick = e => { e.stopPropagation(); const buka = lm.classList.contains('hide'); lm.classList.toggle('hide', !buka); lb.setAttribute('aria-expanded', String(buka)); };
+lm.querySelectorAll('button').forEach(b => b.onclick = e => { e.stopPropagation(); setBahasa(b.dataset.l); tutupMenu(); });
+document.addEventListener('click', e => { if (!e.target.closest('.lang')) tutupMenu(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupMenu(); });
+setBahasa(LANG);
+})();
+/* PT yang pernah dipilih di HP ini dipakai lagi */
+try { const k0 = localStorage.getItem('idc_pt'); if (k0 === 'CAPGLOBAL' || k0 === 'CAPWORLD') pilihPt(k0); } catch (e) { console.error(e); }
+</script>
+</body>
+</html>
