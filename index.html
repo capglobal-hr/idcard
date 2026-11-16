@@ -333,8 +333,8 @@
         <select id="pabrikBenar"><option value="">— pilih pabrik —</option></select>
         <div class="note warn">Laporan ini akan dicek HRD dan dicatat sebagai <b>data tidak sesuai</b>.</div>
       </div>
-      <label for="hp">No. HP / WhatsApp</label>
-      <input id="hp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx">
+      <div id="hpWrap"><label for="hp">No. HP / WhatsApp</label>
+      <input id="hp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx"></div>
     </div>
   </div>
 
@@ -345,6 +345,7 @@
     <div class="jenis">
       <label class="opt"><input type="radio" name="jenis" value="HILANG"><div>ID Card Hilang<small>ID card hilang dan perlu dibuat ulang.</small></div></label>
       <label class="opt"><input type="radio" name="jenis" value="GANTI"><div>Ganti ID Card Tidak Layak Pakai<small>Wajib upload foto ID card lama.</small></div></label>
+      <label class="opt"><input type="radio" name="jenis" value="GANTI MASSAL"><div>Ganti ID Card Massal (Pas Foto)<small>Penggantian ID card dari perusahaan. Wajib upload pas foto.</small></div></label>
       <label class="opt"><input type="radio" name="jenis" value="SUSULAN"><div>ID Card Susulan<small>Belum dapat ID card karena terlewat.</small></div></label>
     </div>
   </div>
@@ -354,7 +355,7 @@
     <div class="step">3 · Detail pengajuan</div>
 
     <div id="pasFotoBox" class="hide" style="padding-bottom:16px;margin-bottom:4px;border-bottom:1px dashed var(--line)">
-      <label for="pasFoto">Pas foto <span style="color:var(--accent)">(wajib untuk SECURITY, OFFICE &amp; TRANSLATOR)</span></label>
+      <label for="pasFoto">Pas foto <span style="color:var(--accent)">(wajib)</span></label>
       <div class="note warn" style="margin-top:0;margin-bottom:8px">Pas foto <b>formal</b>, wajah terlihat jelas menghadap depan. Warna background bebas.</div>
       <label class="filebtn"><input id="pasFoto" type="file" accept="image/*"><span class="fb-btn">📷 Pilih / ambil foto</span><span class="fb-nama" data-for="pasFoto">Belum ada foto dipilih</span></label>
       <img id="prevPas" class="preview hide" alt="Pratinjau pas foto">
@@ -386,6 +387,9 @@
       <div class="muted">Foto hanya dipakai untuk pengecekan HRD dan dihapus otomatis setelah pengajuan selesai.</div>
     </div>
 
+    <div id="fGANTIMASSAL" class="sec hide">
+      <div class="note info" style="margin-top:0">Penggantian ID card dari perusahaan. Tidak ada denda. Cukup upload pas foto di bawah. No. HP tidak perlu diisi.</div>
+    </div>
     <div id="fSUSULAN" class="sec hide">
       <label for="tglSus">Tanggal masuk kerja</label>
       <input id="tglSus" type="date">
@@ -516,7 +520,7 @@ function bagianSekarang(){
   if (current) return ($('bagianSalah').checked && $('bagianBenar').value ? $('bagianBenar').value : current.bagian).trim().toUpperCase();
   return '';
 }
-function cekPasFoto(){ show($('pasFotoBox'), WAJIB_PAS.indexOf(bagianSekarang()) > -1); }
+function cekPasFoto(){ show($('pasFotoBox'), true); }   // pas foto WAJIB untuk semua karyawan
 function err(el, t){ el.textContent = t || ''; show(el, !!t); }
 
 /* ===== LOADING: amplop terbang ke HR (persen perkiraan, 100% saat server selesai) ===== */
@@ -918,7 +922,7 @@ document.querySelectorAll('input.caps').forEach(el => el.addEventListener('input
 
 document.querySelectorAll('input[name=jenis]').forEach(r => r.onchange = () => {
   document.querySelectorAll('.sec').forEach(s => show(s, false));
-  show($('f' + r.value), true);
+  show($('f' + r.value.replace(/ /g, '')), true); show($('hpWrap'), r.value !== 'GANTI MASSAL');
   show($('cardDetail'), true); show($('btnKirim'), true);
   err($('sendMsg'), '');
 });
@@ -982,7 +986,7 @@ $('btnKirim').onclick = () => {
   const j = document.querySelector('input[name=jenis]:checked');
   if(j && j.value === 'GANTI' && !fotoB64){ err($('sendMsg'), 'Foto ID card lama wajib diupload.'); return; }
   if(j && j.value === 'HILANG' && !$('setujuHilang').checked){ err($('sendMsg'), 'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.'); $('setujuHilang').closest('label').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-  if(WAJIB_PAS.indexOf(bagianSekarang()) > -1 && !pasB64){ err($('sendMsg'), 'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.'); return; }
+  if(!pasB64){ err($('sendMsg'), 'Pas foto wajib diupload.'); return; }
   const p = {
     pt: pt,
     nik: current.nik, hp: $('hp').value.trim(), jenis: j ? j.value : '',
@@ -1023,7 +1027,7 @@ $('btnKirim').onclick = () => {
       const bk = r.bukti || {};
       tampilBukti({
         no: bk.no || '', nama: bk.nama || $('wNama').textContent, nik: bk.nik || lastNik,
-        jenis: bk.jenis || ({ HILANG: 'ID Card Hilang', GANTI: 'Ganti (Tidak Layak Pakai)', SUSULAN: 'Susulan (Terlewat)' })[j ? j.value : ''] || '', perusahaan: bk.perusahaan || 'PT CAPGLOBAL INDUSTRY INTERNATIONAL',
+        jenis: bk.jenis || ({ HILANG: 'ID Card Hilang', GANTI: 'Ganti (Tidak Layak Pakai)', 'GANTI MASSAL': 'Ganti Massal (Wajib Pas Foto)', SUSULAN: 'Susulan (Terlewat)' })[j ? j.value : ''] || '', perusahaan: bk.perusahaan || 'PT CAPGLOBAL INDUSTRY INTERNATIONAL',
         pabrik: pab, tanggal: bk.tanggal || new Date().toLocaleString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
         hr: hr ? hr + ' (' + pab + ')' : '', kode: j ? j.value : ''
       });
@@ -1223,7 +1227,7 @@ const D = {
     'Pastikan data yang diisi sudah benar sebelum dikirim.':'Make sure the data is correct before submitting.',
     '2 · Jenis pengajuan':'2 · Request type',
     'ID Card Hilang':'Lost ID Card','ID card hilang dan perlu dibuat ulang.':'ID card is lost and needs to be reissued.',
-    'Ganti ID Card Tidak Layak Pakai':'Replace Damaged ID Card','Wajib upload foto ID card lama.':'Photo of the old ID card is required.',
+    'Ganti ID Card Tidak Layak Pakai':'Replace Damaged ID Card','Ganti ID Card Massal (Pas Foto)':'Bulk ID Card Replacement (Photo)','Penggantian ID card dari perusahaan. Wajib upload pas foto.':'Company-issued ID card replacement. ID photo is required.','Penggantian ID card dari perusahaan. Tidak ada denda. Cukup upload pas foto di bawah. No. HP tidak perlu diisi.':'Company-issued ID card replacement. No fine. Just upload your ID photo below.','Wajib upload foto ID card lama.':'Photo of the old ID card is required.',
     'ID Card Susulan':'Missed ID Card','Belum dapat ID card karena terlewat.':'Have not received an ID card because it was missed.',
     '3 · Detail pengajuan':'3 · Request details',
     'Pas foto':'Passport photo','(wajib untuk SECURITY, OFFICE & TRANSLATOR)':'(required for SECURITY, OFFICE & TRANSLATOR)',
@@ -1280,7 +1284,7 @@ const D = {
     'Tanggal diambil belum dicatat HRD.':'Collection date not yet recorded by HRD.',
     'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.':'Please tick the statement that a lost ID card request cannot be cancelled.',
     'Foto ID card lama wajib diupload.':'A photo of the old ID card is required.',
-    'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.':'SECURITY, OFFICE and TRANSLATOR departments must upload a formal passport photo.',
+    'Pas foto wajib diupload.':'A passport photo is required.',
     'File bukan foto atau tidak bisa dibaca.':'The file is not a photo or cannot be read.',
     'NIK tidak terdaftar. Hubungi HRD.':'NIK is not registered. Please contact HRD.',
     'NIK ini tercatat ganda di data HRD. Hubungi HRD untuk diperbaiki.':'This NIK is recorded twice in HRD data. Please contact HRD to fix it.',
@@ -1368,7 +1372,7 @@ const D = {
     'Pastikan data yang diisi sudah benar sebelum dikirim.':'提交前请确认填写的资料正确。',
     '2 · Jenis pengajuan':'2 · 申请类型',
     'ID Card Hilang':'工牌丢失','ID card hilang dan perlu dibuat ulang.':'工牌丢失，需要补办。',
-    'Ganti ID Card Tidak Layak Pakai':'更换损坏的工牌','Wajib upload foto ID card lama.':'必须上传旧工牌照片。',
+    'Ganti ID Card Tidak Layak Pakai':'更换损坏的工牌','Ganti ID Card Massal (Pas Foto)':'集中更换工牌（证件照）','Penggantian ID card dari perusahaan. Wajib upload pas foto.':'公司统一更换工牌，必须上传证件照。','Penggantian ID card dari perusahaan. Tidak ada denda. Cukup upload pas foto di bawah. No. HP tidak perlu diisi.':'公司统一更换工牌，无罚款，只需在下方上传证件照，无需填写手机号。','Wajib upload foto ID card lama.':'必须上传旧工牌照片。',
     'ID Card Susulan':'补发工牌','Belum dapat ID card karena terlewat.':'因遗漏尚未领到工牌。',
     '3 · Detail pengajuan':'3 · 申请详情',
     'Pas foto':'证件照','(wajib untuk SECURITY, OFFICE & TRANSLATOR)':'（SECURITY、OFFICE 和 TRANSLATOR 必须上传）',
@@ -1425,7 +1429,7 @@ const D = {
     'Tanggal diambil belum dicatat HRD.':'HRD尚未登记领取日期。',
     'Centang dulu pernyataan bahwa pengajuan ID card hilang tidak bisa dibatalkan.':'请先勾选"工牌丢失申请无法取消"的声明。',
     'Foto ID card lama wajib diupload.':'必须上传旧工牌照片。',
-    'Bagian SECURITY, OFFICE, dan TRANSLATOR wajib upload pas foto formal.':'SECURITY、OFFICE 和 TRANSLATOR 部门必须上传正式证件照。',
+    'Pas foto wajib diupload.':'必须上传证件照。',
     'File bukan foto atau tidak bisa dibaca.':'文件不是照片或无法读取。',
     'NIK tidak terdaftar. Hubungi HRD.':'工号未登记，请联系 HRD。',
     'NIK ini tercatat ganda di data HRD. Hubungi HRD untuk diperbaiki.':'此工号在 HRD 资料中重复，请联系 HRD 更正。',
