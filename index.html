@@ -61,14 +61,32 @@
   .note.info{background:var(--pink-lt);color:var(--ink);border-left:4px solid var(--accent);white-space:pre-line}
   .hide{display:none!important}
   .opt:hover{border-color:var(--pink);box-shadow:0 2px 8px rgba(74,110,153,.12)}
-  @media (min-width:900px){
-    header .in,main{max-width:1040px}
-    main{padding:0 24px}
-    #formWrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:0 18px;align-items:start}
-    #formWrap>.card:not(#cardJenis):not(#cardDetail){grid-column:1;grid-row:1 / span 4}
-    #cardJenis,#cardDetail,#btnKirim{grid-column:2}
-    #cardJenis .jenis{grid-template-columns:1fr 1fr}
-    #viewStatus,#viewRiwayat{max-width:760px;margin-left:auto;margin-right:auto}
+  .sidehelp{display:none}
+  @media (min-width:960px){
+    header{padding-left:28px;padding-right:28px}
+    header .in{max-width:1120px}
+    main{max-width:1176px;margin:30px auto 56px;padding:0 28px;display:grid;grid-template-columns:320px minmax(0,1fr);gap:32px;align-items:start}
+    .side{position:sticky;top:20px;display:flex;flex-direction:column;gap:16px}
+    .side .float{margin:0;box-shadow:0 1px 3px rgba(34,50,74,.06);border:1px solid var(--line)}
+    .sidehelp{display:block;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:0 1px 3px rgba(34,50,74,.06)}
+    .sidehelp .sh-t{font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+    .sidehelp ol{list-style:none;margin:0;padding:0;counter-reset:s}
+    .sidehelp li{counter-increment:s;position:relative;padding:0 0 16px 40px}
+    .sidehelp li:last-child{padding-bottom:0}
+    .sidehelp li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--pink-lt);color:var(--accent);font-weight:800;font-size:13px;display:grid;place-items:center}
+    .sidehelp li:not(:last-child)::after{content:"";position:absolute;left:13px;top:32px;bottom:4px;width:2px;background:var(--line)}
+    .sidehelp li b{display:block;font-size:14.5px}
+    .sidehelp li span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+    .mainc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 34px 32px;box-shadow:0 1px 3px rgba(34,50,74,.06);min-height:420px}
+    .mainc .tabs{box-shadow:none;margin-bottom:22px}
+    .mainc .hello{padding-top:0}
+    .mainc .bigb{max-width:none}
+    #viewAjukan .card{background:transparent;border:0;box-shadow:none;border-radius:0;padding:0 0 22px;margin:0 0 24px;border-bottom:1px solid var(--line)}
+    #viewAjukan .card:last-of-type{border-bottom:0}
+    #viewAjukan .step{font-size:12.5px}
+    #viewAjukan .jenis{grid-template-columns:1fr 1fr}
+    #viewAjukan #btnKirim{max-width:420px;margin:6px 0 0}
+    #viewAjukan input[type=text],#viewAjukan input[type=tel],#viewAjukan input[type=date],#viewAjukan textarea,#viewAjukan select{max-width:640px}
   }
   .preview{margin-top:10px;max-width:100%;max-height:220px;border-radius:10px;display:block;border:3px solid var(--peach)}
   .done{text-align:center;padding:30px 18px}
@@ -276,10 +294,19 @@
 </div></header>
 
 <main>
+<aside class="side">
 <div class="float">
   <div class="fic">🪪</div>
   <div><b>Layanan ID Card Karyawan</b><span>Pengajuan, cek status &amp; laporan ID card</span></div>
 </div>
+<div class="sidehelp"><div class="sh-t">Alur pengajuan</div><ol>
+  <li><b>Cari data Anda</b><span>Pakai NIK atau nama.</span></li>
+  <li><b>Pilih jenis pengajuan</b><span>Hilang, tidak layak pakai, susulan, atau ganti massal.</span></li>
+  <li><b>Upload pas foto, lalu kirim</b><span>Pas foto wajib untuk semua pengajuan.</span></li>
+  <li><b>Pantau di menu Status</b><span>Setelah selesai, ID card diambil di HRD.</span></li>
+</ol></div>
+</aside>
+<div class="mainc">
 
 <div id="viewPt">
   <div class="hello"><div class="wave">🏭</div><h2>Pilih perusahaan Anda</h2><p>Pilih tempat Anda bekerja dulu.</p></div>
@@ -463,6 +490,7 @@
       <div><span class="badge b-DITOLAK">Ditolak</span> <span>Pengajuan tidak dapat diproses. Hubungi HRD.</span></div>
     </details>
   </div>
+</div>
 </div>
 </main>
 
@@ -1237,7 +1265,7 @@ const D = {
     'Pastikan data yang diisi sudah benar sebelum dikirim.':'Make sure the data is correct before submitting.',
     '2 · Jenis pengajuan':'2 · Request type',
     'ID Card Hilang':'Lost ID Card','ID card hilang dan perlu dibuat ulang.':'ID card is lost and needs to be reissued.',
-    'Ganti ID Card Tidak Layak Pakai':'Replace Damaged ID Card','Ganti ID Card Massal (Pas Foto)':'Bulk ID Card Replacement (Photo)','Penggantian ID card dari perusahaan. Wajib upload pas foto.':'Company-issued ID card replacement. ID photo is required.','Penggantian ID card dari perusahaan. Tidak ada denda. Cukup upload pas foto di bawah. No. HP tidak perlu diisi.':'Company-issued ID card replacement. No fine. Just upload your ID photo below.','Wajib upload foto ID card lama.':'Photo of the old ID card is required.',
+    'Ganti ID Card Tidak Layak Pakai':'Replace Damaged ID Card','Alur pengajuan':'Request steps','Cari data Anda':'Find your record','Pakai NIK atau nama.':'Use your NIK or name.','Pilih jenis pengajuan':'Choose request type','Hilang, tidak layak pakai, susulan, atau ganti massal.':'Lost, damaged, late request, or bulk replacement.','Upload pas foto, lalu kirim':'Upload your ID photo, then submit','Pas foto wajib untuk semua pengajuan.':'An ID photo is required for every request.','Pantau di menu Status':'Track in the Status menu','Setelah selesai, ID card diambil di HRD.':'When done, collect your ID card at HRD.','Ganti ID Card Massal (Pas Foto)':'Bulk ID Card Replacement (Photo)','Penggantian ID card dari perusahaan. Wajib upload pas foto.':'Company-issued ID card replacement. ID photo is required.','Penggantian ID card dari perusahaan. Tidak ada denda. Cukup upload pas foto di bawah. No. HP tidak perlu diisi.':'Company-issued ID card replacement. No fine. Just upload your ID photo below.','Wajib upload foto ID card lama.':'Photo of the old ID card is required.',
     'ID Card Susulan':'Missed ID Card','Belum dapat ID card karena terlewat.':'Have not received an ID card because it was missed.',
     '3 · Detail pengajuan':'3 · Request details',
     'Pas foto':'Passport photo','(wajib untuk SECURITY, OFFICE & TRANSLATOR)':'(required for SECURITY, OFFICE & TRANSLATOR)',
@@ -1382,7 +1410,7 @@ const D = {
     'Pastikan data yang diisi sudah benar sebelum dikirim.':'提交前请确认填写的资料正确。',
     '2 · Jenis pengajuan':'2 · 申请类型',
     'ID Card Hilang':'工牌丢失','ID card hilang dan perlu dibuat ulang.':'工牌丢失，需要补办。',
-    'Ganti ID Card Tidak Layak Pakai':'更换损坏的工牌','Ganti ID Card Massal (Pas Foto)':'集中更换工牌（证件照）','Penggantian ID card dari perusahaan. Wajib upload pas foto.':'公司统一更换工牌，必须上传证件照。','Penggantian ID card dari perusahaan. Tidak ada denda. Cukup upload pas foto di bawah. No. HP tidak perlu diisi.':'公司统一更换工牌，无罚款，只需在下方上传证件照，无需填写手机号。','Wajib upload foto ID card lama.':'必须上传旧工牌照片。',
+    'Ganti ID Card Tidak Layak Pakai':'更换损坏的工牌','Alur pengajuan':'申请流程','Cari data Anda':'查找您的资料','Pakai NIK atau nama.':'使用工号或姓名。','Pilih jenis pengajuan':'选择申请类型','Hilang, tidak layak pakai, susulan, atau ganti massal.':'遗失、损坏、补办或集中更换。','Upload pas foto, lalu kirim':'上传证件照后提交','Pas foto wajib untuk semua pengajuan.':'所有申请都必须上传证件照。','Pantau di menu Status':'在“状态”菜单查看进度','Setelah selesai, ID card diambil di HRD.':'完成后请到HRD领取工牌。','Ganti ID Card Massal (Pas Foto)':'集中更换工牌（证件照）','Penggantian ID card dari perusahaan. Wajib upload pas foto.':'公司统一更换工牌，必须上传证件照。','Penggantian ID card dari perusahaan. Tidak ada denda. Cukup upload pas foto di bawah. No. HP tidak perlu diisi.':'公司统一更换工牌，无罚款，只需在下方上传证件照，无需填写手机号。','Wajib upload foto ID card lama.':'必须上传旧工牌照片。',
     'ID Card Susulan':'补发工牌','Belum dapat ID card karena terlewat.':'因遗漏尚未领到工牌。',
     '3 · Detail pengajuan':'3 · 申请详情',
     'Pas foto':'证件照','(wajib untuk SECURITY, OFFICE & TRANSLATOR)':'（SECURITY、OFFICE 和 TRANSLATOR 必须上传）',
