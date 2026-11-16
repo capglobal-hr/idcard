@@ -60,6 +60,16 @@
   .note.ok{background:var(--green-lt);color:var(--ok);border-left:4px solid var(--green)}
   .note.info{background:var(--pink-lt);color:var(--ink);border-left:4px solid var(--accent);white-space:pre-line}
   .hide{display:none!important}
+  .opt:hover{border-color:var(--pink);box-shadow:0 2px 8px rgba(74,110,153,.12)}
+  @media (min-width:900px){
+    header .in,main{max-width:1040px}
+    main{padding:0 24px}
+    #formWrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:0 18px;align-items:start}
+    #formWrap>.card:not(#cardJenis):not(#cardDetail){grid-column:1;grid-row:1 / span 4}
+    #cardJenis,#cardDetail,#btnKirim{grid-column:2}
+    #cardJenis .jenis{grid-template-columns:1fr 1fr}
+    #viewStatus,#viewRiwayat{max-width:760px;margin-left:auto;margin-right:auto}
+  }
   .preview{margin-top:10px;max-width:100%;max-height:220px;border-radius:10px;display:block;border:3px solid var(--peach)}
   .done{text-align:center;padding:30px 18px}
   .cekb{margin:0 auto 12px;max-width:320px;font-size:14px;color:var(--ink)}
